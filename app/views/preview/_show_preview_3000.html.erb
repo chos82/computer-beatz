@@ -1,0 +1,6 @@
+<%= link_to_remote 'Preview', {:with => "'text=' + encodeURIComponent($('text-3000').value)",
+									   :before => "Element.show('spinner-preview')",
+									   :complete => "Element.hide('spinner-preview')" ,
+									   :url => {:controller => 'preview', :action => 'show_preview_3000'}},
+									  {:href => url_for(:controller => 'preview', :action => 'show_preview_3000')} %>
+									  

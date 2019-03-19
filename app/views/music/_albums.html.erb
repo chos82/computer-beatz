@@ -1,0 +1,28 @@
+<p class="center">
+	<%= pluralize @results.length, 'record' %> in <em>Albums</em> found.
+</p>
+
+<div class="order">
+		<p id="track-index-back">
+				<%= link_to 'New album', :controller => :albums, :action => 'new' %>
+		</p>
+		<%= render :partial => 'order' %>
+		<%= render :partial => 'selector' %>
+</div>
+
+<table class="list-entries">
+	<tr>
+		<th>
+			Album
+		</th>
+		<th>
+			Artist
+		</th>
+		<th>
+			Label
+		</th>
+	</tr>
+	<% for album in @results do -%>
+	<%= render :partial => 'albums/album', :object => album %>
+	<% end %>
+</table>

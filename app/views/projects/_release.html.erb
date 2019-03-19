@@ -1,0 +1,11 @@
+		<tr class="p10px">
+			<td>
+				<% link_to release.audio.url, :class => 'playable' do %>
+					<%= image_tag( release.cover.url(:thumb), {:class => 'sm2_link'} ) %>
+				<% end %>
+				<div style="display:none;"><%=release.id%></div>
+			</td>
+			<td>
+				<%= link_to (h release.name), release_path(release) %>
+			</td>
+		</tr>

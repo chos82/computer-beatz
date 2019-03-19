@@ -1,0 +1,25 @@
+		<tr>
+			<td>
+				<%= link_to image_tag( friend.avatar.url(:thumb) ), friend %>
+			</td>
+			<td>
+				<strong><%= link_to( h(friend.login), friend ) %></strong>
+			</td>
+			<% if friend.online? %>
+				<td class="user-on">
+					&nbsp;
+				</td>
+			<% else %>
+			<td class="user-off">
+				&nbsp;
+			</td>
+			<% end %>
+			<td>
+				since <%= show_time_short friend.friendship_since(@user) %>
+			</td>
+			<% if @personal -%>
+			<td>
+				<%= link_to 'cancel<br/>friendship', user_friendship_path(current_user, friend), :method => :delete, :confirm => "Do you really want to quit the friendship?" %>
+			</td>
+			<% end -%>
+		</tr>

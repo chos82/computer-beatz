@@ -1,0 +1,5 @@
+You had invited <%=h @reciever.login %> to become the admin of group '<%=h @group.login %>'.
+<%= @reciever.login %> declined your invitation. You may want to invite someone else.
+
+	View the group profile:
+	<%= "http://#{SITE_URL}" + group_path(@group) %>

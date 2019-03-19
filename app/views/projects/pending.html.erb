@@ -1,0 +1,33 @@
+<%= render :partial => 'members_menu', :object => @project %>
+
+<div class="releases">
+	<h4>Pending Releases</h4>
+	<table>
+	<% @pending.each do |release| -%>
+		<tr class="p10px">
+			<td>
+				<%= image_tag( release.cover.url(:thumb), {:class => 'floatingLeft noBoarder'} ) %>
+			</td>
+			<td>
+				<%= h release.name %>
+			</td>
+		</tr>
+	<% end -%>
+	</table>
+</div>
+
+<div class="releases">
+	<h4>Declined Releases</h4>
+	<table>
+	<% @declined.each do |release| -%>
+		<tr class="p10px">
+			<td>
+				<%= image_tag( release.cover.url(:thumb), {:class => 'floatingLeft noBoarder'} ) %>
+			</td>
+			<td>
+				<%= h release.name %>
+			</td>
+		</tr>
+	<% end -%>
+	</table>
+</div>

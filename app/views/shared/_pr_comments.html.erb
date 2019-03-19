@@ -1,0 +1,33 @@
+<% unless @comments.empty? %>
+<p class="comments-head">Comments:</p>
+<% end %>
+<% for comment in @comments do -%>
+<% if project.is_member? comment.user -%>
+<div class="comment-member">
+<% else -%>
+<div class="comment-std">
+<% end -%>
+	<% if comment.user -%>
+	<%= link_to image_tag( comment.user.avatar.url(:thumb) ), comment.user %>
+	<div class="head">
+		<strong><%= link_to (h comment.user.login), comment.user %></strong><br />
+		<%= time_ago_in_words comment.created_at %> ago
+	</div>
+	<% else -%>
+	<%= image_tag( '/images/removed_user.png' ) %>
+	<div class="head">
+		<strong><i>Removed user</i></strong><br />
+		<%= time_ago_in_words comment.created_at %> ago
+	</div>
+	<% end -%>
+	
+	<div class="text">
+		<%= sanitize( format_text(comment.text) ) %>
+	</div>
+	<div class="delete-news">
+			<%= link_to 'Delete', delete_comment_release_path( @release, :comment => comment.id ),
+                 		:method => :delete,
+                 		:confirm => 'Is it spam? Do not delete critic!' %>
+	</div>
+</div>
+<% end -%>

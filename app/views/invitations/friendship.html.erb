@@ -1,0 +1,8 @@
+<%= link_to '&lt;&lt; Invitations overview', user_invitations_path(current_user) %><br />
+
+<div class="list-head-seperator">
+	People who want to become your friend
+</div>
+<table class="list-entries">
+	<%= render :partial => 'list_friendship_requests', :collection => @fans, :as => :fans %>
+</table>

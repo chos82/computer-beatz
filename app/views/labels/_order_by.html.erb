@@ -1,0 +1,66 @@
+
+	<div class="order">
+		<p id="label-index-back">
+				<%= link_to 'New label', :action => 'new' %>
+			</p>
+		<div>Order by:</div>
+		<div class="margin-bottom">
+			<% unless params[:order] == 'name' %>
+			<%= link_to 'Name', :action => params[:action], :order => 'name', :license => @license %>&nbsp;
+			<% else %>
+			<span class="current">Name</span>
+			<% end %>
+			
+			<% unless params[:order] == 'comments' %>
+			<%= link_to 'Comments', :action => params[:action], :order => 'comments', :license => @license %>&nbsp;
+			<% else %>
+			<span class="current">Comments</span>
+			<% end %>
+			
+			<% unless params[:order] == 'last_commented' %>
+			<%= link_to 'Last commented', :action => params[:action], :order => 'last_commented', :license => @license %>&nbsp;
+			<% else %>
+			<span class="current">Last commented</span>
+			<% end %>
+			
+			<% unless params[:order] == 'loves' %>
+			<%= link_to 'Loves', :action => params[:action], :order => 'loves', :license => @license %>&nbsp;
+			<% else %>
+			<span class="current">Loves</span>
+			<% end %>
+			
+			<% unless params[:order] == 'rating' %>
+			<%= link_to 'Rating', :action => params[:action], :order => 'rating', :license => @license %>&nbsp;
+			<% else %>
+			<span class="current">Rating</span>
+			<% end %>
+			
+			<% unless params[:order] == 'newest' || params[:order].blank?  %>
+			<%= link_to 'Entry date', :action => params[:action], :order => 'newest', :license => @license %>&nbsp;
+			<% else %>
+			<span class="current">Entry date</span>
+			<% end %>
+		</div>
+		<div class="selector-wrap">
+		Licnese:<br />
+	<div class="selector" title="Publications of this label are...">
+		<% unless params[:license] == 'free' %>
+		<%= link_to 'free', :action => 'index', :order => @order, :license => 'free' %>
+		<% else %>
+		<span class="current">free</span>
+		<% end %>
+		
+		<% unless params[:license] == 'both' || params[:license].blank? %>
+		<%= link_to 'both', :action => 'index', :order => @order, :license => 'both' %>
+		<% else %>
+		<span class="current">both</span> 
+		<% end %>
+		
+		<% unless params[:license] == 'commercial' %>
+		<%= link_to 'commercial', :action => 'index', :order => @order, :license => 'commercial' %>
+		<% else %>
+		<span class="current">commercial</span> 
+		<% end %>
+	</div>
+	</div>
+	</div>

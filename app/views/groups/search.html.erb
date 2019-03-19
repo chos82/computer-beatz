@@ -1,0 +1,24 @@
+<h6>Full text search results for query: '<%= @query %>'</h6>
+
+<% unless @results.empty? -%>
+<% for item in @results do %>
+		<div class="simple-list">
+				<div class="mTB1">
+					<%= link_to '<b>'+ h(item.subject) + '</b>: ' + h( truncate(item.text, 80) ), group_topic_path(item.topic.group.id, item.topic.id, :s_id => item.id ) %>
+				</div>
+				<i><small>
+					<strong><%= link_to h(item.topic.group.title), group_path(item.topic.group) %> -&gt; <%= link_to h(item.topic.title), group_topic_path(item.topic.group.id, item.topic.id) %></strong><br />
+					<%= link_to (h item.sender.login), item.sender %>, 
+					<%= time_ago_in_words item.created_at %> ago
+				</small></i>
+		</div>
+<% end %>
+
+
+<%= will_paginate @results, :inner_window => 1, :outer_window => 1, :search => {:query => @query} %>
+
+<% else %>
+<p class="center">
+	No results.
+</p>
+<% end %>

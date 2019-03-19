@@ -1,0 +1,19 @@
+<% unless favourites.empty? -%>
+<%= render :partial => 'shared/order_by' %>
+<table class="list-entries">
+	<% for item in favourites do %>
+	<%= render :partial => 'music/item', :object => item %>
+	<% end %>
+</table>
+
+<%= will_paginate favourites, :inner_window => 1, :outer_window => 1, :order => params[:order] %>
+
+<div class="page-count">
+	(Showing <%= from %> - <%=  to %> / <%= total %>)
+</div>
+
+<% else %>
+<p class="center">
+	No fovourites.
+</p>
+<% end %>

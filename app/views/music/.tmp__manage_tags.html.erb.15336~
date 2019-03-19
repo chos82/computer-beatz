@@ -1,0 +1,41 @@
+	<h3>Manage Tags:</h3> <em>(space seperated)</em>
+	<% form_for(:tag, :url => {:controller => :music, :action => 'post_tags', :id => manage_tags} ) do |f| %>
+		<p>
+			<%= text_field_with_auto_complete :tag, 
+											  	:text,
+											 	{:autocomplete => 'off', 
+												:size => 50, :value => @tags },
+											  	{:method => :get, :skip_style => true,
+												:tokens => ' ', :url => {:controller => 'music', :action => 'auto_complete_tags'} } %>
+  		</p>
+	<% unless @tags.empty? -%>
+	<div class="clear"></div>
+	<ul id="current">
+		<% for tag in @tags do -%>
+		<li class="tag removable"><%=h tag %></li>
+		<% end -%>
+	</ul>
+	<% end -%>
+	<% unless @popular_tags.empty? -%>
+	<div class="clear">Other users frequently tagged:</div>
+	<ul id="popular">
+		<% for popular in @popular_tags do -%>
+		<li class="tag addable"><%=h popular.name %></li>
+		<% end -%>
+	</ul>
+	<% end -%>
+	
+	<% unless @recommended_tags.empty? -%>
+	<div class="clear">Your most frequent tags:</div>
+	<ul id="recommended">
+		<% for tag in @recommended_tags do -%>
+		<li class="tag addable"><%=h tag.name %></li>
+		<% end -%>
+	</ul>
+	<% end -%>
+	<div class="submit-cancel">
+		<%= f.submit "Save", :id => 'save' %>
+		<%= link_to_show_depending_on_type(manage_tags, 'Cancel', :id => 'cancel') %>
+	</div>
+	<% end %>
+	

@@ -1,0 +1,1 @@
+require 'plugin_extensions/acts_as_taggable_on'

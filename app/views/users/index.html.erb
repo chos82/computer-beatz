@@ -1,0 +1,35 @@
+<div class="order">
+<div>Order by:</div>
+			<% unless params[:order] == 'name' %>
+			<%= link_to 'Name', :action => 'index', :order => 'name' %>&nbsp;
+			<% else %>
+			<span class="current">Name</span>
+			<% end %>
+		
+			<% unless params[:order] == 'activity' %>
+			<%= link_to 'Activity', :action => 'index', :order => 'activity' %>&nbsp;
+			<% else %>
+			<span class="current">Activity</span>
+			<% end %>
+			
+			<% unless params[:order].blank? %>
+			<%= link_to 'Last seen', :action => 'index' %>&nbsp;
+			<% else %>
+			<span class="current">Last seen</span>
+			<% end %>
+</div>
+<div class="user-container">
+	<% for user in @users do %>
+	<div class="user-entry">
+		<div><%= link_to( image_tag(user.avatar.url(:small)), user) %></div>
+		<p>
+			<%= link_to( h(user.login), user ) %>
+		</p>
+	</div>
+	<% end %>
+	<div class="clear"></div>
+	<%= will_paginate @users, :inner_window => 1, :outer_window => 1 %>
+	<div class="page-count">
+		(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+	</div>
+</div>

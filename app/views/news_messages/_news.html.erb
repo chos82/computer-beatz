@@ -1,0 +1,26 @@
+<% if news.admin_message -%>
+<div class="gn-admin">
+<% else -%>
+<div class="gn-std">
+<% end -%>
+	<a name="id<%=news.id%>"></a>
+	<%= link_to image_tag( news.sender.avatar.url(:thumb) ), news.sender %>
+	<div class="head">
+		<strong><%= link_to (h news.sender.login), news.sender %></strong><br />
+		<%= time_ago_in_words news.created_at %> ago 
+		<% unless news.created_at == news.updated_at -%>
+		(edited on <%= show_time news.updated_at %>)
+		<% end -%>
+	</div>
+	<div class="subject">
+		<% if news.id.to_s == params[:h_id] -%>
+				<span class="message-highlight">-&gt;</span>
+		<% end -%>
+		<%= news.subject %>
+	</div>
+	<div class="text"><%= format_text news.text %></div>
+</div>
+
+<% if current_user == news.sender -%>
+<%= link_to 'Edit',  edit_group_topic_news_message_path( :group_id => @group, :topic_id => @topic, :id => news ), :class=>'edit_link' %>
+<% end -%>

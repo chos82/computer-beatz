@@ -1,0 +1,17 @@
+<p>
+	<h3><%=h @album.name %></h3>
+</p>
+<% if @report %>
+<p>
+	<%= link_to( h(@user.login), {:controller => '/users',
+								  :action => 'show',
+							      :id => @user.id},
+							    {:target => 'blank'}) %>: <%= @report.status %>
+</p>
+<% end %>
+<p>
+	From: <%= link_to (h @album.artist.name), admin_artist_path(@album.artist) if @album.artist %><br />
+	Label: <%= link_to (h @album.label.name), admin_label_path(@album.label) if @album.label %>
+</p>
+<%= link_to 'Edit', edit_admin_album_path(@album) %> |
+<%= link_to 'Back', admin_music_index_path %>

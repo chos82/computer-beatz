@@ -1,0 +1,22 @@
+<%= render :partial => 'shared/head' %>
+		
+		<div id="search">
+			<% form_for :search, :url => { :controller => 'music', :action => 'search' },
+ 								 :html => { :id => 'top-search' } do |f| %>
+			<%= text_field_with_auto_complete :search, 
+											  :query,
+											  {:autocomplete => 'off'},
+											  {:method => :get, :skip_style => true, :url => {:controller => 'music', :action => 'auto_complete_search'} } %>
+			<%= submit_tag 'Search' %>
+			<% end %>
+		</div>
+		
+		<%= render :partial => 'shared/credit' %>
+	
+		<%= render :partial => 'shared/head2' %>
+
+		<%= render :partial => 'layouts/right_column/tags' %>
+		
+		<%= render :partial => 'shared/main' %>
+		
+<%= render :partial => 'shared/foot' %>

@@ -1,0 +1,13 @@
+<%= @member.login %> requests access to your computer-beatz group '<%= @group.title %>'.
+
+Link to your group:
+<%= "http://#{SITE_URL}" + group_path(@group) %>
+
+Link to the requesting user`s profile:
+<%= "http://#{SITE_URL}" + user_path(@member) %>
+
+By visiting the following link, you can either approve her/him and grant access to the group that way, or you can decline the request.
+ 
+<%= @pending_url %>
+
+(all pending requests are shown there)

@@ -1,0 +1,17 @@
+<div class="margin-left">
+<p>
+	<h3>Add a track to <%= h @album.name %></h3>
+</p>
+<% form_for( @album, :url => {:action => 'check_added_track', :id => @album.id, :method => :post} )do |f| %>
+  <p>
+    <%= f.label :track %><br />
+    <%= text_field_with_auto_complete :track, 
+									  :name,
+									  {:autocomplete => 'off'},
+									  {:method => :get, :skip_style => true, :url => {:controller => 'tracks', :action => 'auto_complete_for_track_name'} } %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+</div>

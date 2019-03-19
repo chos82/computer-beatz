@@ -1,0 +1,18 @@
+<%= render :partial => 'users/foreign_user_menu', :object => @user %>
+
+<% unless @groups.empty? -%>
+<table class="list-entries">
+	<%= render :partial => 'shared/group', :collection => @groups %>
+</table>
+
+<%= will_paginate @groups, :inner_window => 1, :outer_window => 1, :order => params[:order] %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+
+<% else %>
+<p class="center">
+	No group memberships.
+</p>
+<% end %>

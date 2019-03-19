@@ -1,0 +1,13 @@
+User <%=h @sender.login %>, the current admin of group '<%=h @group.title %>', is tired of doing the administration.
+He asks you to become the new admin of that group.
+
+	You can accept or decline the invitation here:
+	<%= "http://#{SITE_URL}" + myinvitations_path(@reciever) %>
+	(All your pending invitations are shown there)
+	
+	
+	View the group profile:
+	<%= "http://#{SITE_URL}" + group_path(@group) %>
+	
+	View the profile of the user who invited you:
+	<%= "http://#{SITE_URL}" + user_path(@sender) %>

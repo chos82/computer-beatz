@@ -1,0 +1,12 @@
+<div class="gray-back">
+	<%= link_to( 'Edit', edit_release_path(@release) ) %>
+</div>
+
+<%= render :partial => 'release', :object => @release %>
+
+<%= render :partial => 'comments_members', :object => @comments, :locals => {:release => @release} %>
+
+<%= will_paginate @comments, :inner_window => 1, :outer_window => 1 %>
+<%= render :partial => 'add_comment', :object => @release %>
+
+<div id="observer"></div>

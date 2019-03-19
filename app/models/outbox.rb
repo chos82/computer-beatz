@@ -1,0 +1,3 @@
+class Outbox < Message
+  
+end

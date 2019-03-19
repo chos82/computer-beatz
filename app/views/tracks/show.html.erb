@@ -1,0 +1,110 @@
+<div class="std-track">
+	<div class="entry-date">
+		On computer-beatz sice <%= show_time_short @track.created_at %>
+	</div>
+	<h3 id="h-entry"><span><%=h @track.name %></span></h3>
+	<em><%= echo_track_release_date @track %></em>
+	<p>
+		Artist: <%= link_to_artist(@track) %>
+	</p>
+	<p>
+		Label: <%= link_to_label(@track) %>
+		<% if @track.label && @track.label.license == 'free' -%>
+		<span class="free-license"></span>
+		<% elsif @track.label && @track.label.license == 'commercial' -%>
+		<span class="commercial-license"></span>
+		<% end -%>
+	</p>
+	<p>
+		Albums: 
+		<% for i in 0...@track.albums.length do %>
+		<%= link_to (h @track.albums[i].name), @track.albums[i] %>, 
+		<% end -%>
+		<%= link_to 'Add album', {:action => 'add_album',
+                             :id => @track.id},
+                             :class => 'add' %>
+	</p>
+</div>
+
+<% unless @track.creator.nil? -%>
+<div class="creator">
+	<%= link_to (h @track.creator.login), @track.creator %> made this entry
+</div>
+<% end -%>
+
+<div id="report">
+	<%= report_entry @track %>
+</div>
+
+<div class="container1">
+
+	<div class="advert1">
+		<%= link_to( image_tag("advert1.jpg"), advert_url ) %>
+	</div>
+
+	<div class="credit2">
+		Photo by <%= link_to 'Hryckowain', 'http://flickr.com/people/hryckowian/?search=Hryckowian', :target => 'blank' %>
+	</div>
+
+	<div id="rating">
+		<%= render :partial => 'music/rating', :object => @track %>
+	</div>
+
+	<div id="love">
+		<%= render :partial => 'music/loving', :object => @track %>
+	</div>
+
+</div>
+
+<p class="clear">
+	<% unless @track.video -%>
+		<% if logged_in? -%>
+		<div class="youtube"></div>
+		<div id="youtube-results">
+			<%= link_to_remote 'Embed<br />YouTube<br />video',
+								{ :before => "Element.show('youtube-spinner')",
+							  	:complete => "Element.hide('youtube-spinner')" ,
+							  	:url => url_for( :action => 'embed_video', :id => @track), :method => :get },
+								{ :href => url_for( :action => 'embed_video', :id => @track), :method => :get } %>
+		</div>
+		<div class="spinner-bar clear" id="youtube-spinner" style="display: none;">&nbsp;</div>
+		<% end -%>
+	<% else -%>
+		<div id="yv"><%= embed_yv @track.video %></div>
+	<% end -%>
+</p>
+
+<p class="further">
+	<%= link_to 'Similar Items', music_similar_index_path(@track) %>
+</p>
+
+
+<% unless @tags.empty? %>
+<h3 class="align-center">Tags:</h3>
+<p class="tag-list align-center">
+	<% tag_cloud @tags do |tag, class_name| %>
+	<%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => class_name %>
+	<% end %>
+</p>
+<% end %>
+
+<% if logged_in? -%>
+<div id="tags-link">
+	<%= link_to( 'Tag', manage_tags_music_url(@track),
+							 :class => 'tooltip button',
+							 :id => 'tag-button',
+							 :title => "Manage Tags for this Item." ) %>
+	<div class="tool-txt" id="tag-button_tipBox">&nbsp;</div>
+	<div class="spinner-bar" id="tag-button_spinner" style="display: none;">&nbsp;</div>
+</div>
+<div id="manage-tags" class="add-tag" style="display: none;"></div>
+<% end -%>
+
+<%= render :partial => 'shared/comments', :object => @comments %>
+
+<%= will_paginate @comments, :inner_window => 1, :outer_window => 1 %>
+<% if logged_in? -%>
+<%= render :partial => 'music/add_comment', :object => @track %>
+<% end -%>
+
+<div id="observer"></div>

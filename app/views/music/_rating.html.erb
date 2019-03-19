@@ -1,0 +1,29 @@
+<% @options = params.merge(:controller => "music", :action => "rate", :id => rating) -%>
+<% @convert = %w[one two three four five] -%>
+<ul class="star-rating">
+	<% if !rating.rated_by_user?(current_user) && logged_in? -%>
+	<li class="current-rating" style="width:<%= rating.rating*20 %>px">current</li>
+	<% 1.upto(5) do |x| -%>
+	<% rate_options = @options.merge(:rating => x) -%>
+	<li><%= link_to_remote "#{x}",
+			{ :url => url_for( rate_options ), :loading => "Element.show('t-#{rating.id}-indicator')" },
+			{ :href => url_for( rate_options ), :class => "#{@convert[x-1]}-stars", :title => "#{pluralize(x,'star')} out of 5" } -%>
+	<%end -%>
+	<% elsif !logged_in? -%>
+	<li class="current-rating" style="width:<%= (rating.rating*20).round %>px">current</li>
+	<% else -%>
+	<li class="current-rating-rated" style="width:<%= (rating.rating*20).round %>px">rated
+	<% end %>
+	</li>
+</ul>
+<div class="rating-stats">
+	<h6 class="current-rating"><span>Current rating:</span></h6>
+	<strong><%= sprintf "%3.2f", rating.rating -%></strong> / 5
+	<% unless @ur.nil? -%>
+	<h6 class="your-rating"><span>Your rating:</span></h6>
+	<strong><%= @ur.rating %></strong>
+	<% end -%>
+	<h6 class="rate-count"><span>Number of ratings:</span></h6>
+	<strong><%= @rating_count -%></strong>
+</div>
+

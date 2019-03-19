@@ -1,0 +1,27 @@
+<% unless @comments.empty? %>
+<p class="comments-head">Comments:</p>
+<% end %>
+<% for comment in @comments do -%>
+<% if @release.project.is_member? comment.user -%>
+<div class="comment-member">
+<% else -%>
+<div class="comment-std">
+<% end -%>
+	<% if comment.user -%>
+	<%= link_to image_tag( comment.user.avatar.url(:thumb) ), comment.user %>
+	<div class="head">
+		<strong><%= link_to (h comment.user.login), comment.user %></strong><br />
+		<%= time_ago_in_words comment.created_at %> ago
+	</div>
+	<% else -%>
+	<div class="head">
+		<strong><i>unregistred user</i></strong><br />
+		<%= time_ago_in_words comment.created_at %> ago
+	</div>
+	<% end -%>
+	
+	<div class="text">
+		<%= sanitize( format_text(comment.text) ) %>
+	</div>
+</div>
+<% end -%>

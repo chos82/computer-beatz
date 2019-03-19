@@ -1,0 +1,73 @@
+<%= error_messages_for 'comment', :header_message => "The comment could not be submitted.",
+								 :message => "Please check the following details:",
+								 :header_tag => 'h3' %>
+<%= render :partial => 'show_artist' %>
+
+<% unless @artist.creator.nil? -%>
+<div class="creator">
+	<%= link_to (h @artist.creator.login), @artist.creator %> made this entry
+</div>
+<% end %>
+
+<div id="report">
+	<%= report_entry @artist %>
+</div>
+
+<div class="container1">
+
+	<div class="advert1">
+		<%= link_to( image_tag("advert1.jpg"), advert_url ) %>
+	</div>
+
+	<div class="credit2">
+		Photo by <%= link_to 'Hryckowain', 'http://flickr.com/people/hryckowian/?search=Hryckowian', :target => 'blank' %>
+	</div>
+
+	<div id="rating">
+		<%= render :partial => 'music/rating', :object => @artist %>
+	</div>
+
+	<div id="love">
+		<%= render :partial => 'music/loving', :object => @artist %>
+	</div>
+	
+</div>
+
+<p class="further">
+	<%= link_to 'Tracks', tracks_artist_url(@artist) %>
+	<%= link_to 'Albums', albums_artist_url(@artist) %>
+	<%= link_to 'Labels', labels_artist_url(@artist) %>
+	<%= link_to 'Similar Items', music_similar_index_path(@artist) %>
+</p>
+
+<% unless @tags.empty? %>
+<h3 class="align-center">Tags:</h3>
+<p class="tag-list align-center">
+	<% tag_cloud @tags do |tag, class_name| %>
+	<%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => class_name %>
+	<% end %>
+</p>
+<% end %>
+
+<% if logged_in? -%>
+<div id="tags-link">
+	<%= link_to( 'Tag', manage_tags_music_url(@artist),
+							 :class => 'tooltip button',
+							 :id => 'tag-button',
+							 :title => "Manage Tags for this Item." ) %>
+	<div class="tool-txt" id="tag-button_tipBox">&nbsp;</div>
+	<div class="spinner-bar" id="tag-button_spinner" style="display: none;">&nbsp;</div>
+</div>
+<div id="manage-tags" class="add-tag" style="display: none;"></div>
+<% end -%>
+
+<%= render :partial => 'shared/comments', :object => @comments %>
+
+<%= will_paginate @comments, :inner_window => 1, :outer_window => 1 %>
+
+<% if logged_in? -%>
+<%= render :partial => 'music/add_comment', :object => @artist %>
+<% end -%>
+
+<div id="observer">
+</div>

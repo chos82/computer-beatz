@@ -1,0 +1,54 @@
+<div id="playAllButton">
+	<% link_to all_player_url, {:class => 'playable playButton playAll'} do %>
+		<div>Play all!</div>
+	<% end %>
+</div>
+<table class="list-entries">
+	<tr>
+		<td></td>
+		<td>
+			<b>Title</b>
+		</td>
+		<td>
+			<b>Project</b>
+		</td>
+	</tr>
+	<% for release in @releases do -%>
+	<tr class="blank">
+		<td>
+			<% link_to release_path(release), :class => 'playable' do %>
+				<%= image_tag( release.cover.url(:thumb), {:class => 'floatingLeft noBoarder'} ) %>
+			<% end %>
+			<div style="display:none;"><%=release.id%></div>
+		</td>
+		<td>
+			<strong><%= link_to( (h release.name), release ) %></strong>
+		</td>
+		<td>
+			<%= link_to( (h release.project.name), release.project ) if release.project %>
+		</td>
+	</tr>
+	<tr class="stats">
+		<td colspan="3">
+			<div class="stats">
+				<ul class="star-rating-small">
+					<% if release.rated_by_user?(current_user) %>
+					<li class="current-rating-rated" style="width:<%= release.rating*12.round %>px">rated</li>
+					<% else %>
+					<li class="current-rating" style="width:<%= release.rating*12.round %>px">rated</li>
+					<% end %>
+				</ul>
+				<span class="stats-c" title="Number of comments"><%= release.comments_count %></span>
+				<span class="stats-l" title="Number of people loving this item"><%= release.favourites_count %></span>
+			</div>
+		</td>
+	</tr>
+	<% end -%>
+</table>
+
+<%= will_paginate @releases, :inner_window => 1, :outer_window => 1 %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+

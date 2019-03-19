@@ -1,0 +1,17 @@
+<div class="margin-left">
+<% form_tag session_path do -%>
+<p><label for="login">Username</label><br/>
+<%= text_field_tag 'login', nil, {:size => 50} %></p>
+
+<p>
+	<label for="password">Password</label><br/>
+	<%= password_field_tag 'password', nil, {:size => 50} %><br />
+	<%= link_to 'Forgot Password/Username?', forgot_password_path %>
+</p>
+
+<p><label for="remember_me">Remember me:</label>
+	<%= check_box_tag 'remember_me' %></p>
+
+<p><%= submit_tag 'Log in' %></p>
+<% end -%>
+</div>

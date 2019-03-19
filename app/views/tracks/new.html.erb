@@ -1,0 +1,31 @@
+<div class="margin-left">
+<h3>New track 
+<%= 'for <em>' + h(@artist.name) + '</em>' if @artist %>
+<%= 'for <em>' + h(@album.name) + '</em>' if @album %>
+<%= 'for <em>' + h(@label.name) + '</em>' if @label %>
+<%= 'belonging to Mix <em>' + h(@mix.name) + '</em>' if @mix %>
+</h3>
+
+<%= error_messages_for 'track', :header_message => "The form could not be submitted.",
+								 :message => "Please check the following details:",
+								 :header_tag => 'h3' %>
+
+<% form_for( @track, :url => {:action => 'check_new',
+							  :artist_id => params[:artist_id],
+							  :label_id => params[:label_id],
+							  :album_id => params[:album_id],
+							  :mix_id => params[:mix_id]} )do |f| %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= text_field_with_auto_complete :track, :name, {:autocomplete => 'off'}, {:method => :get, :skip_style => true} %>
+  </p>
+  <p>
+  	<%= f.label :release_date %><br />
+  	<%= f.date_select :release_date, :order => [:year], :start_year => 1970, :end_year => Time.now.year, :include_blank => true %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+</div>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+	Social Bookmarks
+	
+	English Language Pack
+	version 4.2
+	Copyright(c) Apostolos Dountsis
+	http://www.dountsis.com
+-->
+<social_sites xsi:noNamespaceSchemaLocation="social_bookmarks.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <site>
+    <name>Buzz</name>
+    <url>http://buzz.yahoo.com/submit?submitUrl={link}&amp;submitHeadline={title}&amp;submitSummary=</url>
+    <img>buzz.png</img>
+    <key>buzz_en</key>
+  </site>   
+  <site>
+    <name>Del.icio.us</name>
+    <url>http://del.icio.us/post?url={link}&amp;title={title}</url>
+    <img>delicious.png</img>
+    <key>delicious_en</key>
+  </site>
+  <site>
+    <name>digg</name>
+    <url>http://digg.com/submit?phase=2&amp;url={link}&amp;title={title}</url>
+    <img>digg.png</img>
+    <key>digg_en</key>
+  </site>
+  <site>
+    <name>DZone</name>
+    <url>http://www.dzone.com/links/add.html?description={title}&amp;url={link}&amp;title={title}</url>
+    <img>dzone.png</img>
+    <key>dzone_en</key>
+  </site>
+  <site>
+    <name>Facebook</name>
+    <url>http://www.facebook.com/sharer.php?u={link}</url>
+    <img>facebook.png</img>
+    <key>facebook_en</key>
+  </site>
+  <site>
+    <name>FURL</name>
+    <url>http://furl.net/storeIt.jsp?t={title}&amp;u={link}</url>
+    <img>furl.png</img>
+    <key>furl_en</key>
+  </site>
+  <site>
+    <name>Google Bookmarks</name>
+    <url>http://www.google.com/bookmarks/mark?op=edit&amp;output=popup&amp;bkmk={link}&amp;title={title}</url>
+    <img>google.png</img>
+    <key>google_en</key>
+  </site>
+  <site>
+    <name>Mister Wong</name>
+    <url>http://www.mister-wong.com/index.php?action=addurl&amp;bm_url={link}&amp;bm_description={title}</url>
+    <img>misterwong.png</img>
+    <key>misterwong_en</key>
+  </site>
+  <site>
+    <name>reddit</name>
+    <url>http://reddit.com/submit?url={link}&amp;title={title}</url>
+    <img>reddit.png</img>
+    <key>reddit_en</key>
+  </site>
+  <site>
+    <name>Slashdot</name>
+    <url>http://slashdot.org/bookmark.pl?url={link}&amp;title={title}</url>
+    <img>slashdot.png</img>
+    <key>slashdot_en</key>
+  </site>
+  <site>
+    <name>Stumble Upon</name>
+    <url>http://www.stumbleupon.com/submit.php?url={link}&amp;title={title}</url>
+    <img>stumbleupon.png</img>
+    <key>stumbleupon_en</key>
+  </site>
+  <site>
+    <name>Spurl</name>
+    <url>http://www.spurl.net/spurl.php?url={link}&amp;title={title}</url>
+    <img>spurl.png</img>
+    <key>spurl_en</key>
+  </site>
+  <site>
+    <name>Technorati</name>
+    <url>http://www.technorati.com/faves?add={link}</url>
+    <img>technorati.png</img>
+    <key>technorati_en</key>
+  </site>
+  <site>
+    <name>Yahoo My Web</name>
+    <url>http://myweb2.search.yahoo.com/myresults/bookmarklet?u={link}&amp;t={title}</url>
+    <img>yahoo.png</img>
+    <key>yahoo_en</key>
+  </site>
+</social_sites>

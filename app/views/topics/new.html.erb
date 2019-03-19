@@ -1,0 +1,13 @@
+<h3>New topic for <%= link_to h(@group.title), group_path(@group) %></h3>
+
+<% form_for(@topic, :url => group_topics_path(@group)) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

@@ -1,0 +1,15 @@
+<table class="list-entries">
+	<% for release in @releases do %>
+	<tr>
+		<td>
+			<%= link_to( h(release.project.name), project_path(release.project), :target => :blank ) %>
+		</td>
+		<td>
+			<b><%= link_to( h(release.name), preview_release_path(release), :target => :blank ) %></b>
+		</td>
+    	<td><%= link_to 'Publish', publish_admin_release_path(release), :confirm => 'Are you sure?', :method => :put %></td>
+		<td><%= link_to 'Decline', new_decline_admin_release_path(release) %>
+		</td>
+	</tr>
+	<% end %>
+</table>

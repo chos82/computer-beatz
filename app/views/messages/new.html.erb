@@ -1,0 +1,40 @@
+<div class="center-content">
+	<%= error_messages_for :message, :header_message => "There was an error with your message:" %>
+	<h3 class="no-top">Send a message to <%= link_to (h @user.login), user_path(@user) %></h3>
+	<% form_for( @message, :url => user_messages_path(@user.id) ) do |f| %>
+	
+  <p>
+		<%= f.label :subject %><br />
+		<%= f.text_field :subject, :size => 73 %>
+	</p>
+  <p>
+  	<span class="right-px">
+  		<span class="spinner" id="spinner-preview" style="display: none;">&nbsp;</span>
+		<span id="preview-link">
+  		<%= render :partial => 'preview/show_preview_3000' %>
+		</span>
+	</span>
+	<%= f.label :text %><br />
+	<%= f.text_area :text, :rows => 15, :cols => 55, :id => 'text-3000' %><br />
+	<span class="right-px">You may use <%= link_to 'Textile', {:controller => 'static', :action => 'textile'}, :popup => ['Textile Short Reference', 'height=800,width=600, scrollbars=yes'] %> syntax, but no HTML</span>
+	(<span id="counter-text-3000">#</span> characters)
+  </p>
+  
+  <div id="preview" style="display: none">
+  	<strong>Preview:</strong>
+  	<div id="result" class="message-text"></div>
+  </div>
+  
+ 	 <p>
+  		<%= check_box_tag 'save_to_outbox' %>
+		<%= label_tag "Save message to your outbox?" %>
+	</p>
+	
+	<p>
+  		<%= f.submit "Send" %>
+	</p>
+<% end %>
+
+<div id="observer"></div>
+
+</div>

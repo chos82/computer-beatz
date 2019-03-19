@@ -1,0 +1,97 @@
+<%= render :partial => 'show_label' %>
+
+<p class="further">
+	<span class="current">Albums </span>
+	<%= link_to 'Tracks', tracks_label_url(@label) %>
+	<%= link_to 'Artists', artists_label_url(@label) %>
+</p>
+
+	<div class="order">
+		<p id="album-index-back">
+			<%= link_to 'Add album', :action => 'add_album', :id => @label.id %>
+		</p>
+		<% unless @albums.empty? -%>
+		<div>Order by:</div>
+		<div class="margin-bottom">
+			<% unless params[:order] == 'name' %>
+			<%= link_to 'Name', :action => params[:action], :order => 'name' %>&nbsp;
+			<% else %>
+			<span class="current">Name</span>
+			<% end %>
+			
+			<% unless params[:order] == 'comments' %>
+			<%= link_to 'Comments', :action => params[:action], :order => 'comments' %>&nbsp;
+			<% else %>
+			<span class="current">Comments</span>
+			<% end %>
+			
+			<% unless params[:order] == 'last_commented' %>
+			<%= link_to 'Last commented', :action => params[:action], :order => 'last_commented' %>&nbsp;
+			<% else %>
+			<span class="current">Last commented</span>
+			<% end %>
+			
+			<% unless params[:order] == 'loves' %>
+			<%= link_to 'Loves', :action => params[:action], :order => 'loves' %>&nbsp;
+			<% else %>
+			<span class="current">Loves</span>
+			<% end %>
+			
+			<% unless params[:order] == 'rating' %>
+			<%= link_to 'Rating', :action => params[:action], :order => 'rating' %>&nbsp;
+			<% else %>
+			<span class="current">Rating</span>
+			<% end %>
+			
+			<% unless params[:order] == 'newest' || params[:order].blank?  %>
+			<%= link_to 'Entry date', :action => params[:action], :order => 'newest' %>&nbsp;
+			<% else %>
+			<span class="current">Entry date</span>
+			<% end %>
+		</div>
+		<% end %>
+	</div>
+	
+	<% unless @albums.empty? -%>
+<table class="list-entries">
+	<tr>
+		<th>
+			Name
+		</th>
+		<th>
+			Artist
+		</th>
+	</tr>
+	<% for album in @albums do -%>
+	<tr class="blank">
+		<td>
+			<strong><%= link_to( (h album.name), album ) %></strong>
+		</td>
+		<td>
+			<%= link_to_name album.artist %>
+		</td>
+	</tr>
+	<tr class="stats">
+		<td colspan="2">
+			<div class="stats">
+				<ul class="star-rating-small">
+					<% if album.rated_by_user?(current_user) %>
+					<li class="current-rating-rated" style="width:<%= album.rating.round*12 %>px">rated</li>
+					<% else %>
+					<li class="current-rating" style="width:<%= album.rating.round*12 %>px">rated</li>
+					<% end %>
+				</ul>
+				<span class="stats-c" title="Number of comments"><%= album.comments_count %></span>
+				<span class="stats-l" title="Number of people loving this item"><%= album.favourites_count %></span>
+				<span class="stats-t" title="Number of taggings for this item"><%= album.taggings_count %></span>
+			</div>
+		</td>
+	</tr>
+	<% end -%>
+</table>
+<% end -%>
+<%= will_paginate @albums, :inner_window => 1, :outer_window => 1 %>
+<div class="page-count">
+	Showing <%= @from %> - <%=  @to %> / <%= @total %>
+</div>
+

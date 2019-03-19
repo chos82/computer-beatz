@@ -1,0 +1,40 @@
+<p class="center">
+	Users who tagged <strong>"<%=h @item.name %>"</strong>
+</p>
+<% unless @total == 0 -%>
+<ul class="user-list">
+	<% for user in @taggers -%>
+		<li>
+		<div>
+			<%= link_to image_tag( user.avatar.url(:thumb) ), user, :class => 'usrImg' %>
+			<% if user.online? %>
+			<div class="statusOn" title="online">
+				&nbsp;
+			</div>
+			<% else %>
+			<div class="statusOff" title="online">
+				&nbsp;
+			</div>
+			<% end %>
+			<strong><%= link_to( h(user.login), user ) %></strong>
+		</div>
+		<div class="usrInfo clear">
+			<div class="usrAge">
+				<span class="usrStatHead">Age:</span>
+				<%= show_age user %>
+			</div>
+			<div class="usrCountry">
+				<span class="usrStatHead">Country:</span>
+				<%= show_country user %>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</li>
+
+	<% end -%>
+</ul>
+<%= will_paginate @taggers, :inner_window => 1, :outer_window => 1 %>
+<% end -%>
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>

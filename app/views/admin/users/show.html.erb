@@ -1,0 +1,13 @@
+<p>
+	<h3><%= @user.login %></h3>
+</p>
+<strong>Roles:</strong><br />
+<ul>
+	<% for role in @user.roles do %>
+	<li>
+		<%= role.rolename %>
+	</li>
+	<% end %>
+</ul>
+<%= link_to 'Edit', edit_admin_user_path(@user) %> |
+<%= link_to 'Back', admin_users_path %>

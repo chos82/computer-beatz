@@ -1,0 +1,55 @@
+<%= render :partial => 'users/user_menu' %>
+<p class="compose">
+	<%= link_to_if mailbox_status_ok?(current_user), 'Compose Message', compose_messages_path %>
+	<%= link_to_unless_current 'Inbox', inbox_index_path(current_user) %>
+</p>
+<%= render :partial => 'messages/status' %>
+
+<% unless @messages.empty? -%>
+<div class="top-content-container">
+	<div class="heading">
+			<h2>Outbox</h2>
+			<%= link_to 'Delete All', delete_all_outbox_path(current_user),
+										:method => :delete,
+								 		:confirm => 'Really delete ALL outbox messages?' %>
+	</div>
+</div>
+<table class="list-entries">
+	<% for message in @messages do -%>
+	<tr>
+		<td>
+			<%= link_to ('<div class="unread-message"></div>',
+							  outbox_path( current_user, message ) ) %>
+			<div class="message-info">
+			<em>To: </em><%= link_to (h message.reciever.login), user_path(message.reciever) %><br />
+			<div>
+				<%= link_to (h truncate(message.subject, :length => 80)),
+							  outbox_path( current_user, message ) %>
+			</div>
+			</div>
+		</td>
+		<td>
+			<%= show_time_short message.created_at %><br />
+			<%= link_to 'delete', outbox_path( current_user, message ),
+								 :method => :delete,
+								 :confirm => 'Delete this message?' %>
+		</td>
+	</tr>
+	<% end -%>
+</table>
+
+<%= will_paginate @messages, :inner_window => 1, :outer_window => 1 %>
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+
+<% else %>
+<div class="top-content-container">
+	<div class="heading">
+			<h2>Outbox</h2>
+	</div>
+</div>
+<p class="center">
+	No messages.
+</p>
+<% end %>

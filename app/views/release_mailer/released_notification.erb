@@ -1,0 +1,7 @@
+The release <%= h @release.name %> of the computer-beatz project <%= h @release.project.name %> is now available.
+
+Visit the release page:
+	<%= "http://#{SITE_URL}" + release_path(@release) %>
+	
+The project page can be found here
+	<%= "http://#{SITE_URL}" + project_path(@release.project) %>

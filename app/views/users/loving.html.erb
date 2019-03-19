@@ -1,0 +1,16 @@
+<div class="std-heading">
+	People who love <strong><%= link_to_show_depending_on_type @music %></strong>
+</div>
+<% unless @users.empty? -%>
+<ul class="user-list">
+	<% for user in @users do %>
+	<%= render :partial => 'user', :object => user %>
+	<% end %>
+</ul>
+<%= will_paginate @users, :inner_window => 1, :outer_window => 1 %>
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+<% else %>
+0 records found.
+<% end -%>

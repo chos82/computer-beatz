@@ -1,0 +1,39 @@
+body{
+	background-color: black;
+	font-family:"Palatino Linotype" Palatino serif;
+	color:white;
+	font-size:1.2em;
+	text-align:right;
+}
+
+a, a:hover, a:visited, a:active{
+	color:#4790a8;
+}
+a:hover{
+	text-decoration:none;
+}
+
+#containerAll{
+	width:800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#head{
+	padding-right:20px;
+	border-bottom:3px solid white;
+}
+
+#main{
+	background:url('ear.jpg') left center no-repeat;
+	min-height:500px;
+	padding-left:400px;
+}
+
+#text{
+	padding-top:30px;
+}
+	#text p{
+		font-size:.8em;
+		text-align:left;
+	}

@@ -1,0 +1,19 @@
+<p>
+	Something is wrong with <strong><%= h @music.name %></strong>?<br />
+	Please specify the kind of issue.
+</p>
+<p>
+	<% form_tag music_report_path @music do %>
+	<%= radio_button_tag 'report[status]', 'invalid homepage' %><%= label_tag 'report', 'Invalid homepage' %><br />
+	<%= radio_button_tag 'report[status]', 'typo' %><%= label_tag 'report', 'Typo' %><br />
+	<%= radio_button_tag 'report[status]', 'does not exist' %><%= label_tag 'report', 'Does not exist' %>
+</p>
+<p>	
+	<%= submit_tag 'Submit' %>
+	<% end %>
+</p>
+<p>
+	If the kind of problem is not listed, please 
+	<%= mail_to("chris@computer-beatz.net" , 'contact', :subject => "Report on artist '#{@music.name}'" ,
+													   :encode => "javascript" ) %>.
+</p>

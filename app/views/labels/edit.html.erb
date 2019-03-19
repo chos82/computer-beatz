@@ -1,0 +1,15 @@
+<div class="margin-left">
+<h3>Editing <%=@label.name%></h3>
+
+<% form_for(@label) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :www %><br />
+    <%= f.text_field :www %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+<%= link_to 'Back', @label %>
+</div>

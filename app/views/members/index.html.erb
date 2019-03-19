@@ -1,0 +1,5 @@
+<% unless @group.admin == current_user -%>
+	<%= render :partial => 'user_index', :object => @members %>
+<% else -%>
+	<%= render :partial => 'admin_index', :object => @members %>
+<% end -%>

@@ -1,0 +1,36 @@
+<div class="user-profile">
+	<%= image_tag @user.avatar.url(:original), :class => "profile-image" %>
+	
+	<div class="user-info">
+		<% if @user.online? %>
+		<div class="user-online">online</div>
+		<% else %>
+		<div class="user-offline">offline</div>
+		<h6>Last Log In:</h6>
+		<span><%= show_login(@user.last_login) %></span>
+		<% end %>
+		<h6>Joined on:</h6>
+		<span><%= show_time( @user.created_at ) %></span>
+		<h6>Home:</h6>
+		<span><%= show_home @user %></span>
+		<h6>Age:</h6>
+		<span><%= show_age @user %></span>
+		<h6>Gender:</h6>
+		<span><%= show_gender @user %></span>
+		<% unless @user.www.blank? %>
+		<h6>Homepage:</h6>
+		<span><%= link_to @user.www, "http://#{@user.www}" %></span>
+		<% end %>
+	</div>
+	
+	<% if !@user.motto.blank? && show_user_item?(@user, @user.motto_privacy) %>
+	<div class="motto">
+		<p>
+			<strong><%=h @user.login %> says:</strong>
+		</p>
+		<div class="text">
+			<%= sanitize( format_text(@user.motto) ) %>
+		</div>
+	</div>
+	<% end %>
+</div>

@@ -1,0 +1,9 @@
+You are member of the computer-beatz project <%= h @project.name %>.
+A member of this project has invited <%= h @new_member %> to become a member of this project.
+
+User <%= h @new_member %> has accepted the invitation.
+
+
+Visit the project page:
+
+	<%= "http://#{SITE_URL}" + member_project_path(@project) %>

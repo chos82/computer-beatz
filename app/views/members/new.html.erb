@@ -1,0 +1,17 @@
+<% unless current_user.membership_pending?(@group) -%>
+<% form_for( :member, :url => group_members_path(@group) ) do |f| %>
+	<p class="center">
+		<% unless @group.locked -%>
+    	<%= f.submit "Become a member" %>
+		<% else -%>
+		<%= f.submit "Notify the admin - I want to join" %>
+		<% end -%>
+  	</p>
+<% end -%>
+<% else -%>
+<p class="center">
+	You already sent a join request to the administrator.
+</p>
+<% end -%>
+
+<%= render :partial => 'shared/groups/group_profile', :object => @group %>

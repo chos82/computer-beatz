@@ -1,0 +1,4 @@
+<%= @member.login %>, you have requested permission to the computer-beatz group '<%= @group.title %>'. 
+The admin of this group has approved you. You have now access to the group board:
+
+<%= "http://#{SITE_URL}" + group_path(@group) %>

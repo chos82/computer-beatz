@@ -1,0 +1,70 @@
+<h1>Editing track</h1>
+
+<% form_for @track, :url => {:action => 'update'} do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <table>
+  	<tr>
+  		<td>
+  			From:
+		</td>
+		<td>
+			<%= link_to (h @track.artist.name), admin_artist_path(@track.artist) if @track.artist %>
+		</td>
+		<td>
+			<%= link_to 'remove', {:action => 'remove_artist',
+							       :id => @track},
+							      {:confirm => 'Remove the artist form this track? The track will be valid, when doing so!'}  if @track.artist %>
+		</td>
+	</tr>
+	<tr>
+  		<td>
+  			Albums:
+		</td>
+		<td>
+			<% for album in @track.albums do -%>
+			<%= link_to (h album.name), admin_album_path(album) %>, 
+			<%= link_to 'remove', {:action => 'remove_album',
+							       :id => @track, :album => album},
+							      {:confirm => 'Remove the album form this track? The track will be valid, when doing so!'} %>
+			<br />
+			<% end -%>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Label:
+		</td>
+		<td>
+			<%= link_to (h @track.label.name), admin_label_path(@track.label) if @track.label %>
+		</td>
+		<td>
+			<%= link_to 'remove', {:action => 'remove_label',
+							       :id => @track},
+							      {:confirm => 'Remove the artist form this track? The track will be valid, when doing so!'} if @track.label %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Video:
+		</td>
+		<td></td>
+		<td>
+			<%= link_to 'remove', {:action => 'remove_video',
+							       :id => @track},
+							      {:confirm => 'Remove the video form this track? The track will be valid, when doing so!'} if @track.video %>
+		</td>
+	</tr>
+  </table>
+  	Updating will set entry valid!<br />
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', admin_track_path(@track) %> |
+<%= link_to 'Back', admin_music_index_path %>
+

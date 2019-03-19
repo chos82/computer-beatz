@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>COMPUTER-BEATZ Player</title>
+<link rel="SHORTCUT ICON" href="/images/favicon.ico">
+<%= stylesheet_link_tag 'player' %>
+<%= javascript_include_tag 'prototype' %>
+<%= javascript_include_tag 'effects' %>
+<%= javascript_include_tag 'slider' %>
+<script type="text/javascript" src="/soundmanager/script/soundmanager2-nodebug-jsmin.js"></script>
+<%= javascript_include_tag 'page-player' %>
+<!-- soundManager.useFlashBlock: related CSS -->
+<link rel="stylesheet" type="text/css" href="/stylesheets/sm_flashblock.css" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30308711-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+<div id="sm2-container"></div>
+<div id="player">
+ 	<div id="p_stop"></div>
+	<div id="p_play-pause"></div>
+	<div id="p_skp-bwd"></div>
+	<div id="p_skp-fwd"></div>
+	<div id="p_level"></div>
+	<div id="p_levelSlider">
+		<div id="p_levelTrack">
+			<div id="p_levelHandle"></div>
+		</div>
+		<div id="volumeBar"></div>
+	</div>
+	<span id="time">
+		<span id="pos">--:--</span> / <span id="dur">--:--</span>
+	</span>
+</div>
+<div id="status">
+	<div id="loadBar">
+			<div id="posBar"></div>
+	</div>
+</div>
+
+<div id="visualizations">
+	visualizations
+</div>
+<div id="animation" style="display:none;">
+		<div id="peak" class="bt">level bar</div>
+		<div id="spectrum" class="bt" title="WARNING: Causes massive CPU load!">spectrum</div>
+		<div id="wave" class="bt" title="WARNING: Causes massive CPU load!">waveform</div>
+		<div id="off" class="bt">off</div>
+	<div class="clear"></div>
+	<div id="data">
+		<div id="d_peak">
+			<div id="left"></div>
+			<div id="right"></div>
+		</div>
+		<div id="d_spectrum" style="display:none"></div>
+		<div id="d_wave" style="display:none"></div>
+	</div>
+</div>
+
+ <%= yield :layout %>
+
+<div id="links">
+	<div id="cp">currently playing</div>
+	<a id="show" href="" target="_blank">show page</a>
+	<a id="download" href="" target="_blank" title="Right-click -> save as">download</a>
+</div>
+
+</body>
+</html>

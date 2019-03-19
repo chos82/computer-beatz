@@ -1,0 +1,17 @@
+<p class="center">
+	Albums tagged with <strong>"<%=h @tag %>"</strong>
+</p>
+
+<%= render :partial => 'shared/order_by' %>
+
+<table class="list-entries">
+	<% for album in @albums do -%>
+	<%= render :partial => 'album', :object => album %>
+	<% end -%>
+</table>
+
+<%= will_paginate @albums, :inner_window => 1, :outer_window => 1, :id => @tag, :order => params[:order] %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>

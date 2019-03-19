@@ -1,0 +1,60 @@
+<% form_for :query, :url => { :action => "advanced_search" } do |f| %>
+<div class="search-background">
+	Search for<br />
+	<%= f.radio_button :type, 'tracks', :checked => true %><%= f.label :type, "Tracks" %>
+	<%= f.radio_button :type, 'albums' %><%= f.label :type, "Albums" %>
+	<%= f.radio_button :type, 'artists' %><%= f.label :type, "Artists" %>
+	<%= f.radio_button :type, 'labels' %><%= f.label :type, "Labels" %>
+</div>
+<div class="search-background">
+	<%= f.label :label, "Label" %><br />
+	<%= text_field_with_auto_complete :query, 
+									  :label,
+									  {:autocomplete => 'off'},
+									  {:method => :get, :skip_style => true, :url => {:action => 'auto_complete_label'} } %>
+</div>
+<div class="search-background">
+	<%= f.label :artist, "Artist" %><br />
+	<%= text_field_with_auto_complete :query, 
+									  :artist,
+									  {:autocomplete => 'off'},
+									  {:method => :get, :skip_style => true, :url => {:action => 'auto_complete_artist'} } %>
+</div>
+<div class="search-background">
+	<%= f.label :album, "Album" %><br />
+	<%= text_field_with_auto_complete :query, 
+									  :album,
+									  {:autocomplete => 'off'},
+									  {:method => :get, :skip_style => true, :url => {:action => 'auto_complete_album'} } %>
+</div>
+<div class="search-background">
+	<%= f.label :tarck, "Track" %><br />
+	<%= text_field_with_auto_complete :query, 
+									  :track,
+									  {:autocomplete => 'off'},
+									  {:method => :get, :skip_style => true, :url => {:action => 'auto_complete_track'} } %>
+</div>
+<div class="search-background">
+	Release date (may be set, if searching for tracks or albums)<br />
+	<%= select_year nil, :start_year => 1970, :end_year => Time.now.year, :include_blank => true %>
+	<%= f.select :release_connector, Music::RELEASE_CONNECTORS, {:include_blank => true} %>
+</div>
+<div class="search-background">
+	License<br />
+	<%= f.radio_button :license, 'free' %><%= f.label :license, "free" %>
+	<%= f.radio_button :license, 'both', :checked => true %><%= f.label :license, "both (or unknown)" %>
+	<%= f.radio_button :license, 'commercial' %><%= f.label :license, "commercial" %>
+</div>
+<div class="search-background">
+	<%= f.label :tags, "Tags" %><br />
+	<%= text_field_with_auto_complete :query, 
+									  :tags,
+									  {:autocomplete => 'off', 
+									   :size => 50},
+									  {:method => :get, :skip_style => true,
+									   :tokens => ',', :url => {:action => 'auto_complete_tag_search'} } %>
+</div>
+<div class="submit">
+	<%= submit_tag 'Search' %>
+</div>
+<% end %>

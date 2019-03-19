@@ -1,0 +1,18 @@
+<%= error_messages_for 'newsletter', :header_message => "The newsletter could not be submitted.",
+								 :message => "Please check the following details:",
+								 :header_tag => 'h3' %>
+								 
+<div>
+	<% form_for( :newsletter, :url => {:action => :create} ) do |f| %>
+		<p>
+			<%= f.label :subject %><br />
+			<%= f.text_field :subject, :size => 100 %>
+		</p>
+		<p>
+			<%= f.text_area :text, :rows => 22, :cols => 76 %><br />
+		</p>
+		<p>
+    		<%= f.submit "Send" %>
+  		</p>
+	<% end -%>
+</div>

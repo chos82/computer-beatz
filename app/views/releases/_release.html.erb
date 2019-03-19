@@ -1,0 +1,44 @@
+<div class="release">
+	<h3>
+		<%= link_to( image_tag( release.project.logo.url(:thumb), :class => 'noBoarder' ), release.project ) %>
+		<%= link_to( h(release.project.name), release.project ) %><br />
+		-&gt; <%= h(release.name) %>
+	</h3>
+</div>
+
+<div class="container1">
+	<div class="release-cover">
+	<%= link_to( image_tag( release.cover.url(:normal) , :class => 'project-logo noBoarder'), cover_release_path(release), :popup => true )  %>
+	
+	<div class="pr-date">
+		released on <%= show_time release.created_at %>
+	</div>
+</div>
+
+	This release is licensed under terms of <br />
+	<%= show_creative_commons release.project %>
+
+	<div id="rating">
+		<%= render :partial => 'rating', :object => release %>
+	</div>
+
+	<div id="love">
+		<%= render :partial => 'loving', :object => release %>
+	</div>
+	
+	<div>
+		<% link_to release.audio.url, {:class => 'playable playButton'} do %>
+			<div>Play it!</div>
+		<% end %>
+		<div style="display:none;"><%=release.id%></div>
+		<%= link_to 'Download', release.audio.url, :class => 'downloadLink', :target => '_blank' %><br />
+		<i>right-click, save as</i> to download
+	</div>
+
+</div>
+
+<div id="observer"></div>
+
+<div class="text clear">
+	<%= sanitize( format_text(release.description) ) %>
+</div>

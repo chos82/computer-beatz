@@ -1,0 +1,3 @@
+page.hide('youtube-results')
+page.replace_html('youtube-results', :partial => 'embed_video')
+page['youtube-results'].visual_effect :BlindDown

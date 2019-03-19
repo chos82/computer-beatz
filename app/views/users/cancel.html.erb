@@ -1,0 +1,42 @@
+<div class="center">
+	<strong>You are about to</strong>
+	<h2>CANCEL</h2>
+	<strong>your</strong>
+	<h3>account</h3>
+</div>
+<p>
+	Canceling your account will also destroy all:
+	<ul>
+		<li>
+			Comments
+		</li>
+		<li>
+			Entries to guestbook
+		</li>
+		<li>
+			Posts to Groups
+		</li>
+		<li>
+			Projects including the releases, if the project 
+			has no other members
+		</li>
+		<li>
+			Messages you sent or recieved
+		</li>
+		<li>
+			Your favourites ist
+		</li>
+		<li>
+			Your ratings
+		</li>
+		<li>
+			Your taggings
+		</li>
+		<li>
+			Invitations you sent or recieved
+		</li>
+	</ul>
+	If you are the administrator of a group, you should give the administration to 
+	someone, before u cancel your account.<br />
+	<%= link_to 'Proceed cancelation', current_user, :method => :delete, :confirm => 'Are you really shure?' %>
+</p>

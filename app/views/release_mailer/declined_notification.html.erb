@@ -1,0 +1,14 @@
+The release <%= h @release.name %> of the computer-beatz project <%= h @release.project.name %> will not be published.
+
+The project page can be found here
+	<%= "http://#{SITE_URL}" + project_path(@release.project) %>
+	
+	
+There may be manifold reasons that computer-beatz declined to publish the track.
+
+<% if @message && !@message.empty? -%>
+The reviewer has added a personal message:
+---------------------------------------
+
+<%= @message %>
+<% end -%>

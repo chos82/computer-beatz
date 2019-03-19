@@ -1,0 +1,12 @@
+User <%=h @sender.login %> has invited you to become a member of '<%=h @group.title %>'.
+
+	You can accept or decline the invitation here:
+	<%= "http://#{SITE_URL}" + myinvitations_path(@reciever) %>
+	(All your pending invitations are shown there)
+	
+	
+	View the group profile:
+	<%= "http://#{SITE_URL}" + group_path(@group) %>
+	
+	View the profile of the user who invited you:
+	<%= "http://#{SITE_URL}" + user_path(@sender) %>

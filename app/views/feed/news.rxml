@@ -1,0 +1,91 @@
+xml.instruct!
+xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
+  xml.channel do
+    xml.title 'Computer-Beatz - What`s new?'
+    xml.link 'http://' + SITE_URL
+    xml.pubDate CGI.rfc1123_date(@date)
+    xml.description "Latest news in the social and collaborative community, music database and weblabel computer-beatz"
+    @latest.each do |item|
+      xml.item do
+        case item.type.to_s
+          when 'Release'
+            xml.title '[Release] ' + item.name
+            xml.link url_for(:only_path => false, 
+                             :controller => 'releases', 
+                             :action => 'show',
+                             :id => item)
+            desc = 'Project ' + h(item.project.name) + ' released ' + h(item.name)
+            unless item.description.blank?
+              desc += ': ' unless item.description.empty?
+              desc += h(item.description)
+            else
+              desc += '.'
+            end
+            xml.description desc
+            xml.pubDate CGI.rfc1123_date(item.created_at)
+            xml.guid url_for(:only_path => false, 
+                             :controller => 'releases', 
+                             :action => 'show',
+                             :id => item)
+          when 'Newsletter'
+            xml.title '[Newsletter] ' + item.subject
+            xml.link url_for(:only_path => false, 
+                             :controller => 'newsletter', 
+                             :action => 'show',
+                             :id => item)
+            xml.description item.text
+            xml.pubDate CGI.rfc1123_date(item.created_at)
+            xml.guid url_for(:only_path => false, 
+                             :controller => 'newsletter', 
+                             :action => 'show',
+                             :id => item)
+          when 'Artist', 'Label', 'Album', 'Track'
+            xml.title h(item.name)
+            xml.link url_for(:only_path => false, 
+                             :controller => item.type.to_s.downcase.pluralize, 
+                             :action => 'show',
+                             :id => item)
+            case item.type.to_s
+              when 'Artist', 'Label'
+                xml.description 'The ' + item.type.to_s + ' ' + h(item.name) + ' was freshly added to the database.'
+              when 'Track', 'Album'
+                desc = 'The ' + item.type.to_s + ' ' + h(item.name)
+                desc += ', ' + item.release_date.year.to_s if item.release_date
+                desc += ", by #{h item.artist.name}" if item.artist
+                desc += ", on #{h item.label.name}" if item.label
+                desc += ' was freshly added to the database.'
+                xml.description desc
+            end
+            xml.pubDate CGI.rfc1123_date(item.updated_at)
+            xml.guid url_for(:only_path => false, 
+                             :controller => item.type.to_s.downcase.pluralize, 
+                             :action => 'show',
+                             :id => item)
+          when 'Group'
+            xml.title '[GROUP] ' + item.title
+            xml.link url_for(:only_path => false, 
+                             :controller => 'groups', 
+                             :action => 'show',
+                             :id => item)
+            xml.description 'The Group ' + h(item.title) + ' was created.'
+            xml.pubDate CGI.rfc1123_date(item.created_at)
+            xml.guid url_for(:only_path => false, 
+                             :controller => 'groups', 
+                             :action => 'show',
+                             :id => item)
+          when 'NewsMessage'
+            xml.title '[GroupNews] ' + h(item.topic.title)
+            xml.link group_topic_path(item.topic.group, item.topic, :only_path => false)
+            xml.description h(item.subject) + ': ' + strip_tags (RedCloth.new(item.text).to_html)
+            xml.pubDate CGI.rfc1123_date(item.created_at)
+            xml.guid group_topic_path(item.topic.group, item.topic, :only_path => false)
+          else
+            
+        end    
+      end
+    end
+    
+   
+
+  end
+end

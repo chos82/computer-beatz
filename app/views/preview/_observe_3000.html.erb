@@ -1,0 +1,5 @@
+<%= observe_field 'text-3000', :url => { :controller => :preview, :action => :redcloth},
+      :frequency => 2,
+      :update => :result,
+	  :with => "'text=' + encodeURIComponent(value)"
+%>

@@ -1,0 +1,28 @@
+<p class="center">
+	<%= pluralize @results.length, 'record' %> in <em>Tracks</em> found.
+</p>
+
+<div class="order">
+		<p id="track-index-back">
+				<%= link_to 'New track', :controller => :tracks, :action => 'new' %>
+		</p>
+		<%= render :partial => 'order' %>
+		<%= render :partial => 'selector' %>
+</div>
+
+<table class="list-entries">
+	<tr>
+		<th>
+			Track
+		</th>
+		<th>
+			Artist
+		</th>
+		<th>
+			Label
+		</th>
+	</tr>
+	<% for track in @results do -%>
+	<%= render :partial => 'tracks/track', :object => track %>
+	<% end %>
+</table>

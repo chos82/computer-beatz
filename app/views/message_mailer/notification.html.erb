@@ -1,0 +1,8 @@
+<%= @sender %> sent you a message. Visit the following link to view your inbox:
+
+	<%= "http://#{SITE_URL}" + inbox_index_path(@reciever) %>
+	
+
+In case you don`t want to recieve notification e-mails, when someone writes you, you can change that behaviour by editing your profile at:
+
+	<%= "http://#{SITE_URL}" + myaccount_path(@reciever) %>

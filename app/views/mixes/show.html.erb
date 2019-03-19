@@ -1,0 +1,96 @@
+<div class="std-mix">
+	<div class="entry-date">
+		On computer-beatz sice <%= show_time_short @mix.created_at %>
+	</div>
+	<h3 id="h-entry"><span><%=h @mix.name %></span></h3>
+	<em><%= echo_release_date @mix %></em>
+	<p>
+		Artist: <%= link_to_artist(@mix) %>
+	</p>
+</div>
+
+<% unless @mix.creator.nil? -%>
+<div class="creator">
+	<%= link_to (h @mix.creator.login), @mix.creator %> made this entry
+</div>
+<% end -%>
+
+<div id="report">
+	<%= report_entry @mix %>
+</div>
+
+<div class="container1">
+
+	<div class="advert1">
+		<%= link_to( image_tag("advert1.jpg"), advert_url ) %>
+	</div>
+
+	<div class="credit2">
+		Photo by <%= link_to 'Hryckowain', 'http://flickr.com/people/hryckowian/?search=Hryckowian', :target => 'blank' %>
+	</div>
+
+	<div id="rating">
+		<%= render :partial => 'music/rating', :object => @mix %>
+	</div>
+
+	<div id="love">
+		<%= render :partial => 'music/loving', :object => @mix %>
+	</div>
+
+</div>
+
+<p class="clear">
+	<h3>Tracks:</h3>
+	<table class="track_listing">
+		<tr>
+			<th>#number</th>
+			<th>start time <br/><small><em>(in minutes)</em></small></th>
+			<th>Artist</th>
+			<th>Name</th>
+		</tr>
+		<% for listing in @mix.track_listings do -%>
+		<tr>
+			<td><%= listing.track_number %></td>
+			<td><%= listing.start_time if listing.start_time %></td>
+			<td><%= link_to h(listing.track.artist.name), listing.track.artist if listing.track.artist %></td>
+			<td><b><%= link_to h listing.track.name %></b><td>
+		</tr>
+		<% end -%>
+	</table>
+	<%= link_to 'Add a track', :action => 'add_track', :id => @mix %>
+</p>
+
+<p class="further">
+	<%= link_to 'Similar Items', music_similar_index_path(@mix) %>
+</p>
+
+
+<% unless @tags.empty? %>
+<h3 class="align-center">Tags:</h3>
+<p class="tag-list align-center">
+	<% tag_cloud @tags do |tag, class_name| %>
+	<%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => class_name %>
+	<% end %>
+</p>
+<% end %>
+
+<% if logged_in? -%>
+<div id="tags-link">
+	<%= link_to( 'Tag', manage_tags_music_url(@mix),
+							 :class => 'tooltip button',
+							 :id => 'tag-button',
+							 :title => "Manage Tags for this Item." ) %>
+	<div class="tool-txt" id="tag-button_tipBox">&nbsp;</div>
+	<div class="spinner-bar" id="tag-button_spinner" style="display: none;">&nbsp;</div>
+</div>
+<div id="manage-tags" class="add-tag" style="display: none;"></div>
+<% end -%>
+
+<%= render :partial => 'shared/comments', :object => @comments %>
+
+<%= will_paginate @comments, :inner_window => 1, :outer_window => 1 %>
+<% if logged_in? -%>
+<%= render :partial => 'music/add_comment', :object => @mix %>
+<% end -%>
+
+<div id="observer"></div>

@@ -1,0 +1,120 @@
+<%= render :partial => 'users/user_menu' %>
+<p class="compose">
+	<%= link_to_if mailbox_status_ok?(current_user), 'Compose Message', compose_messages_path %>
+	<%= link_to_unless_current 'Outbox', outbox_index_path(current_user) %>
+</p>
+<%= render :partial => 'messages/status' %>
+
+<div class="top-content-container">
+	<div class="heading">
+			<h2>Inbox</h2>
+			<% unless @messages.empty? -%>
+			<%= link_to 'Delete All', delete_all_inbox_path(current_user, :select => params[:select]),
+										:method => :delete,
+								 		:confirm => 'Really delete all shown messages?' %>
+			<% end -%>
+	</div>
+	<div class="head">
+			<% unless params[:select] == 'all' || params[:select].blank? %>
+			<%= link_to 'All Messages', inbox_index_path(current_user) %>&nbsp;
+			<% else %>
+			<span class="current">All Messages</span>
+			<% end %>
+			
+			<% unless params[:select] == 'unread' %>
+			<%= link_to 'New Messages', inbox_index_path(current_user, :select => 'unread') %>&nbsp;
+			<% else %>
+			<span class="current">New Messages</span>
+			<% end %>
+			
+			<% unless params[:select] == 'read' %>
+			<%= link_to 'Read Messages', inbox_index_path(current_user, :select => 'read') %>&nbsp;
+			<% else %>
+			<span class="current">Read Messages</span>
+			<% end %>
+	</div>
+</div>
+
+<% unless @messages.empty? -%>
+<table class="list-entries">
+	<% for message in @messages do -%>
+		<% if message.replied %>
+				<tr>
+		<td>
+			<%= link_to '<div class="replied-message"></div>', inbox_path(current_user, message) %>
+			<div class="message-info">
+			<em>From: </em><%= link_to (h message.sender.login), user_path(message.sender) %><br />
+			<div>
+				<%= link_to (h truncate(message.subject, :length => 80)),
+							  inbox_path(current_user, message) %>
+			</div>
+			</div>
+		</td>
+		<td class="align-right">
+			<%= show_time_short message.created_at %><br />
+			<%= link_to 'delete', inbox_path(current_user, message),
+								 :method => :delete,
+								 :confirm => 'Delete this message?' %>
+		</td>
+	</tr>
+		<% elsif message.read %>
+				<tr>
+		<td>
+			<%= link_to '<div class="read-message"></div>', inbox_path(current_user, message) %>
+			<div class="message-info">
+			<em>From: </em><%= link_to (h message.sender.login), user_path(message.sender) %><br />
+			<div>
+				<%= link_to (h truncate(message.subject, :length => 80)),
+							  inbox_path(current_user, message) %>
+			</div>
+			</div>
+		</td>
+		<td class="align-right">
+			<%= show_time_short message.created_at %><br />
+			<%= link_to 'reply', reply_message_path( message ) %> | 
+			<%= link_to 'delete', inbox_path(current_user, message),
+								 :method => :delete,
+								 :confirm => 'Delete this message?' %>
+		</td>
+	</tr>
+		<% else -%>
+				<tr>
+		<td>
+			<%= link_to('<div class="unread-message"></div>',
+							  read_inbox_path( current_user, message ),
+							  :method => :put) %>
+			<div class="message-info">
+			<em>From: </em><%= link_to (h message.sender.login), user_path(message.sender) %><br />
+			<div>
+				<strong><%= link_to (h truncate(message.subject, :length => 80)),
+							  read_inbox_path( current_user, message ),
+							  :method => :put %></strong>
+			</div>
+			</div>
+		</td>
+		<td class="align-right">
+			<%= show_time_short message.created_at %><br />
+			<%= link_to 'reply', reply_message_path( message ) %> | 
+			<%= link_to 'delete', inbox_path( current_user, message ),
+								 :method => :delete,
+								 :confirm => 'Delete this message?' %>
+		</td>
+	</tr>
+		<% end -%>
+	<% end -%>
+</table>
+
+<% if @messages.empty? -%>
+<p class="center">No Messages.</p>
+<% else -%>
+<%= will_paginate @messages, :inner_window => 1, :outer_window => 1 %>
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+<% end -%>
+
+<% else %>
+<p class="center">
+	No messages.
+</p>
+<% end %>

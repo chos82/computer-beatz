@@ -1,0 +1,11 @@
+<% form_tag decline_admin_release_path(@release) do -%>
+	<h3>Decline <%= link_to @release.name, release_path(@release), :target => :blank %></h3>
+	<p>
+		<%= link_to 'audio file', @release.audio.url, :target => :blank %>
+	</p>
+	Add a personal message:<br />
+	<%= text_area_tag 'message', nil, :rows => 15, :cols => 55 %>
+	<p>
+		<%= submit_tag 'Decline', :confirm => 'The associated audio file will be deleted! Maybe you want to download and archive it before?' %>
+	</p>
+<% end -%>

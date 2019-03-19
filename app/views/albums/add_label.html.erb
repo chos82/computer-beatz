@@ -1,0 +1,20 @@
+<div class="margin-left">
+<p>
+	<h3><%=h @album.name %></h3>
+</p>
+<p>
+	From: <%= echo_name(@album.artist) %><br />
+</p>
+<% form_for( @album, :url => {:action => 'check_added_label', :id => @album.id, :method => :post} )do |f| %>
+  <p>
+    <%= f.label :label %><br />
+    <%= text_field_with_auto_complete :label, 
+									  :name,
+									  {:autocomplete => 'off'},
+									  {:method => :get, :skip_style => true, :url => {:controller => 'labels', :action => 'auto_complete_for_label_name'} } %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+</div>

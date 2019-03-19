@@ -1,0 +1,59 @@
+		<div id="user-menu">
+			<% if logged_in? -%>
+			<div id="loginName">
+				<%= link_to h(current_user.login), myprofile_path(current_user) %>&nbsp;
+					<ul id="userJSmenu" style="display:none;">
+						<li>
+							<%= link_to_unless_current 'Profile', myprofile_path(current_user) %>
+						</li>
+						<li>
+							<%= link_to_unless_current 'Tagged', mytaggings_path(current_user) %>
+						</li>
+						<li>
+							<%= link_to_unless_current 'Tags', mytags_path(current_user) %>
+						</li>
+						<li>
+							<%= link_to_unless_current 'Favourites', myfavourites_path(current_user) %>
+						</li>
+						<li>
+							<% if !( mailbox_status_ok?(current_user) ) %>
+							<%= link_to_unless params[:ontroller] == 'inbox' || params[:controller] == 'outbox', 'Mail', inbox_index_path(current_user), :class => 'warning' %>
+							<% elsif (new_mail?(current_user)) -%>
+							<%= link_to_unless params[:ontroller] == 'inbox' || params[:controller] == 'outbox', 'Mail', inbox_index_path(current_user), :class => 'highlight' %>
+							<% else -%>
+							<%= link_to_unless params[:ontroller] == 'inbox' || params[:controller] == 'outbox', 'Mail', inbox_index_path(current_user) %>
+							<% end -%>
+						</li>
+						<li>
+							<%= link_to_unless_current 'Friends', myfriends_path(current_user) %>
+						</li>
+						<li>
+							<%= link_to_unless_current 'Groups', mygroups_path(current_user) %>
+						</li>
+						<% unless current_user.projects.empty? -%>
+						<li>
+							<%= link_to_unless_current 'Projects', myprojects_path(current_user) %>
+						</li>
+						<% end -%>
+						<li>
+							<% unless no_invitations == 0 -%>
+							<%= link_to_unless_current 'Invitations', myinvitations_path(current_user), :class => 'highlight' %>
+							<% else -%>
+							<%= link_to_unless_current 'Invitations', myinvitations_path(current_user) %>
+							<% end -%>
+						</li>
+						<li>
+							<%= link_to_unless_current 'Account', myaccount_path(current_user) %>
+						</li>
+					</ul>
+			</div>
+				(<span id="inbox" title="Inbox. No of new messages."><%= inbox_link current_user %></span>|<span title="No. invitations"><%= invitations_link current_user %></span>) | 
+				<%= link_to 'Log Out', logout_url %>
+				<% else -%>
+				<%= link_to 'Log In', new_session_path %> | 
+				<%= link_to 'Sign Up', new_user_path %>
+			<% end -%>
+		</div>
+		
+		
+	</div>

@@ -1,0 +1,5 @@
+<p class="center">
+	Items that <%= h @user.login %> tagged with<strong> "<%=h params[:tag] %>"</strong>
+</p>
+
+<%= render :partial => 'tag', :collection => @tagged_items, :as => 'tagged_items' %>

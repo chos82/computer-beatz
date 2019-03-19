@@ -1,0 +1,30 @@
+<%= render :partial => 'order_by' %>
+<table class="list-entries">
+	<tr>
+		<th>
+			Mix
+		</th>
+		<th>
+			Artist
+		</th>
+	</tr>
+	<% for mix in @mixes do -%>
+	<%= render :partial => 'mix', :object => mix %>
+	<% end -%>
+</table>
+
+<%= will_paginate @mixes, :inner_window => 1, :outer_window => 1, :order => params[:order] %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+<% unless @tags.empty? -%>
+<p class="tag-cloud">
+	<% tag_cloud @tags do |tag, css_class| -%>
+   	<%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => css_class %>
+	<% end -%>
+</p>
+<p class="center">
+	<%= link_to 'All tags', :action => :tags %>
+</p>
+<% end -%>

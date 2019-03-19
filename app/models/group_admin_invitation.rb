@@ -1,0 +1,4 @@
+class GroupAdminInvitation < Invitation
+  
+  
+end

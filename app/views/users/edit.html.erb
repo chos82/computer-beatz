@@ -1,0 +1,131 @@
+<%= render :partial => 'user_menu' %>
+<h2>Edit Your Account</h2>
+<%= link_to 'Change Password', change_password_path %><br />
+<%= link_to 'Cancel Membership', cancel_user_path(current_user) %>
+<%= error_messages_for :user, :header_message => "The form could not be submitted.",
+								 :message => "Please check the following details:",
+								 :header_tag => 'h3'  %>
+<% form_for current_user,  :html => { :multipart => true} do |f| %>
+
+<p>
+	E-mail notifications on:<br />
+	<%= f.check_box :message_notify %>
+	<%= f.label :message_notify, "New messages" %><br />
+	<%= f.check_box :guestbook_notify %>
+	<%= f.label :guestbook_notify, "New guestbook entries" %><br />
+	<%= f.check_box :invitation_notify %>
+	<%= f.label :invitation_notify, "Requests, approvals, denials" %> (friendships, groups)<br />
+</p>
+<p>
+	<%= f.check_box :newsletter %>
+	<%= f.label :newsletter, "Recieve the newsletter" %>
+</p>
+<p>
+	<%= f.label :avatar, "Upload an avatar" %><br />
+	<%= f.file_field :avatar %>
+</p>
+
+<p><%= f.label :birthday, 'Birthday' %><br />
+<%= f.date_select( :birthday, 
+				   :order => [:day, :month, :year],
+				   :start_year => 1930,
+				   :end_year => (Time.now.year - 10),
+				   :include_blank => true ) %></p>
+
+<p><%= f.label :gender, 'Gender' %><br >
+<%= f.radio_button :gender, 'female' %>female
+<%= f.radio_button :gender, 'male' %>male
+<%= f.radio_button :gender, 'unknown' %>don`t tell
+</p>
+
+<p><%= f.label :time_zone, 'Time Zone' %><br />
+<%= f.time_zone_select( "time_zone", nil, :default => "UTC" ) %></p>
+
+<p><%= f.label :country, 'Country' %><br />
+<%= f.country_select 'country', 'unknown' %></p>
+
+<table>
+	<tr>
+		<td>
+			<%= f.label :zip, 'ZIP' %><br />
+			<%= f.text_field :zip, :size => 5 %>
+		</td>
+		<td>
+			<%= f.label :city, 'City' %><br />
+			<%= f.text_field :city %>
+		</td>
+	</tr>
+</table>
+
+<p><%= f.label :www, 'Homepage' %><br />
+<%= f.text_field :www, :size => 45 %></p>
+
+<p>
+	<span class="right-px">
+  		<span class="spinner" id="spinner-preview" style="display: none;">&nbsp;</span>
+		<span id="preview-link">
+  		<%= render :partial => 'preview/show_preview_3000' %>
+		</span>
+	</span>
+	<%= f.label :motto, 'Say something to other users' %>
+	<%= f.text_area :motto, :rows => 15, :cols => 55, :id => 'text-3000' %>
+	<span class="right-px">You may use <%= link_to 'Textile', {:controller => 'static', :action => 'textile'}, :popup => ['Textile Short Reference', 'height=800,width=600, scrollbars=yes'] %> syntax, but no HTML</span>
+	(<span id="counter-text-3000">#</span> characters)
+</p>
+
+<div id="preview" class="motto" style="display: none">
+  	<strong>Preview:</strong>
+  	<div id="result" class="text"></div>
+</div>
+
+<p>
+	<h4>Privacy settings:</h4>
+	<em>users</em> are all people having a computer-beatz account
+	<p>
+		<strong>Profile text</strong><br />
+		<%= f.radio_button :motto_privacy, 'private' %> only you
+		<%= f.radio_button :motto_privacy, 'friends' %> friends
+		<%= f.radio_button :motto_privacy, 'users' %> users
+		<%= f.radio_button :motto_privacy, 'public' %> everybody
+	</p>
+	<p>
+		<strong>Guestbook</strong><br />
+		<%= f.radio_button :guestbook_privacy, 'private' %> only you
+		<%= f.radio_button :guestbook_privacy, 'friends' %> friends
+		<%= f.radio_button :guestbook_privacy, 'users' %> users
+		<%= f.radio_button :guestbook_privacy, 'public' %> everybody
+	</p>
+	<p>
+		<strong>Taggings and tags</strong><br />
+		<%= f.radio_button :tagged_privacy, 'private' %> only you
+		<%= f.radio_button :tagged_privacy, 'friends' %> friends
+		<%= f.radio_button :tagged_privacy, 'users' %> users
+		<%= f.radio_button :tagged_privacy, 'public' %> everybody
+	</p>
+	<p>
+		<strong>Favourites</strong><br />
+		<%= f.radio_button :favourites_privacy, 'private' %> only you
+		<%= f.radio_button :favourites_privacy, 'friends' %> friends
+		<%= f.radio_button :favourites_privacy, 'users' %> users
+		<%= f.radio_button :favourites_privacy, 'public' %> everybody
+	</p>
+	<p>
+		<strong>Group memberships</strong><br />
+		Only affects the list on your profile. Your membership is still shown on a group`s page.<br />
+		<%= f.radio_button :groups_privacy, 'private' %> only you
+		<%= f.radio_button :groups_privacy, 'friends' %> friends
+		<%= f.radio_button :groups_privacy, 'users' %> users
+		<%= f.radio_button :groups_privacy, 'public' %> everybody
+	</p>
+	<p>
+		<strong>Friendships</strong><br />
+		<%= f.radio_button :friendships_privacy, 'private' %> only you
+		<%= f.radio_button :friendships_privacy, 'friends' %> friends
+		<%= f.radio_button :friendships_privacy, 'users' %> users
+		<%= f.radio_button :friendships_privacy, 'public' %> everybody
+	</p>
+</p>
+<p><%= submit_tag 'Update' %></p>
+<% end %>
+
+<div id="observer"></div>

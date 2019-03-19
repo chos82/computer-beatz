@@ -1,0 +1,22 @@
+<% unless @similars.empty? -%>
+<p class="center-std">
+	<%= @similars.size %> Labels, Artists and Tracks most similar to <strong><%= link_to_show_depending_on_type @item %></strong>.<br />
+	Similarity is based on tags.
+</p>
+<div class="std-heading">
+			Ordered by relevance.
+</div>
+<table class="list-entries">
+	<% for item in @similars do %>
+	<%= render :partial => 'music/item', :object => item %>
+	<% end %>
+</table>
+
+<% else -%>
+<p class="center-std">
+	0 similar records found.
+	<% if @item.tags.length == 0 %>
+	This is because <%= link_to_show_depending_on_type @item %> has no tags yet. Start tagging!
+	<% end %>
+</p>
+<% end -%>

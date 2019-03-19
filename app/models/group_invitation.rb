@@ -1,0 +1,2 @@
+class GroupInvitation < Invitation
+end

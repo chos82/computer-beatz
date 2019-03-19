@@ -1,0 +1,12 @@
+<table class="list-entries">
+	<%= render :partial => 'shared/order_by' %>
+	<% for item in @tagged_items do %>
+	<%= render :partial => 'music/item', :object => item %>
+	<% end %>
+</table>
+
+<%= will_paginate @tagged_items, :inner_window => 1, :outer_window => 1, :order => params[:order] %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>

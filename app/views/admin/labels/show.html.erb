@@ -1,0 +1,23 @@
+<p>
+	<h3>Label: <%= link_to (h(@label.name),
+						     {:controller => '/labels',
+						      :action => 'show',
+							  :id => @label},
+						     {:target => 'blank'}) %></h3>
+</p>
+<% if @report %>
+<p>
+	<%= link_to( h(@user.login), {:controller => '/users',
+								  :action => 'show',
+							      :id => @user.id},
+							    {:target => 'blank'}) %>: <%= @report.status %>
+</p>
+<% end %>
+<% unless @label.www.blank? %>
+<p>
+	<%= link_to @label.www, 'http://' + @label.www,
+								 :target => 'blank' %>
+</p>
+<% end %>
+<%= link_to 'Edit', edit_admin_label_path(@label) %> |
+<%= link_to 'Back', admin_music_index_path %>

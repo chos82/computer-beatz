@@ -1,0 +1,21 @@
+<table class="list-entries">
+	<% for report in @reports do %>
+	<tr>
+		<td>
+			<%=h report.reportable.type %>
+		</td>
+		<td>
+			<%= blank_link_to_show_depending_on_type report.reportable %>
+		</td>
+		<td>
+			<% unless report.reportable.www.blank? %>
+			<%= link_to 'www', 'http://' + report.reportable.www,
+									 :target => 'blank' %>
+			<% end %>
+		</td>
+		<td><%= link_to_show_in_admin report.reportable %></td>
+    <td><%= link_to_edit report.reportable %></td>
+    <td><%= link_to 'Destroy',admin_music_path(report.reportable), :confirm => 'Are you sure?', :method => :delete %></td>
+	</tr>
+	<% end %>
+</table>

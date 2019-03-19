@@ -1,0 +1,5 @@
+page[@item.id.to_s].visual_effect( :Fade )
+
+page.replace_html('manage-tags-'+@item.id.to_s, :partial => 'edit_tags', :object => @item)
+
+page['manage-tags-'+@item.id.to_s].visual_effect :Grow

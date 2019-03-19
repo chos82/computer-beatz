@@ -1,0 +1,11 @@
+<div class="margin-left">
+<% if @music.type.to_s == 'Artist' -%> 
+<%= render :partial => 'artist' %>
+<% elsif @music.type.to_s == 'Label' -%>
+<%= render :partial => 'label' %>
+<% elsif @music.type.to_s == 'Track' -%>
+<%= render :partial => 'track' %>
+<% elsif @music.type.to_s == 'Album' -%>
+<%= render :partial => 'album' %>
+<% end -%>
+</div>

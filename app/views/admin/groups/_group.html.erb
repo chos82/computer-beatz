@@ -1,0 +1,9 @@
+<tr class="<%= cycle('odd', 'even') %>">
+	<td><%=h group.title %></td>
+	<td><%= truncate (h group.description), :length => 80 %></td>
+	<td><%= group.locked ? 'locked' : 'free' %></td>
+	<td><%= group.public ? 'public' : 'invisible' %></td>
+	<td>
+	<%= link_to('destroy', admin_group_path(group.id), :method => :delete, :confirm => "Really DESTROY this group?" ) %>
+	</td>
+</tr>

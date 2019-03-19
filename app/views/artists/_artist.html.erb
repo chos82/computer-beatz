@@ -1,0 +1,29 @@
+<tr class="blank">
+		<td>
+			<strong><%= link_to( (h artist.name), artist ) %></strong>
+		</td>
+		<% unless artist.www.blank? %>
+		<td class="www">
+			<%= link_to 'www', 'http://' + artist.www,
+									 :target => 'blank' %>
+		</td>
+		<% else %>
+		<td>&nbsp;</td>
+		<% end %>
+	</tr>
+	<tr class="stats">
+		<td colspan="3">
+			<div class="stats">
+				<ul class="star-rating-small">
+					<% if artist.rated_by_user?(current_user) %>
+					<li class="current-rating-rated" style="width:<%= artist.rating*12.round %>px">rated</li>
+					<% else %>
+					<li class="current-rating" style="width:<%= artist.rating*12.round %>px">rated</li>
+					<% end %>
+				</ul>
+				<span class="stats-c" title="Number of comments"><%= artist.comments_count %></span>
+				<span class="stats-l" title="Number of people loving this item"><%= artist.favourites_count %></span>
+				<span class="stats-t" title="Number of taggings for this item"><%= artist.taggings_count %></span>
+			</div>
+		</td>
+	</tr>

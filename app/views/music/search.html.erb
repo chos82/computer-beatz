@@ -1,0 +1,62 @@
+<p class="center">
+	Search results for <strong>"<%=h @query %>"</strong>: 
+	<%= pluralize @total, 'record' %> found.
+</p>
+
+<% unless @total == 0 -%>
+<div class="top-content-container">
+	<div class="head">
+			<div>Order by:</div>
+			<% unless params[:order] == 'name' || params[:order].blank? %>
+			<%= link_to 'Name', :action => 'search', :order => 'name', :search => {:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Name</span>
+			<% end %>
+			
+			<% unless params[:order] == 'comments' %>
+			<%= link_to 'Comments', :action => 'search', :order => 'comments', :search => {:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Comments</span>
+			<% end %>
+			
+			<% unless params[:order] == 'last_commented' %>
+			<%= link_to 'Last commented', :action => 'search', :order => 'last_commented', :search => {:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Last commented</span>
+			<% end %>
+			
+			<% unless params[:order] == 'loves' %>
+			<%= link_to 'Loves', :action => 'search', :order => 'loves', :search => {:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Loves</span>
+			<% end %>
+			
+			<% unless params[:order] == 'rating' %>
+			<%= link_to 'Rating', :action => 'search', :order => 'rating', :search => {:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Rating</span>
+			<% end %>
+			
+			<% unless params[:order] == 'newest' %>
+			<%= link_to 'Entry date', :action => 'search', :order => 'newest', :search => {:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Entry date</span>
+			<% end %>
+	</div>
+</div>
+<table class="list-entries">
+	<% for item in @results do %>
+	<%= render :partial => 'item', :object => item %>
+	<% end %>
+</table>
+
+
+<%= will_paginate @results, :inner_window => 1, :outer_window => 1, :params => {:search => {:query => @query}, :order => @order} %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+<p class="center">
+	<%= link_to 'Advanced Search', :action => 'advanced_form' %>
+</p>
+<% end -%>

@@ -1,0 +1,50 @@
+<%= render :partial => 'users/foreign_user_menu', :object => @user %>
+
+<%= render :partial => 'users/user_profile', :object => @user %>
+
+<p class="further">
+	Groups, you can invite <%=@user.login -%> to:<br />
+	Ordered by (your) join date.
+</p>
+<% unless @groups.empty? -%>
+<table class="list-entries">
+	<% for group in @groups do %>
+	<tr>
+	<td class="mini-group-info">
+		<div class="group-logo">
+			<%= link_to image_tag( group.logo.url(:thumb) ), group %>
+		</div>
+		<div class="group-stats">
+			<% if group.locked -%>
+			<div class="locked" title="Users have to be approved by the group`s admin">&nbsp;</div>
+			<% else -%>
+			<div class="unlocked" title="Public accessible">&nbsp;</div>
+			<% end -%>
+			<% if group.public -%>
+			<div class="public" title="Everybody can read messages">&nbsp;</div>
+			<% else -%>
+			<div class="not-public" title="Only group members can read messages">&nbsp;</div>
+			<% end -%>
+		</div>
+	</td>
+	<td class="group-title">
+		<strong><%= link_to( h(group.title), group ) %></strong>
+	</td>
+	<td class="right-links">
+		<%= link_to 'Invite',{ :controller => 'invitations', :action => 'create', :group_id => group, :user_id => @user }, :method => :post, :confirm => "Invite this user?" %>
+	</td>
+</tr>
+	<% end %>
+</table>
+
+<%= will_paginate @groups, :inner_window => 1, :outer_window => 1 %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+
+<% else %>
+<p class="center">
+	There are no groups, your are member in, but user <%=@user.login%> is not.
+</p>
+<% end %>

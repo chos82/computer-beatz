@@ -1,0 +1,24 @@
+<%= render :partial => 'order_by' %>
+
+<table class="list-entries">
+	<% for label in @labels do -%>
+	<%= render :partial => 'label', :object => label %>
+	<% end -%>
+</table>
+
+<%= will_paginate @labels, :inner_window => 1, :outer_window => 1, :order => @order, :license => @license %>
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+
+<% unless @tags.empty? -%>
+<p class="tag-cloud">
+	<% tag_cloud @tags do |tag, css_class| -%>
+   	<%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => css_class %>
+	<% end -%>
+</p>
+<p class="center">
+	<%= link_to 'All tags', :action => :tags %>
+</p>
+<% end -%>
+

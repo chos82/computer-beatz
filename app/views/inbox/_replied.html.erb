@@ -1,0 +1,18 @@
+	<tr>
+		<td>
+			<%= link_to '<div class="replied-message"></div>', inbox_path( current_user, message ) %>
+			<div class="message-info">
+			<em>From: </em><%= link_to (h message.sender.login), user_path(message.sender) %><br />
+			<div>
+				<%= link_to (h truncate(message.subject, :length => 80)),
+							  inbox_path( current_user, message ) %>
+			</div>
+			</div>
+		</td>
+		<td class="align-right">
+			<%= show_time_short message.created_at %><br />
+			<%= link_to 'delete', inbox_path( current_user, message ),
+								 :method => :delete,
+								 :confirm => 'Delete this message?' %>
+		</td>
+	</tr>

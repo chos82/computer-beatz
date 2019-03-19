@@ -1,0 +1,20 @@
+<div class="margin-left">
+<p>
+	<h3><%=h @track.name %></h3>
+</p>
+<p>
+	Label: <%= echo_name(@track.label) %><br />
+</p>
+<% form_for( @track, :url => {:action => 'check_added_artist', :id => @track.id, :method => :post} )do |f| %>
+  <p>
+    <%= f.label :artist %><br />
+    <%= text_field_with_auto_complete :artist, 
+									  :name,
+									  {:autocomplete => 'off'},
+									  {:method => :get, :skip_style => true, :url => {:controller => 'artists', :action => 'auto_complete_for_artist_name'} } %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+</div>

@@ -1,0 +1,42 @@
+<p class="group-name">
+	<%=h @group.title %>
+</p>
+
+<%= render  :partial => 'shared/groups/menu' %>
+
+<div class="group-profile">
+	<%= image_tag @group.logo.url(:original), :class => "logo-image" %>
+	
+	<div class="group-info">
+		<h6>Administrator:</h6>
+		<span><%= link_to (h @group.admin.login), user_path(@group.admin) %></span>
+		<h6>Status:</h6>
+		<span class="inline-group-stats">
+			<% if @group.locked -%>
+			<span class="locked" title="Users have to be approved by the group`s admin">&nbsp;</span>
+			locked
+			<% else -%>
+			<span class="unlocked" title="Public accessible">&nbsp;</span>
+			open
+			<% end -%>
+			<% if @group.public -%>
+			<span class="public" title="Everybody can read messages">&nbsp;</span>
+			public
+			<% else -%>
+			<span class="not-public" title="Only group members can read messages">&nbsp;</span>
+			members only
+			<% end -%>
+		</span>
+		<h6>Created at:</h6>
+		<span><%= show_time( @group.created_at ) %></span>
+	</div>
+	
+	<div class="description">
+		<p>
+			<strong>Description:</strong>
+		</p>
+		<div class="text">
+			<%= sanitize(format_text(@group.description)) %>
+		</div>
+	</div>
+</div>

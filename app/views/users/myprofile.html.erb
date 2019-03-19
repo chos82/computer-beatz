@@ -1,0 +1,65 @@
+<%= error_messages_for 'guestbook_entry', :header_message => "The message could not be submitted.",
+								 :message => "Please check the following details:",
+								 :header_tag => 'h3' %>
+
+<p class="user-name">
+	<%=h current_user.login %>
+</p>
+
+<%= render :partial => 'user_menu' %>
+
+<%= render :partial => 'user_profile', :object => current_user%>
+
+<% unless @guestbook_entries.empty? -%>
+<div class="gb">
+	<h3>Guestbook</h3>
+</div>
+
+<% for entry in @guestbook_entries do -%>
+<div class="gb-std">
+	<%= render :partial => 'guestbook_entry', :object => entry, :locals => {:user => current_user} %>
+	
+	<div class="delete">
+	<%= link_to 'Delete', user_guestbook_entry_path(current_user, entry),
+													 :method => :delete,
+													 :confirm => "Delete this guestbook message?" %>
+	</div>
+</div>
+<% end -%>
+
+<% end -%>
+
+<%= will_paginate @guestbook_entries %>
+
+<div id="new-gb-entry">
+	<h3>Post to your guestbook:</h3>
+	<% form_for( :guestbook_entry, :url => user_guestbook_entries_path(current_user) ) do |f| %>
+		<p>
+			<span class="right-px">
+  				<span class="spinner" id="spinner-preview" style="display: none;">&nbsp;</span>
+				<span id="preview-link">
+  					<%= render :partial => 'preview/show_preview_500' %>
+				</span>
+			</span>
+			<%= f.text_area :text, :rows => 8, :cols => 55, :id => 'text-500' %><br />
+			<span class="right-px">You may use 
+			<%= link_to 'Textile', {:controller => 'static',
+								    :action => 'textile'},
+									:popup => ['Textile Short Reference', 'height=800,width=600, scrollbars=yes'] %> 
+			syntax, but no HTML</span>
+			(<span id="counter-text-500">#</span> characters)
+		</p>
+		
+		<div id="preview" class="gb-std" style="display: none">
+  			<strong>Preview:</strong>
+  			<div id="result" class="text"></div>
+  		</div>
+		
+		<p>
+    		<%= f.submit "Send" %>
+  		</p>
+	<% end %>
+</div>
+
+<div id="observer"></div>
+

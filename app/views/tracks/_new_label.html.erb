@@ -1,0 +1,20 @@
+<h3>New label</h3>
+
+<%= error_messages_for 'artist', :header_message => "The form could not be submitted.",
+								 :message => "Please check the following details:",
+								 :header_tag => 'h3' %>
+
+<% form_for( @label )do |f| %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %><br/>
+  </p>
+  <p>
+    <%= f.label :www,  "Homepage" %><br />
+    <%= f.text_field :www %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>

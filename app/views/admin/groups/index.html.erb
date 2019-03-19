@@ -1,0 +1,11 @@
+<% form_for :search, :url => { :action => 'search' } do |f| %>
+			<%= f.text_field :title %>
+			<%= submit_tag 'Search' %>
+<% end %>
+<h1>Listing Groups:</h1>
+<table>
+	<% for group in @groups do %>
+	<%= render :partial => 'group', :object => group %>
+	<% end %>
+	<%= will_paginate @users, :inner_window => 1, :outer_window => 1 %>
+</table>

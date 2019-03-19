@@ -1,0 +1,15 @@
+<p class="center">
+	Labels tagged with <strong>"<%=h @tag %>"</strong>
+</p>
+
+<%= render :partial => 'shared/order_by' %>
+<table class="list-entries">
+	<% for label in @labels do -%>
+	<%= render :partial => 'label', :object => label %>
+	<% end -%>
+</table>
+<%= will_paginate @labels, :inner_window => 1, :outer_window => 1, :id => @label, :order => params[:order] %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>

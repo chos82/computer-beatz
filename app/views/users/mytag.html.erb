@@ -1,0 +1,5 @@
+<p class="center">
+	Items that you tagged with<strong> "<%=h params[:tag] %>"</strong>
+</p>
+
+<%= render :partial => 'tag', :object => @tagged_items, :as => 'tagged_items' %>

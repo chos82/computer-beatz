@@ -1,0 +1,1 @@
+page.replace_html("love" , :partial => "loving", :object => @item)

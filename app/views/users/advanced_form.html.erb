@@ -1,0 +1,27 @@
+<% form_for :query, :url => { :action => "advanced_search" } do |f| %>
+<div class="search-background">
+	<%= f.label :login, "Username" %><br />
+	<%= text_field_with_auto_complete :query, 
+									  :login,
+									  {:autocomplete => 'off'},
+									  {:method => :get, :skip_style => true, :url => {:controller => 'users', :action => 'auto_complete_login'} } %>
+</div>
+<div class="search-background">
+	<%= f.label :gender, "Gender" %><br />
+	<%= radio_button_tag 'query[gender]', 'both', :checked => true %><%= label_tag 'query[gender]', 'both' %>
+	<%= radio_button_tag 'query[gender]', 'female' %><%= label_tag 'query[gender]', 'female' %>
+	<%= radio_button_tag 'query[gender]', 'male' %><%= label_tag 'query[gender]', 'male' %>
+</div>
+<div class="search-background">
+	<%= f.label :age, "Age" %><br />
+	from <%= select_tag "query[age_from]", age_options %> 
+	to <%= select_tag "query[age_to]", age_options %> 
+</div>
+<div class="search-background">
+	<%= f.label :country, 'Country' %><br />
+	<%= f.country_select 'country', 'all' %>
+</div>
+<div class="submit">
+	<%= submit_tag 'Search' %>
+</div>
+<% end %>

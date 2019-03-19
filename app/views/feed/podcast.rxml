@@ -1,0 +1,42 @@
+xml.instruct!
+xml.rss "version" => "2.0", "xmlns:itunes" => "http://www.itunes.com/dtds/podcast-1.0.dtd" do
+  xml.channel do
+    xml.title 'Computer-Beatz - Latest released Tracks and Songs'
+    xml.link 'http://' + SITE_URL + '/releases'
+    xml.pubDate CGI.rfc1123_date(@releases.first.created_at)
+    xml.description "Latest releases on the computer-beatz weblabel for electronic music."
+    xml.copyright "Creative Commons"
+    @releases.each do |item|
+      xml.item do
+        xml.title item.project.name + ' - ' + item.name
+            xml.link url_for(:only_path => false, 
+                             :controller => 'releases', 
+                             :action => 'show',
+                             :id => item)
+            desc = 'Project ' + h(item.project.name) + ' released ' + h(item.name)
+            unless item.description.blank?
+              desc += ': ' unless item.description.empty?
+              desc += h(item.description)
+            else
+              desc += '.'
+            end
+            xml.description desc
+            xml.pubDate CGI.rfc1123_date(item.created_at)
+            xml.guid url_for(:only_path => false, 
+                             :controller => 'releases', 
+                             :action => 'show',
+                             :id => item)
+            xml.enclosure("url" => "http://" + SITE_URL + item.audio.url,  
+                          "length" => "item.audio_file_size.to_s",
+                          "type" => "audio/mpeg")
+            xml.tag! 'itunes:author', item.project.name
+            xml.tag! 'itunes:category', 'Elcetronic Music, Electro, Techno, House'
+            xml.tag! 'itunes:image', "http://" + SITE_URL + item.cover.url(:normal)
+            xml.tag! 'itunes:duration', item.audio_file_size / 16
+            xml.tag! 'itunes:subtitle', 'A release on the creative commons weblabel Computer Beatz'
+      end
+    end
+    
+  end
+  
+end

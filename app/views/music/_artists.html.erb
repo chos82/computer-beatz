@@ -1,0 +1,15 @@
+<p class="center">
+	<%= pluralize @results.length, 'record' %> in <em>Artists</em> found.
+</p>
+
+	<div class="order">
+		<p id="artist-index-back">
+			<%= link_to 'New artist', :controller => :artists, :action => 'new' %>
+		</p>
+		<%= render :partial => 'order' %>
+	</div>
+	<table class="list-entries">
+	<% for result in @results do -%>
+	<%= render :partial => 'artists/artist', :object => result %>
+	<% end -%>
+	</table>

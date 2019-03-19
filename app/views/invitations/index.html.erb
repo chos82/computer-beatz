@@ -1,0 +1,54 @@
+<%= render :partial => 'users/user_menu', :object => current_user %>
+
+<% unless @project_invitations.empty? -%>
+	<div class="list-head-seperator">
+		Invitations to projects
+	</div>
+	<table class="list-entries">
+		<%= render :partial => 'list_project_invitations', :collection => @project_invitations, :as => :invitation %>
+	</table>
+<% end -%>
+
+<% unless @admin_invitations.empty? -%>
+	<div class="list-head-seperator">
+		Invitations to become an admin of a group
+	</div>
+	<table class="list-entries">
+		<%= render :partial => 'list_admin_invitations', :collection => @admin_invitations, :as => :invitation %>
+	</table>
+	<% if @show_mare_ai -%>
+		<%= link_to 'Show all', :action => 'administration' %>
+	<% end -%>
+<% end -%>
+
+<% unless @total == 0 %>
+	<% unless @invitations.empty? -%>
+		<div class="list-head-seperator">
+			Invitations to groups
+		</div>
+		<table class="list-entries">
+			<%= render :partial => 'list_invitations', :collection => @invitations, :as => :invitation %>
+		</table>
+		<% if @show_more_i -%>
+			<%= link_to 'Show all', :action => 'groups' %>
+		<% end -%>
+	<% end -%>
+	
+	<% unless @fans.empty? -%>
+		<div class="list-head-seperator">
+			People who want to become your friend
+		</div>
+		<table class="list-entries">
+			<%= render :partial => 'list_friendship_requests', :collection => @fans , :as => :fan%>
+		</table>
+		<% if @show_more_fans -%>
+			<%= link_to 'Show all', :action => 'friendship' %>
+		<% end -%>
+	<% end -%>
+<% end -%>
+
+<% if @project_invitations.blank? && @invitations.blank? && @admin_invitations.blank? && @fans.blank? -%>
+<p class="center">
+	You have no pending invitations.
+</p>
+<% end %>

@@ -1,0 +1,17 @@
+<% unless @tags.blank? -%>
+<div id="rightColumnTags">
+		<p>Tags as <i>list</i></p>
+		<% @tags.each do |tag| -%>
+		<div class="tagItem">
+			<span class="tagCount">
+				<%= tag.count %>
+			</span>
+			<div class="tagName">
+				<%= link_to tag.name, { :action => :tag, :id => tag.name } %>
+			</div>
+		</div>
+		<% end -%>
+</div>
+<% else -%>
+<%= show_latest_creations %>
+<% end -%>

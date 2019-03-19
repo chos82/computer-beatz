@@ -1,0 +1,17 @@
+<div class="margin-left">
+<p>
+	<h3>Add an artist to <%= h @label.name %></h3>
+</p>
+<% form_for( @label, :url => {:action => 'check_added_artist', :id => @label.id, :method => :post} )do |f| %>
+  <p>
+    <%= f.label :artist %><br />
+    <%= text_field_with_auto_complete :artist, 
+									  :name,
+									  {:autocomplete => 'off'},
+									  {:method => :get, :skip_style => true, :url => {:controller => 'artists', :action => 'auto_complete_for_artist_name'} } %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+</div>

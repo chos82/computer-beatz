@@ -1,0 +1,25 @@
+<%= render :partial => 'users/user_menu' %>
+<p class="center"><%= link_to 'Your friends', myfriends_path(current_user) %></p>
+<h3>Your Friendship Requests:</h3>
+
+<table class="list-entries">
+	<% for user in @requested do -%>
+		<tr>
+			<td class="w50px">
+				<%= link_to image_tag( user.avatar.url(:thumb) ), user %>
+			</td>
+			<td class="align-left">
+				<strong><%= link_to( h(user.login), user ) %></strong>
+			</td>
+			<% if user.online? %>
+				<td class="user-on">
+					&nbsp;
+				</td>
+			<% else %>
+			<td class="user-off">
+				&nbsp;
+			</td>
+			<% end %>
+		</tr>
+	<% end -%>
+</table>

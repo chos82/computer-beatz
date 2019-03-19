@@ -1,0 +1,9 @@
+There is a new message in the computer-beatz group '<%= @group.title %>'. 
+To view the news of this group visit the following link:
+
+<%= "http://#{SITE_URL}" + group_path(@group) %>
+
+
+In case you don`t want to recieve notification e-mails, when someone writes to '<%= @group.title %>', you can change that behaviour by editing your membership at:
+
+	<%= "http://#{SITE_URL}" + edit_group_member_path(@group, @member) %>

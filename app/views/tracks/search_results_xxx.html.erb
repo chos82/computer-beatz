@@ -1,0 +1,36 @@
+<p>
+	Search results for <strong>"<%=h @query %>"</strong>: 
+	<%= pluralize @results.length, 'record' %> in <em>Tracks</em> found.
+</p>
+<% if @results.length != 0%>
+<table>
+	<tr>
+		<th>
+			Track
+		</th>
+		<th>
+			Artist
+		</th>
+		<th>
+			Label
+		</th>
+	</tr>
+	<% for result in @results do -%>
+	<tr>
+		<td>
+			<%= link_to( (h result.name), result ) %>
+		</td>
+		<td>
+			<%= link_to (h result.artist.name), result.artist %>
+		</td>
+		<td>
+			<%= link_to (h result.label.name), result.label %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" class ="line-seperator"></td>
+	</tr>
+	<% end -%>
+</table>
+<%= will_paginate @results %>
+<% end %>

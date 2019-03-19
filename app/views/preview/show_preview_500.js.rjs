@@ -1,0 +1,7 @@
+page.replace_html("preview-link" , :partial => "hide_preview_500")
+
+page[:preview].visual_effect :BlindDown
+
+page.replace_html("result", :partial => "redcloth", :object => @text)
+
+page.replace_html("observer", :partial => "observe_500")

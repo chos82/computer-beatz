@@ -1,0 +1,13 @@
+<p class="center">
+	<strong>Mailbox</strong><br />
+	<%= @count %> / 500 Messages
+</p>
+<div class="mailbox-back">
+	<% unless @count == 0 -%>
+	<% if @count > 20 -%>
+	<div class="mailbox-full" style="width: <%=(0.6 * @count).round%>px;"></div>
+	<% else -%>
+	<div class="mailbox-full" style="width: 12px;"></div>
+	<% end -%>
+	<% end -%>
+</div>

@@ -1,0 +1,49 @@
+<%= render :partial => 'members_menu', :object => @project %>
+
+<div class="proj-members">
+	<h4>Members:</h4>
+	<table>
+		<% @project.users.each do |member| -%>
+			<tr>
+				<td><%= link_to image_tag( member.avatar.url(:thumb) ), member, :class => 'floating-img' %></td>
+				<td><%= link_to (h member.login), member %></td>
+			</tr>
+		<% end -%>
+	</table>
+</div>
+<div class="clear"></div>
+
+<% unless @pending.empty? -%>
+<div class="proj-members">
+	<h4>Pending Members:</h4>
+	<table>
+		<% @pending.each do |member| -%>
+			<tr>
+				<td><%= link_to image_tag( member.avatar.url(:thumb) ), member, :class => 'floating-img' %></td>
+				<td><%= link_to (h member.login), member %></td>
+			</tr>
+		<% end -%>
+	</table>
+</div>
+<% end -%>
+
+<div class="clear"></div>
+
+	<% form_for( @project, :url => {:action => 'do_invitation', :id => @project } ) do |f| %>
+
+		  <div class="h40 mTB1">
+		  	<h4><%= f.label :reciever, 'Invite' %> (Type users`s name)</h4>
+			<%= text_field_with_auto_complete :invitation, 
+											  :reciever,
+											  {:autocomplete => 'off',
+											   :before => "Element.show('spinner-reciever')",
+			  								  :complete => "Element.hide('spinner-reciever')"},
+											  {:method => :get, :skip_style => true, :url => {:action => 'auto_complete_reciever'}, :class => 'inline' } %>
+		  <span class="spinner" id="spinner-reciever" style="display: none;">&nbsp;</span>
+		  <span id="reciever_status"></span>
+		  </div>
+		
+  		<%= f.submit "Invite", :confirm => "Really invite this user? Can`t be undone!" %>
+
+	<% end %>
+	<%= link_to '&lt;&lt; Back', project_path(@project) %>

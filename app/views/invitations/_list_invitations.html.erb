@@ -1,0 +1,27 @@
+	<tr>
+	<td class="mini-group-info">
+		<div class="group-logo">
+			<%= link_to image_tag( invitation.group.logo.url(:thumb) ), invitation.group %>
+		</div>
+		<div class="group-stats">
+			<% if invitation.group.locked -%>
+			<div class="locked" title="Users have to be approved by the group`s admin">&nbsp;</div>
+			<% else -%>
+			<div class="unlocked" title="Public accessible">&nbsp;</div>
+			<% end -%>
+			<% if invitation.group.public -%>
+			<div class="public" title="Everybody can read messages">&nbsp;</div>
+			<% else -%>
+			<div class="not-public" title="Only group members can read messages">&nbsp;</div>
+			<% end -%>
+		</div>
+	</td>
+	<td class="group-title">
+		<div><strong><%= link_to invitation.sender.login, invitation.sender %></strong> invites you to join</div>
+		<strong><%= link_to( h(invitation.group.title), invitation.group ) %></strong>
+	</td>
+	<td class="align-right">
+		<%= link_to 'Accept', accept_invitation_path(:id => invitation) , :method => :delete, :confirm => "By accepting the invitation, you will become a member of the group." %><br />
+		<%= link_to 'Decline',{ :controller => 'invitations', :action => 'destroy', :id => invitation }, :method => :delete, :confirm => "Decline the invitation?" %>
+	</td>
+	</tr>

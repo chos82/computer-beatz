@@ -1,0 +1,56 @@
+<p class="group-name">
+	<%=h @group.title %>
+</p>
+
+<%= render  :partial => 'shared/groups/menu' %>
+
+<ul class="user-list">
+<% for user in @members do %>
+	<li>
+		<div>
+			<%= link_to image_tag( user.avatar.url(:thumb) ), user, :class => 'usrImg' %>
+			<% if user.online? %>
+			<div class="statusOn" title="online">
+				&nbsp;
+			</div>
+			<% else %>
+			<div class="statusOff" title="online">
+				&nbsp;
+			</div>
+			<% end %>
+			<strong><%= link_to( h(user.login), user ) %></strong>
+		</div>
+		<div class="usrInfo clear">
+			<div class="noMessanges" title="Number of news-messages this user wrote.">
+				<%= user.members.last.no_messages %>
+			</div>
+			<div class="usrAge">
+				<span class="usrStatHead">Age:</span>
+				<%= show_age user %>
+			</div>
+			<div class="usrCountry">
+				<span class="usrStatHead">Country:</span>
+				<%= show_country user %>
+			</div>
+		</div>
+		<% unless @group.admin == user -%>
+		<div class="clear"></div>
+		<div class="cancelMember">
+		<%= link_to 'approve', approve_group_member_path(@group, user.members),
+							   :method => :put,
+							   :confirm => "Approve this user to the group?" %>   |   
+		<%= link_to 'decline', decline_group_member_path(@group, user.members),
+							   :method => :put,
+							   :confirm => "Decline the request of this user to join the group (can not be undone)?" %>			   
+		</div>			   
+		<% end -%>
+		<div class="clear"></div>
+	</li>
+	<% end %>
+</ul>
+
+<%= will_paginate @members, :inner_window => 1, :outer_window => 1, :params => {:query => @query, :order => @order} %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>

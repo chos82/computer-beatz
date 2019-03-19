@@ -1,0 +1,12 @@
+<div id="group-menu">
+	<%= link_to_unless_current 'Show Group', group_path(@group) %>
+	<% if show_group? @group -%>
+	<%= link_to_unless_current 'Topics', group_topics_path(@group) %>
+	<% end -%>
+	<%= link_to_unless_current 'Members', group_members_path(@group)%>
+	<% if logged_in? -%>
+	<% unless current_user.declined?(@group) -%>
+	<%= link_to_unless_current 'Join', new_group_member_path(@group) %>
+	<% end -%>
+	<% end -%>
+</div>

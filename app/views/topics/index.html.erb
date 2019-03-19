@@ -1,0 +1,44 @@
+<p class="center">
+	<h3>Topics for <%= link_to h(@group.title), group_path(@group) %></h3>
+</p>
+
+<div class="order">
+	<div>Order by:</div>
+	<% unless params[:order].blank? %>
+		<%= link_to 'Title', :action => params[:action] %>&nbsp;
+	<% else %>
+		<span class="current">Title</span>
+	<% end %>
+	<% unless params[:order] == 'activity' %>
+		<%= link_to 'Last post', :action => params[:action], :order => 'activity' %>&nbsp;
+	<% else %>
+		<span class="current">Last active</span>
+	<% end %>
+	<% unless params[:order] == 'noPosts' %>
+		<%= link_to 'Posts', :action => params[:action], :order => 'noPosts' %>&nbsp;
+	<% else %>
+		<span class="current">No Posts</span>
+	<% end %>
+</div>
+
+<% @topics.each do |topic| %>
+	<% if current_user == @group.admin -%>
+		<div class="destroy">
+			<%= link_to 'Destroy', group_topic_path(@group, topic), :method => :delete, :confirm => "Proceeding will destroy this topic AND ALL it`s messages!" %>
+		</div>
+	<% end %>
+	<div class="topic">
+		<b><%= link_to h(topic.title), group_topic_path(@group, topic) %></b>
+		<div>
+			<%= link_to h(topic.user.login), user_path(topic.user) %>,
+			<%= show_time_short topic.created_at %>
+		</div>
+	</div>
+<% end %>
+
+<%= link_to 'New topic', new_group_topic_path(@group), :class => 'std-button' %>
+
+<%= will_paginate @topics, :inner_window => 1, :outer_window => 1, :order => params[:order] %>
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>

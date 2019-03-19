@@ -1,0 +1,37 @@
+<div class="project">
+	<h3 id="h-entry"><span><%=h @project.name %></span></h3>
+	<%= link_to( image_tag( @project.logo.url(:normal), :class => 'project-logo noBoarder'), logo_project_path(@project), :popup => true )  %>
+	
+	Average <i>Release</i> rating:
+	<ul class="star-rating">
+		<li class="current-rating" style="width:<%= @rating_avg*20 %>px">current</li>
+	</ul>
+	
+	Releases of this project are licensed under terms of 
+	<%= show_creative_commons @project %>
+	
+	<div class="proj-members">
+		<% if @project.users.length > 1 %>
+		<h4>Memers:</h4>
+		<% else -%>
+		<h4>The person behind:</h4>
+		<% end -%>
+		<table>
+			<% @project.active_members.each do |member| -%>
+			<tr>
+					<td><%= link_to image_tag( member.avatar.url(:thumb) ), member, :class => 'floatingLeft' %></td>
+					<td><%= link_to (h member.login), member %></td>
+			</tr>
+			<% end -%>
+		</table>
+	</div>
+
+</div>
+
+<div class="text clear">
+	<%= sanitize( format_text(@project.description) ) %>
+</div>
+
+<div class="pr-date">
+	created at <%= show_time @project.created_at %>
+</div>

@@ -1,0 +1,16 @@
+<p class="center">
+	Tracks tagged with <strong>"<%=h @tag %>"</strong>
+</p>
+
+<%= render :partial => 'shared/order_by' %>
+<table class="list-entries">
+	<% for track in @tracks do -%>
+	<%= render :partial => 'track', :object => track %>
+	<% end -%>
+</table>
+
+<%= will_paginate @tracks, :inner_window => 1, :outer_window => 1, :id => @tag, :order => params[:order] %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>

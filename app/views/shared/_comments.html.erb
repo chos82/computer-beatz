@@ -1,0 +1,30 @@
+<% unless @comments.empty? %>
+<p class="comments-head">Comments:</p>
+<% end %>
+<% for comment in @comments do -%>
+<div class="comment-std">
+	<% if comment.user -%>
+	<%= link_to image_tag( comment.user.avatar.url(:thumb) ), comment.user %>
+	<div class="head">
+		<strong><%= link_to (h comment.user.login), comment.user %></strong><br />
+		<%= time_ago_in_words comment.created_at %> ago
+	</div>
+	<% else -%>
+	<%= image_tag( '/images/removed_user.png' ) %>
+	<div class="head">
+		<strong><i>Removed user</i></strong><br />
+		<%= time_ago_in_words comment.created_at %> ago
+	</div>
+	<% end -%>
+	
+	<div class="text">
+		<%= sanitize( format_text(comment.text) ) %>
+	</div>
+	
+	<% if logged_in? -%>
+	<div class="comment-report">
+		<%= report_comment comment %>
+	</div>
+	<% end -%>
+</div>
+<% end -%>

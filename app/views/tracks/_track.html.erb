@@ -1,0 +1,27 @@
+	<tr class="blank">
+		<td>
+			<strong><%= link_to( (h track.name), track ) %></strong>
+		</td>
+		<td>
+			<%= link_to( (h track.artist.name), track.artist ) if track.artist %>
+		</td>
+		<td>
+			<%= link_to( (h track.label.name), track.label ) if track.label %>
+		</td>
+	</tr>
+	<tr class="stats">
+		<td colspan="3">
+			<div class="stats">
+				<ul class="star-rating-small">
+					<% if track.rated_by_user?(current_user) %>
+					<li class="current-rating-rated" style="width:<%= track.rating*12.round %>px">rated</li>
+					<% else %>
+					<li class="current-rating" style="width:<%= track.rating*12.round %>px">rated</li>
+					<% end %>
+				</ul>
+				<span class="stats-c" title="Number of comments"><%= track.comments_count %></span>
+				<span class="stats-l" title="Number of people loving this item"><%= track.favourites_count %></span>
+				<span class="stats-t" title="Number of taggings for this item"><%= track.taggings_count %></span>
+			</div>
+		</td>
+	</tr>

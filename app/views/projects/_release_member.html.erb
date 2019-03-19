@@ -1,0 +1,14 @@
+		<tr class="p10px">
+			<td>
+				<% link_to release_member.audio.url, :class => 'playable' do %>
+					<%= image_tag( release_member.cover.url(:thumb), {:class => 'sm2_link'} ) %>
+				<% end %>
+				<div style="display:none;"><%=release_member.id%></div>
+			</td>
+			<td>
+				<%= link_to (h release_member.name), release_path(release_member) %>
+			</td>
+			<td class="deleteRelease">
+				<%= link_to 'Delete', release_member, :method => :delete, :confirm => 'Are you shure you want to delete this release? Proceeding will also delte all comments, ratings and favourizations!' %>
+			</td>
+		</tr>

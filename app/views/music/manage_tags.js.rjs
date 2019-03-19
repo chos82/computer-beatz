@@ -1,0 +1,7 @@
+page['tags-link'].visual_effect :BlindUp
+
+page['tag-button_tipBox'].show();
+
+page.replace_html('manage-tags', :partial => 'manage_tags', :object => @item)
+
+page['manage-tags'].visual_effect :Grow

@@ -1,0 +1,8 @@
+	<div class="project-item">
+		<div>
+			<%= link_to( image_tag(project.logo.url(:small)), project) %>
+			<h4><%= link_to h(project.name), project %></h4>
+			<div class="desc"><%= link_to format_text( truncate(project.description, 80) ), project %></div>
+		</div>
+		<div class="created">Created at <%= show_time project.created_at %></div>
+	</div>

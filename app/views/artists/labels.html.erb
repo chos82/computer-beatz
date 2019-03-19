@@ -1,0 +1,44 @@
+<%= render :partial => 'show_artist' %>
+
+<p class="further">
+	<%= link_to 'Tracks', tracks_artist_url(@artist) %>
+	<%= link_to 'Albums', albums_artist_url(@artist) %>
+	<span class="current">Labels </span>
+</p>
+
+<p class="center">
+	Labels for <strong><%=h @artist.name %></strong>: 
+	<%= pluralize @labels.length, 'record' %> found.
+</p>
+
+
+	<%= render :partial => 'shared/order_by' %>
+<table class="list-entries">
+	<% for label in @labels do -%>
+	<tr class="blank">
+		<td>
+			<strong><%= link_to( (h label.name), label ) %></strong>
+		</td>
+	</tr>
+	<tr class="stats">
+		<td>
+			<div class="stats">
+				<ul class="star-rating-small">
+					<% if label.rated_by_user?(current_user) %>
+					<li class="current-rating-rated" style="width:<%= label.rating.round*12 %>px">rated</li>
+					<% else %>
+					<li class="current-rating" style="width:<%= label.rating.round*12 %>px">rated</li>
+					<% end %>
+				</ul>
+				<span class="stats-c" title="Number of comments"><%= label.comments_count %></span>
+				<span class="stats-l" title="Number of people loving this item"><%= label.favourites_count %></span>
+				<span class="stats-t" title="Number of taggings for this item"><%= label.taggings_count %></span>
+			</div>
+		</td>
+	</tr>
+	<% end -%>
+</table>
+<%= will_paginate @labels, :inner_window => 1, :outer_window => 1 %>
+<div class="page-count">
+	Showing <%= @from %> - <%=  @to %> / <%= @total %>
+</div>

@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>computer-beatz: Textile Short Reference</title>
+		<%= stylesheet_link_tag 'COMPUTER-BEATZ' %>
+	</head>
+	<body id="reference">
+		This is only a short reference, but should serve most needs. To explore the full power of the mark-down language used here,
+		visit Redcloth`s <%= link_to 'Textile Reference', 'http://redcloth.org/textile/', :target => 'blank' %>.<br />
+		HTML and CSS is not usable! That includes Textile`s CSS functions. So if you want to be creative: Use a picture <span class="wink">&nbsp;</span> ...sorry geeks...<br /><br />
+		
+ 		The blank lines shown here are essential!<br /><br />
+		
+		<table class="reference-list">
+			<tr>
+				<th>
+					Input
+				</th>
+				<th>
+					Output
+				</th>
+			</tr>
+			<tr>
+				<td colspan="2" class="category">
+					Smilies (no Textile standard)
+				</td>
+			</tr>
+			<tr>
+				<td>
+					:)
+				</td>
+				<td>
+					<span class="smile">&nbsp;</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					;)
+				</td>
+				<td>
+					<span class="wink">&nbsp;</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					:(
+				</td>
+				<td>
+					<span class="sad">&nbsp;</span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="category">Phrase modifiers</td>
+			</tr>
+			<tr>
+				<td>This is *strong* text.</td>
+				<td>This is <strong>strong</strong> text.</td>
+			</tr>
+			<tr>
+				<td>This is _emphasized_ text.</td>
+				<td>This is <em>emphasized</em> text.</td>
+			</tr>
+			<tr>
+				<td>This is a link to "computer-beatz":http://computer-beatz.net.</td>
+				<td>This is a link to <a href="http://computer-beatz.net" target="_blank">computer-beatz</a></td>
+			</tr>
+			<tr>
+				<td>!http://www.w3.org/Icons/valid-html401!</td>
+				<td><img src="http://www.w3.org/Icons/valid-html401" alt="This page is valid HTML" /></td>
+			</tr>
+			<tr>
+				<td class="category" colspan="2">Page Layout</td>
+			</tr>
+			<tr>
+				<td>h3. Heading 3<br /><br />
+				Some text.</td>
+				<td><h3>Heading 3</h3><p>Some text.</p></td>
+			</tr>
+			<tr>
+				<td colspan="2"><p class="center">Headings are availible in six categories ('h1.' - 'h6.') from huge to small</p></td>
+			</tr>
+			<tr>
+				<td>Quote something meaningful, like:<br /><br />
+				bq. Errare humanum est.</td>
+				<td>Quote something meaningful, like:
+				<blockquote>Errare humanum est.</blockquote></td>
+			</tr>
+			<tr>
+				<td>* Bullet 1<br />
+				* Bullet 2<br />
+				** SubBullet 2.1</td>
+				<td><ul><li>Bullet 1</li>
+				<li>Bullet 2<ul><li>SubBullet 2.1</li></ul></li></ul></td>
+			</tr>
+			<tr>
+				<td># A numbered List<br />
+				# works just like the bullet version</td>
+				<td><ol><li>A numbered List</li><li>works just like the bullet version</li></ol></td>
+			</tr>
+			<tr>
+				<td>- Thing := The definition...<br />
+				- Techno := 4/4 bassdrum, 130 bpm - 150 bpm</td>
+				<td><dt>Thing</dt><dd>The definition...</dd><br />
+				<dt>Techno</dt><dd>4/4 bassdrum, 130 bpm - 150 bpm</dd></td>	
+			</tr>
+			<tr>
+				<td>|_. name|_. age|<br />
+				|Walter|5|<br />
+				|Florence|6|</td>
+				<td><div class="textile"><table>
+	<tr>
+		<th>name</th>
+		<th>age</th>
+	</tr>
+	<tr>
+		<td>Walter</td>
+		<td>5</td>
+	</tr>
+	<tr>
+		<td>Florence</td>
+		<td>6</td>
+	</tr>
+</table></div>
+</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="category">Acronyms</td>
+			</tr>
+			<tr>
+				<td>CB(computer-beatz)</td>
+				<td><acronym title="computer-beatz"><span class="caps">CB</span></acronym></td>
+			</tr>
+		</table>
+		Links are opened in a new window/tab (depending on the browser - 'target="_blank"') if thei do not belong to this domain. 
+		Tables are displayed in the middle of the post ('margin-{left, right}: auto;). Images are limited in width to nicely fit the post.
+	</body>
+</html>

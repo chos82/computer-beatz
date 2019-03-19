@@ -1,0 +1,18 @@
+<div class="margin-left">
+<p>
+	<h3><%=h @mix.name %></h3>
+</p>
+<p>
+	From: <%= echo_name(@mix.artist) %>
+</p>
+<% form_for( @mix, :url => {:action => 'update_release_date', :id => params[:id]} )do |f| %>
+  <p>
+  	<%= f.label :release_date %><br />
+  	<%= select_year Time.now.year, :start_year => 1970, :end_year => Time.now.year %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+<%= link_to 'Back', @mixm %>
+</div>

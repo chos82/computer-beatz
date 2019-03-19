@@ -1,0 +1,17 @@
+<div id="playlist">
+	<div id="scrollUp" style="display:none;"></div>
+	<% for i in 0...@releases.length do -%>
+	<% if i < 3 -%>
+	<%= link_to @releases[i].project.name + ' - ' +
+					@releases[i].name,
+					@releases[i].audio.url, :class => 'audio', :id => 'tr' + i.to_s %>
+	<% else -%>
+	<%= link_to @releases[i].project.name + ' - ' +
+					@releases[i].name,
+					@releases[i].audio.url, :class => 'audio', :id => 'tr' + i.to_s,
+					:style => 'display:none;' %>
+	<% end -%>
+	<div style="display:none;"><%=@releases[i].id%></div>
+	<% end -%>
+	<div id="scrollDown" style="display:none;"></div>
+</div>

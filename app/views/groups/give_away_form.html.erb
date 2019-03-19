@@ -1,0 +1,29 @@
+<p class="group-name">
+	<%=h @group.title %>
+</p>
+
+<%= render :partial => 'shared/groups/admin_menu' %>
+<p>
+Got tired of being the admin of this group? Through this form 
+you may choose someone to continue what you began. Please do 
+not annoy others with this invitation. Caution: A invitation 
+can not be undone! If someone, you invite here, accepts your 
+invitation, she/he will be the new admin of this group.
+</p>
+
+<% form_for :invitation, :url => { :action => 'give_away' } do |f|  %>
+  <div class="h40">
+  	<%= label_tag :new_admin, 'Pick a user to become the new admin' %><br />	
+	<%= text_field_with_auto_complete :invitation,
+									   :reciever,
+									  {:autocomplete => 'off',
+									   :before => "Element.show('spinner-reciever')",
+	  								  :complete => "Element.hide('spinner-reciever')"},
+									  {:method => :get, :skip_style => true, :url => {:action => 'auto_complete_reciever'}, :class => 'inline' } %>
+  <span class="spinner" id="spinner-reciever" style="display: none;">&nbsp;</span>
+  <span id="reciever_status"></span>
+  </div>
+  <p>
+    <%= submit_tag "Invite this user" %>
+  </p>
+<% end %>

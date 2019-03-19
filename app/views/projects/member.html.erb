@@ -1,0 +1,23 @@
+<%= render :partial => 'members_menu', :object => @project %>
+
+<%= render :partial => 'project' %>
+
+<div class="releases">
+<h4>Releases</h4>
+<div>
+	<% link_to project_player_url(@project), {:class => 'playable playButton projectPlay'} do %>
+		<div>Play all!</div>
+	<% end %>
+	<div style="display:none;"><%=@project.id%></div>
+</div>
+<table>
+<%= render :partial => 'release_member', :collection => @published %>		
+</table>
+</div>
+
+<%= render :partial => 'member_comment', :object => @comments, :locals => {:project => @project} %>
+
+<%= will_paginate @comments, :inner_window => 1, :outer_window => 1 %>
+<%= render :partial => 'add_comment', :object =>  @project %>
+
+<div id="observer"></div>

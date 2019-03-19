@@ -1,0 +1,30 @@
+<%= render :partial => 'foreign_user_menu' %>
+
+<h3>Items <%= h @user.login %> tagged</h3>
+
+<% @tagged_items.each do |item| -%>
+	<div class="tagged">
+		<div class="tagging">
+			<div class="tagged-context">
+				 <%= link_to 'Taggers', taggers_music_url(item) %>
+			</div>
+			<span class="tagged-item">
+			 	<%= link_to_show_depending_on_type(item) %>
+			 </span>
+			<div class="tags">
+				<% for tag in item.tags_by(@user) do -%>
+				<%= link_to tag.name, tagged_by_user_url(:id => @user, :tag => tag.name) %>&nbsp;
+				<% end -%>
+			</div>
+		</div>
+	</div>
+<% end -%>
+<% if @tagged_items.empty? -%>
+No items tagged.
+<% end -%>
+
+<%= will_paginate @tagged_items, :inner_window => 1, :outer_window => 1, :order => params[:order] %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>

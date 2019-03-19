@@ -1,0 +1,13 @@
+<table class="list-entries">
+	<% for report in @reports do %>
+	<tr>
+		<td>
+			<%= truncate (h report.reportable.text), :length => 80 %>
+		</td>
+		<td><%= link_to 'Show', admin_comment_path(report.reportable) %></td>
+    	<td>
+    		<%= link_to 'Destroy', admin_comment_path(report.reportable), :confirm => 'Are you sure?', :method => :delete %>
+		</td>
+	</tr>
+	<% end %>
+</table>

@@ -1,0 +1,44 @@
+<%= render :partial => 'members_menu', :object => @project %>
+
+<h3>Edit project</h3>
+
+<% form_for(@project, :html => { :multipart => true}) do |f| %>
+  <%= f.error_messages :header_message => "The form could not be submitted.",
+					   :message => "Please check the following details:",
+					   :header_tag => 'h3' %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name, :size => 73 %>
+  </p>
+  
+  <p>
+  	<span class="right-px">
+  		<span class="spinner" id="spinner-preview" style="display: none;">&nbsp;</span>
+		<span id="preview-link">
+  		<%= render :partial => 'preview/show_preview_no_limit' %>
+		</span>
+	</span>
+	<%= f.label :description %><br />
+	<%= f.text_area :description, :rows => 15, :cols => 55, :id => 'text-no-limit' %><br />
+	<span class="right-px">You may use <%= link_to 'Textile', {:controller => 'static', :action => 'textile'}, :popup => ['Textile Short Reference', 'height=800,width=600, scrollbars=yes'] %> syntax, but no HTML</span>
+  </p>
+  
+  <div id="preview" class="description" style="display: none">
+  	<strong>Preview:</strong>
+  	<div id="result" class="text"></div>
+  </div>
+  
+  <p>
+  	<%= f.label :logo, 'Upload a logo' %><br />
+	<%= f.file_field :logo %>
+  </p>
+  
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to '&lt;&lt; Back', project_path(@project) %>
+
+<div id="observer"></div>

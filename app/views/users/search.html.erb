@@ -1,0 +1,37 @@
+<p class="center">
+	Search results for <strong>"<%=h @query %>"</strong>: 
+	<%= pluralize @total, 'record' %> found.
+</p>
+<% unless @total == 0 -%>
+<div class="top-content-container">
+	<div class="head">
+			<div>Order by:</div>
+			<% unless params[:order] == 'name' || params[:order].blank? %>
+			<%= link_to 'Name', :action => 'search', :order => 'name', :search => {:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Name</span>
+			<% end %>
+		
+			<% unless params[:order] == 'login' %>
+			<%= link_to 'Last seen', :action => 'search', :order => 'login', :search =>{:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Last seen</span>
+			<% end %>
+		
+			<% unless params[:order] == 'activity' %>
+			<%= link_to 'Activity', :action => 'search', :order => 'activity', :search => {:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Activity</span>
+			<% end %>
+	</div>
+</div>
+<ul class="user-list">
+	<% for user in @results do %>
+	<%= render :partial => 'user', :object => user %>
+	<% end %>
+</ul>
+<%= will_paginate @results, :inner_window => 1, :outer_window => 1, :params => {:search => {:query => @query}, :order => @order} %>
+<% end -%>
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>

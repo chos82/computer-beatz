@@ -1,0 +1,35 @@
+<% unless @results.empty? -%>
+<%= render :partial => 'labels' if @type == 'labels' %>
+<%= render :partial => 'artists' if @type == 'artists' %>
+<%= render :partial => 'tracks' if @type == 'tracks' %>
+<%= render :partial => 'albums' if @type == 'albums' %>
+<%= will_paginate @results, :inner_window => 1, :outer_window => 1,
+											    :params => {:order => @order,
+												:query => {:label => @label,
+														   :artist => @artist,
+														   :album => @album,
+														   :track => @track,
+											    		   :release_connector => @release_connector,
+														   :license => @license},
+											    :date => {:year => @release_date}} %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+<% else -%>
+<% if @type == 'labels' || @type == 'tracks' -%>
+	<div class="order">
+		<%= render :partial => 'selector' %>
+	</div>
+	<p class="center">
+	0 records found.<br />
+	</p>
+<% else -%>
+<p class="center">
+	0 records found.<br />
+</p>
+<% end -%>
+<% end -%>
+<p class="center">
+	<%= link_to 'New Search', :action => 'advanced_form' %>
+</p>

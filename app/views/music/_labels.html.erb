@@ -1,0 +1,17 @@
+<p class="center">
+	<%= pluralize @results.length, 'record' %> in <em>Labels</em> found.
+</p>
+
+	<div class="order">
+		<p id="label-index-back">
+			<%= link_to 'New label', :controller => 'labels', :action => 'new' %>
+		</p>
+		<%= render :partial => 'order' %>
+		<%= render :partial => 'selector' %>
+	</div>
+	<table class="list-entries">
+	
+	<% for label in @results do -%>
+	<%= render :partial => 'labels/label', :object => label %>
+	<% end %>
+	</table>

@@ -1,0 +1,29 @@
+	<tr class="blank">
+		<%= td_class_music_type item %>
+			<strong><%= link_to_show_depending_on_type item %></strong><br />
+		</td>
+		<% unless item.www.blank? %>
+		<td class="www">
+			<%= link_to 'www', 'http://' + item.www,
+									 :target => 'blank' %>
+		</td>
+		<% else %>
+		<td>&nbsp;</td>
+		<% end %>
+	</tr>
+	<tr class="stats">
+		<td colspan="4">
+			<div class="stats">
+				<ul class="star-rating-small">
+					<% if item.rated_by_user?(current_user) %>
+					<li class="current-rating-rated" style="width:<%= item.rating*12.round %>px">rated</li>
+					<% else %>
+					<li class="current-rating" style="width:<%= item.rating*12.round %>px">rated</li>
+					<% end %>
+				</ul>
+				<span class="stats-c" title="Number of comments"><%= item.comments_count %></span>
+				<span class="stats-l" title="Number of people loving this item"><%= item.favourites_count %></span>
+				<span class="stats-t" title="Number of taggings for this item"><%= item.taggings_count %></span>
+			</div>
+		</td>
+	</tr>

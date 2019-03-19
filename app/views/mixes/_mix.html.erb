@@ -1,0 +1,24 @@
+	<tr class="blank">
+		<td>
+			<strong><%= link_to( (h mix.name), mix ) %></strong>
+		</td>
+		<td>
+			<%= link_to( (h mix.artist.name), mix.artist ) if mix.artist %>
+		</td>
+	</tr>
+	<tr class="stats">
+		<td colspan="2">
+			<div class="stats">
+				<ul class="star-rating-small">
+					<% if mix.rated_by_user?(current_user) %>
+					<li class="current-rating-rated" style="width:<%= mix.rating*12.round %>px">rated</li>
+					<% else %>
+					<li class="current-rating" style="width:<%= mix.rating*12.round %>px">rated</li>
+					<% end %>
+				</ul>
+				<span class="stats-c" title="Number of comments"><%= mix.comments_count %></span>
+				<span class="stats-l" title="Number of people loving this item"><%= mix.favourites_count %></span>
+				<span class="stats-t" title="Number of taggings for this item"><%= mix.taggings_count %></span>
+			</div>
+		</td>
+	</tr>

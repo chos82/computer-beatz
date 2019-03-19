@@ -1,0 +1,12 @@
+	<%= render :partial => 'users/foreign_user_menu', :object => @user %>
+	<% unless @friends.empty? -%>
+		<h3>Friends of <%= @user.login %>:</h3>
+	<% else -%>
+		<p class="center"><%= @user.login %> currently has no friends. Wanna be one?</p>
+	<% end -%>
+
+<table class="list-entries">
+	<%= render :partial => 'friend', :collection => @friends %>
+</table>
+
+<%= will_paginate @friends, :inner_window => 1, :outer_window => 1 %>

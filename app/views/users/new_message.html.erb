@@ -1,0 +1,11 @@
+<h3>Send a message to <%= h @reciever.login %></h3>
+<% form_for( :message, :url => {:action => 'send_message', :id => @reciever.id} ) do |f| %>
+	<p>
+		<%= f.text_area :text, :rows => 6, :id => 'message' %><br />
+		(<span id="counter-message">#</span> characters)
+	</p>
+	<p>
+  		<%= f.submit "Send" %>
+	</p>
+<% end %>
+	

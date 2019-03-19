@@ -1,0 +1,12 @@
+The computer-beatz project <%= h @project.name %> has invited you to become a member.
+
+
+You can accept or decline the invitation here:
+	
+	<%= "http://#{SITE_URL}" + myinvitations_path(@recipient) %>
+
+
+
+Visit the project page:
+
+	<%= "http://#{SITE_URL}" + project_path(@project) %>

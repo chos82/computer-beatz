@@ -1,0 +1,14 @@
+	<tr>
+		<td class="mini-project-info">
+			<div class="group-logo">
+				<%= link_to image_tag( invitation.project.logo.url(:thumb) ), invitation.project %>
+			</div>
+		</td>
+		<td class="project-title">
+			<strong><%= link_to( h(invitation.project.name), invitation.project ) %></strong>
+		</td>
+		<td class="align-right">
+			<%= link_to 'Accept', accept_project_membership_path(invitation), :method => :put, :confirm => "By accepting the invitation, you will become a member of the project." %><br />
+			<%= link_to 'Decline', project_membership_path(invitation), :method => :delete, :confirm => "Decline the invitation?" %>
+		</td>
+	</tr>

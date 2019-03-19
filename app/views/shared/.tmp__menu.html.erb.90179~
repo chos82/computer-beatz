@@ -1,0 +1,52 @@
+<div id="content">
+		
+		<div id="menu">
+			
+			<div id="m01"></div>
+			<div class="mItem"><%= link_to_unless_current( "Home" , 'http://'+SITE_URL ) %></div>
+			
+			<div id="m02"></div>
+			<div class="mItem"><%= link_to_unless_current( "All" , {:controller => 'music' } ) %></div>
+			<div class="mItem"><%= link_to_unless_current( "Labels" , {:controller => 'labels' } ) %></div>
+			<div class="mItem"><%= link_to_unless_current( "Artists" , {:controller => 'artists' } ) %></div>
+			<div class="mItem"><%= link_to_unless_current( "Albums" , {:controller => 'albums' } ) %></div>
+			<div class="mItem"><%= link_to_unless_current( "Tracks" , {:controller => 'tracks' } ) %></div>
+			
+			<div id="m03"></div>
+			<div class="mItem"><%= link_to_unless_current( "People" , {:controller => 'users' } ) %></div>
+			<div class="mItem"><%= link_to_unless_current( "Groups" , {:controller => 'groups' } ) %></div>
+			
+			<div id="m04"></div>
+			<div class="mItem"><%= link_to_unless_current( "Releases" , {:controller => 'releases' } ) %></div>
+			<div class="mItem"><%= link_to_unless_current( "Projects" , {:controller => 'projects' } ) %></div>
+			
+			<div id="mFoot"></div>
+			
+			<a id="feedburner" href="http://feeds.feedburner.com/computer-beatz" target="_blank" title="Computer Beatz on feedburner"></a>
+			<a id="twitter" href="http://twitter.com/computerbeatz" target="_blank" title="Computer Beatz on Twitter"></a>
+			<a id="myspace" href="http://www.myspace.com/computerbeatz" target="_blank" title="Computer Beatz on MySpace"></a>
+			<a id="facebook" href="http://www.facebook.com/pages/Computer-Beatz/119207358132944" target="_blank" title="Computer Beatz on Facebook"></a>
+			<a id="podcast" href="http://feeds.feedburner.com/computer-beatz/podcast" target="_blank" title="Computer Beatz Podcast on feedburner"></a>
+			
+			<div id="social_connector"></div>
+			
+			<div id="socialize">
+				<div id="fb_like">
+					<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+					<fb:like href="<%=request.request_uri%>" layout="button_count" font="trebuchet ms"></fb:like>
+				</div>
+				<div id="tweet">
+					<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="computerbeatz">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+				</div>
+				
+				<div id="bookmark_button" style="display:none;">Bookmark!</div>
+
+				<div id="bookmarks" style="display:none;">
+				<div id="bookmarks_close">close</div>
+					<%= render_social_bookmarks(request.request_uri, page_title) %>
+				</div>
+
+			</div>
+			
+		</div>
+		

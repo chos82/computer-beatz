@@ -1,0 +1,44 @@
+<h3>Edit release</h3>
+
+<p><%= link_to( '&lt;&lt;Back', member_project_path(@release.project) ) %></p>
+
+<em>The cover will get modified!</em><br />
+See <%= link_to 'release policy', {:controller => 'static',
+								  :action => 'release_policy'},
+								  :popup => ['computer-beatz Release Policy', 'height=270,width=650'] %> for further explanation.
+
+<% form_for(@release, :url => release_path(@release), :html => { :multipart => true}) do |f| %>
+  <%= f.error_messages :header_message => "The form could not be submitted.",
+					   :message => "Please check the following details:",
+					   :header_tag => 'h3' %>
+  <p>
+    <%= f.label :name, 'Title' %>*<br />
+    <%= f.text_field :name, :size => 73 %>
+  </p>
+  <p>
+  	<span class="right-px">
+  		<span class="spinner" id="spinner-preview" style="display: none;">&nbsp;</span>
+		<span id="preview-link">
+  		<%= render :partial => 'preview/show_preview_no_limit' %>
+		</span>
+	</span>
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :rows => 15, :cols => 55, :id => 'text-no-limit' %>
+	<span class="right-px">You may use <%= link_to 'Textile', {:controller => 'static', :action => 'textile'}, :popup => ['Textile Short Reference', 'height=800,width=600, scrollbars=yes'] %> syntax, but no HTML</span>
+  </p>
+  <div id="preview" class="description" style="display: none">
+  	<strong>Preview:</strong>
+  	<div id="result" class="text"></div>
+  </div>
+  <p>
+  	<%= f.label :cover, 'Cover' %><br />
+	Prefarable size is at least 800px x 800px, must be less than 3MB.<br />
+	<%= f.file_field :cover %>
+  </p>
+  <em>Fields marked with * are required.</em>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<div id="observer"></div>

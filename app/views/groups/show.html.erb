@@ -1,0 +1,36 @@
+<%= render :partial => 'shared/groups/group_profile', :object => @group %>
+
+<% if @news -%>
+
+<% if show_group?(@group) -%>
+
+<%= link_to 'New topic', new_group_topic_path(@group), :class => 'std-button float-right' %>
+
+<div class="gn">
+	<h3>Latest messages</h3>
+</div>
+
+<% for message in @news do -%>
+<div class="simple-list">
+	<div class="mTB1">
+		<%= link_to '<b>'+ h(message.subject) + '</b>: ' + truncate( strip_tags(RedCloth.new(message.text).to_html), 80 ), group_topic_path(@group, message.topic, :anchor => 'id'+message.id.to_s, :h_id => message.id) %>
+	</div>
+	<i><small>
+		<strong><%= link_to h(message.topic.title), group_topic_path(@group, message.topic) %></strong><br />
+		<%= link_to (h message.sender.login), message.sender %>, 
+		<%= time_ago_in_words message.created_at %> ago
+	</small></i>
+</div>
+<% end -%>
+
+<% else %>
+<p class="center">
+	The mesages in this group are not public. You have to join to read them.
+</p>
+<% end -%>
+	
+<% else -%>
+<p class="center">
+	There are no news in this group.
+</p>
+<% end -%>

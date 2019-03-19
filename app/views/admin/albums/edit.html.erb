@@ -1,0 +1,45 @@
+<h1>Editing album</h1>
+
+<% form_for @album, :url => {:action => 'update'} do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <table>
+  	<tr>
+  		<td>
+  			From:
+		</td>
+		<td>
+			<%= link_to (h @album.artist.name), admin_artist_path(@album.artist) if @album.artist %>
+		</td>
+		<td>
+			<%= link_to 'remove', {:action => 'remove_artist',
+							       :id => @album},
+							      {:confirm => 'Remove the artist form this album? The album will be valid, when doing so!'}  if @album.artist %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Label:
+		</td>
+		<td>
+			<%= link_to (h @album.label.name), admin_label_path(@album.label) if @album.label %>
+		</td>
+		<td>
+			<%= link_to 'remove', {:action => 'remove_label',
+							       :id => @album},
+							      {:confirm => 'Remove the artist form this track? The track will be valid, when doing so!'} if @album.label %>
+		</td>
+	</tr>
+  </table>
+  	Updating will set entry valid!<br />
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', admin_album_path(@album) %> |
+<%= link_to 'Back', admin_music_index_path %>
+

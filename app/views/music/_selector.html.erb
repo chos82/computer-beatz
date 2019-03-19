@@ -1,0 +1,46 @@
+<div class="selector-wrap">
+		Licnese:<br />
+	<div class="selector" title="License is...">
+		<% unless params[:query][:license] == 'free' %>
+		<%= link_to 'free', :action => 'advanced_search',
+									:params => {:order => 'comments',
+												:query => {:label => @label,
+														   :artist => @artist,
+														   :track => @track,
+														   :tags => @tags,
+														   :license => 'free',
+											    		   :release_connector => @release_connector},
+											    :date => {:year => @release_date}} %>&nbsp;
+		<% else %>
+		<span class="current">free</span>
+		<% end %>
+		
+		<% unless params[:query][:license] == 'both' || params[:query][:license].blank? %>
+		<%= link_to 'both', :action => 'advanced_search',
+									:params => {:order => 'comments',
+												:query => {:label => @label,
+														   :artist => @artist,
+														   :track => @track,
+														   :tags => @tags,
+														   :license => 'both',
+											    		   :release_connector => @release_connector},
+											    :date => {:year => @release_date}} %>&nbsp;
+		<% else %>
+		<span class="current">both</span> 
+		<% end %>
+		
+		<% unless params[:query][:license] == 'commercial' %>
+		<%= link_to 'commercial', :action => 'advanced_search',
+									:params => {:order => 'comments',
+												:query => {:label => @label,
+														   :artist => @artist,
+														   :track => @track,
+														   :tags => @tags,
+														   :license => 'commercial',
+											    		   :release_connector => @release_connector},
+											    :date => {:year => @release_date}} %>&nbsp;
+		<% else %>
+		<span class="current">commercial</span> 
+		<% end %>
+	</div>
+	</div>

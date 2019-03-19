@@ -1,0 +1,27 @@
+<h1>Editing label</h1>
+
+<% form_for @label, :url => {:action => 'update'} do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :www %><br />
+    <%= f.text_field :www %>
+  </p>
+  <p>
+  	Publications are...<br />
+  	<%= f.radio_button :license, "free" %><%= f.label :license, "free" %>
+	<%= f.radio_button :license, "commercial" %><%= f.label :license, "commercial" %>
+  </p>
+  <p>
+  	Updating will set entry valid!<br />
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', admin_label_path(@label) %> |
+<%= link_to 'Back', admin_music_index_path %>
+

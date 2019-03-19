@@ -1,0 +1,21 @@
+<p class="clear">Videos on YouTube you might want to embed:</p>
+
+  <% for video in @youtube.videos do -%>
+
+    <div class="video-result">
+    	<%= link_to image_tag(video.group.thumbnail.first.url, :alt => video.title), video.link.first.href, :target => :blank %>
+	
+		<b><%= link_to video.title, video.link.first.href, :target => :blank %></b><br />
+	
+	    by <%= link_to video.author.name, "http://youtube.com/#{video.author.name}", :target => :blank %>
+		<div class="embed-button">
+			<%= link_to 'Embed', :action => 'embed', :id => @track, :video_id => video.id %>
+		</div>
+	</div>
+	<div class="clear"></div>
+	
+  <% end -%>
+  
+  <% if @youtube.videos.blank? -%>
+  No matching videos found!
+  <% end -%>

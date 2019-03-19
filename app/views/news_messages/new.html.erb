@@ -1,0 +1,50 @@
+<%= error_messages_for 'message', :header_message => "The message could not be submitted.",
+								 :message => "Please check the following details:",
+								 :header_tag => 'h3' %>
+								 
+<div id="new-gn-message">
+	<h3>
+		Post to <%= link_to (h @group.title), @group %>:<br />
+		-&gt; <%= @topic.title %>
+	</h3>
+	<% form_for( :message, :url => group_topic_news_messages_path(@group, @topic) ) do |f| %>
+		<p>
+			<%= f.label :subject %><br />
+			<%= f.text_field :subject, :size => 73 %>
+		</p>
+		<p>
+			<span class="right-px">
+  				<span class="spinner" id="spinner-preview" style="display: none;">&nbsp;</span>
+				<span id="preview-link">
+  					<%= render :partial => 'preview/show_preview_no_limit' %>
+				</span>
+			</span>
+			<%= f.text_area :text, :rows => 15, :cols => 55, :id => 'text-no-limit' %><br />
+			<span class="right-px">You may use 
+			<%= link_to 'Textile', {:controller => 'static',
+								    :action => 'textile'},
+								    :popup => ['Textile Short Reference', 'height=800,width=600, scrollbars=yes'] %>
+			 syntax, but no HTML</span>
+		</p>
+		
+		<div id="preview" class="gn-std" style="display: none">
+  			<strong>Preview:</strong>
+  			<div id="result" class="text"></div>
+  		</div>
+		
+		<% if current_user == @group.admin %>
+		<p>
+			<%= f.check_box :admin_message %>
+			<%= f.label :admin_message, 'Mark message as administrator message.' %>
+		</p>
+		<% end -%>
+		<p>
+    		<%= f.submit "Post" %>
+  		</p>
+	<% end -%>
+</div>
+
+<%= render :partial => 'news', :collection => @news %>
+
+<div id="observer">
+</div>

@@ -1,0 +1,2 @@
+module MusicReportsHelper
+end

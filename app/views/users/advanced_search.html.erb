@@ -1,0 +1,62 @@
+<p class="center">
+	<%= pluralize @total, 'record' %> found.
+</p>
+<% unless @results.empty? -%>
+<div class="top-content-container">
+	<div class="head">
+			<div>Order by:</div>
+			<% unless params[:order] == 'name' || params[:order].blank? %>
+			<%= link_to 'Name', :action => 'advanced_search', :order => 'name', 
+															 :params => {:query => {:login => @login,
+												   			 :gender => @gender,
+												  			 :age_from => @age_from,
+												   			 :age_to => @age_to,
+												   			 :country => @country}} %>&nbsp;
+			<% else %>
+			<span class="current">Name</span>
+			<% end %>
+		
+			<% unless params[:order] == 'login' %>
+			<%= link_to 'Last seen', :action => 'advanced_search', :order => 'login',
+															 :params => {:query => {:login => @login,
+												   			 :gender => @gender,
+												  			 :age_from => @age_from,
+												   			 :age_to => @age_to,
+												   			 :country => @country}} %>&nbsp;
+
+			<% else %>
+			<span class="current">Last seen</span>
+			<% end %>
+		
+			<% unless params[:order] == 'activity' %>
+			<%= link_to 'Activity', :action => 'advanced_search', :order => 'activity',
+															 :params => {:query => {:login => @login,
+												   			 :gender => @gender,
+												  			 :age_from => @age_from,
+												   			 :age_to => @age_to,
+												   			 :country => @country}} %>&nbsp;
+
+			<% else %>
+			<span class="current">Activity</span>
+			<% end %>
+	</div>
+</div>
+<ul class="user-list">
+	<% for user in @results do %>
+	<%= render :partial => 'user', :object => user %>
+	<% end %>
+</ul>
+<%= will_paginate @results, :inner_window => 1, :outer_window => 1,
+									   :params => {:query => {:login => @login,
+												   :gender => @gender,
+												   :age_from => @age_from,
+												   :age_to => @age_to,
+												   :country => @country},
+												   :order => @order} %>
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+<% end -%>
+<p class="center">
+	<%= link_to 'New Search', :action => 'advanced_search' %>
+</p>

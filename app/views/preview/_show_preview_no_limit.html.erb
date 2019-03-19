@@ -1,0 +1,6 @@
+<%= link_to_remote 'Preview', {:with => "'text=' + encodeURIComponent($('text-no-limit').value)",
+									   :before => "Element.show('spinner-preview')",
+									   :complete => "Element.hide('spinner-preview')" ,
+									   :url => {:controller => 'preview', :action => 'show_preview_no_limit'}},
+									  {:href => url_for(:controller => 'preview', :action => 'show_preview_no_limit')} %>
+									  

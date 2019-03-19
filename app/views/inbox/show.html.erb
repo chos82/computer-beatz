@@ -1,0 +1,26 @@
+<%= render :partial => 'users/user_menu' %>
+
+<h3>Inbox Message:</h3>
+<div class="message-head">
+	<%= link_to image_tag( @message.sender.avatar.url(:thumb) ), @message.sender %>
+	<div>
+		<%= link_to (h @message.sender.login), @message.sender %><br />
+		<%= show_time @message.created_at %>
+	</div>
+</div>
+
+<div class="message-subject">
+	<%=h @message.subject %>
+</div>
+
+<div class="message-text">
+	<%=sanitize(format_text @message.text) %>
+</div>
+
+<%= link_to '&laquo; Back to Inbox', inbox_index_path(current_user) %> | 
+<%= link_to 'delete', inbox_path( current_user, @message ),
+								 :method => :delete,
+								 :confirm => 'Delete this message?' %>
+<% unless @message.replied %> | 
+<%= link_to 'reply', reply_message_path( @message ) %>
+<% end %>

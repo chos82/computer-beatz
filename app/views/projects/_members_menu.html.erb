@@ -1,0 +1,17 @@
+<div class="gray-back">
+	<%= link_to_unless_current 'Show', project_path(@project) %> | 
+	<%= link_to_unless_current 'Edit', edit_project_path(@project) %> | 
+	<%= link_to_unless_current 'Invite people', invite_project_path(@project) %> | 
+	<%= link_to_unless_current 'Upload Audio', new_project_release_path(@project) %> | 
+	<%= link_to_unless_current( 'Pending &amp; declined', pending_project_path(@project) ) %>
+	<small class="notificationsLink">
+		<% if ProjectMembership.comment_notifications?(current_user, @project) -%>
+		<%= link_to 'Stop receiving e-mail notifications on new comments', 
+			{:action => "stop_comment_notifications", :id => @project.id}, 
+			:confirm => 'Stop recieving e-mail notifications on new comments' %>
+		<% else -%>
+		<%= link_to 'Receive e-mail notifications on new comments',
+			{:controller => 'projects', :action => "start_comment_notifications", :id => @project.id} %>
+		<% end -%>
+	</small>
+</div>

@@ -1,0 +1,16 @@
+<div class="std-heading">
+	People who love <strong><%= link_to @release.name, @release %></strong>
+</div>
+<% unless @users.empty? -%>
+<ul class="user-list">
+	<% for user in @users do %>
+	<%= render :partial => '/users/user', :object => user %>
+	<% end %>
+</ul>
+<%= will_paginate @users, :inner_window => 1, :outer_window => 1 %>
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+<% else %>
+0 records found.
+<% end -%>

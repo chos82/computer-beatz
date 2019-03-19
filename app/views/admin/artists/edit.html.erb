@@ -1,0 +1,22 @@
+<h1>Editing artist</h1>
+
+<% form_for @artist, :url => {:action => 'update'} do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :www %><br />
+    <%= f.text_field :www %>
+  </p>
+  <p>
+  	Updating will set entry valid!<br />
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', admin_artist_path(@artist) %> |
+<%= link_to 'Back', admin_music_index_path %>
+

@@ -1,0 +1,41 @@
+<%= render :partial => 'user_menu' %>
+
+<h3>Items you tagged</h3>
+
+<% for i in 0...@tagged_items.length do -%>
+	<div class="tagged">
+			<% unless @tagged_items[i].tagging_date === @tagged_items[i-1].tagging_date -%>
+			<div class="date">
+				<b><%= @tagged_items[i].tagging_date %></b>
+			</div>
+			<% end -%>
+		<div class="tagging">
+			<div class="tagged-context">
+				 <%= link_to 'Taggers', taggers_music_url(@tagged_items[i]) %>
+				 	<%= link_to( 'Edit', edit_tags_music_url(@tagged_items[i]),
+									:class => 'edit-link',
+									:id => @tagged_items[i].id.to_s ) %>
+			</div>
+			<span class="tagged-item">
+			 	<%= link_to_show_depending_on_type(@tagged_items[i]) %>
+			 </span>
+			<div class="tags">
+				<% for tag in @tagged_items[i].tags_by(current_user) do -%>
+				<%= link_to tag.name, mytag_url(:id => current_user.id, :tag => tag.name) %>&nbsp;
+				<% end -%>
+			</div>
+			<div id="<%=@tagged_items[i].id %>" class="add-tag" style="display: none;"></div>
+			<div class="spinner-bar" id="spinner-<%=@tagged_items[i].id%>" style="display: none;">&nbsp;</div>
+			<div id="manage-tags-<%=@tagged_items[i].id.to_s%>" class="add-tag" style="display: none;"></div>
+		</div>
+	</div>
+<% end -%>
+<% if @tagged_items.empty? -%>
+You don`t have tagged items. Start tagging...NOW!
+<% end -%>
+
+<%= will_paginate @tagged_items, :inner_window => 1, :outer_window => 1, :order => params[:order] %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>

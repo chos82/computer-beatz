@@ -1,0 +1,23 @@
+<div class="margin-left">
+<p>
+	<h3>Add a track to <%= h @mix.name %></h3>
+</p>
+<% form_for( @mix, :url => {:action => 'check_added_track', :id => @mix.id, :method => :post} )do |f| %>
+  <p>
+    <%= f.label :track, 'Track Name' %><br />
+    <%= text_field_with_auto_complete :track, 
+									  :name,
+									  {:autocomplete => 'off'},
+									  {:method => :get, :skip_style => true, :url => {:controller => 'tracks', :action => 'auto_complete_for_track_name'} } %>
+  </p>
+  <p>
+  	<%= text_field :track_listing, :track_number, :size => 2, :value => (@mix.highest_track_numer+1) %> #track number
+  </p>
+  <p>
+  	<%= text_field :track_listing, :start_time, :size => 3 %> start time <em>(/minutes)</em>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+</div>

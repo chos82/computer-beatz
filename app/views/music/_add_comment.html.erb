@@ -1,0 +1,29 @@
+<div id="new-comment">
+	<h3>Comment:</h3>
+	<% form_for(@comment, :url => {:controller => 'music', :action => 'add_comment', :id => add_comment} ) do |f| %>
+		<p>
+			<span class="right-px">
+  				<span class="spinner" id="spinner-preview" style="display: none;">&nbsp;</span>
+				<span id="preview-link">
+  					<%= render :partial => 'preview/show_preview_500' %>
+				</span>
+			</span>
+			<%= f.text_area :text, :rows => 8, :cols => 55, :id => 'text-500' %><br />
+			<span class="right-px">You may use 
+			<%= link_to 'Textile', {:controller => 'static',
+								    :action => 'textile'},
+									:popup => ['Textile Short Reference', 'height=800,width=600, scrollbars=yes'] %> 
+			syntax, but no HTML</span>
+			(<span id="counter-text-500">#</span> characters)
+		</p>
+		
+		<div id="preview" class="comment-std" style="display: none">
+  			<strong>Preview:</strong>
+  			<div id="result" class="text"></div>
+  		</div>
+		
+		<p>
+    		<%= f.submit "Post Comment" %>
+  		</p>
+	<% end %>
+</div>

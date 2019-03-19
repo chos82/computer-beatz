@@ -1,0 +1,13 @@
+<div class="std-artist">
+	<div class="entry-date">
+		On computer-beatz sice <%= show_time_short @artist.created_at %>
+	</div>
+	<h3><%= link_to_unless_current( (h @artist.name), @artist) %></h3>
+	<p>
+	<% unless @artist.www.blank? %>
+		<%= link_to @artist.www, 'http://' + @artist.www, :target => 'blank' %>
+	<% else %>
+		<%= link_to 'Add homepage', edit_artist_path %>
+	<% end %>
+	</p>
+</div>

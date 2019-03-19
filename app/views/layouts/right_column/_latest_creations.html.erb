@@ -1,0 +1,53 @@
+<div id="rightColumn" class="bl2pxs">
+	<% unless @l_releases.nil? %>
+	<p>Latest <%= link_to 'Releases', releases_url %></p>
+	<% for release in @l_releases do -%>
+	<div class="latestReleases">
+		<% link_to release, :class => 'playable' do %>
+			<%= image_tag( release.cover.url(:thumb), {:class => 'floatingLeft noBoarder'} ) %>
+		<% end %>
+		<div style="display:none;"><%=release.id%></div>
+		<div class="l_releaseText">
+			<strong><%= link_to( h(release.project.name), release.project ) %></strong> published 
+			<strong><%= link_to( h(release.name), release) %></strong>
+		</div>
+	</div>
+	<% end -%>
+	<% end -%>
+	
+	<% unless @l_newsletters.nil? -%>
+	<p>Latest <%= link_to 'News', newsletter_index_url %></p>
+	<% for nl in @l_newsletters do -%>
+	<div class="latestPosts">
+		<%= link_to( h(nl.subject), nl ) %>
+	</div>
+	<% end -%>
+	<% end -%>
+	
+	<p>Latest active <%= link_to 'People', users_url %></p>
+	<% for user in @l_users do -%>
+	<div class="lastActiveUsers">
+		<% link_to user do %>
+			<%= image_tag( user.avatar(:thumb), {:class => 'floatingLeft noBoarder'} ) %>
+		<% end %>
+		<strong><%= link_to( h(user.login), user) %></strong>
+	</div>
+	<% end -%>
+	
+	<p>Latest Posts</p>
+	<% for post in @l_news do -%>
+	<div class="latestPosts">
+		<% link_to( group_topic_path(post.topic.group, post.topic, :anchor => post, :h_id => post.id)  ) do %>
+			<%= image_tag post.topic.group.logo(:thumb), {:class => 'floatingLeft noBoarder'} %><%= h(post.subject) %>
+		<% end %>
+	</div>
+	<% end -%>
+	
+	<p>Latest <%= link_to 'DB entries', music_index_url %></p>
+	<% for item in @l_music do -%>
+	<%= echo_div_depending_on_type item %>
+		<strong><%= link_to_show_depending_on_type item %></strong>
+	</div>
+	<% end -%>
+</div>
+

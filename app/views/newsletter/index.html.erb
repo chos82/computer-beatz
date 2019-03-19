@@ -1,0 +1,14 @@
+<h2>Newsletter Archive</h2>
+<% for nl in @newsletters do -%>
+<div class="newsletter">
+	<small><i><%= nl.created_at %></i></small><br />
+	<strong><%= link_to( h(nl.subject), nl ) %></strong><br />
+	<%= truncate( h(nl.text), 80) %>
+</div>
+<% end -%>
+
+<%= will_paginate @newsletters, :inner_window => 1, :outer_window => 1, :order => params[:order] %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>

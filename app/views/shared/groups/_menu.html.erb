@@ -1,0 +1,7 @@
+<% if current_user == @group.admin -%>
+<%= render :partial => 'shared/groups/admin_menu' %>
+<% elsif current_user && current_user.is_member?(@group) -%>
+<%= render :partial => 'shared/groups/member_menu' %>
+<% else %>
+<%= render :partial => 'shared/groups/user_menu' %>
+<% end %>

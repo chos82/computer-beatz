@@ -1,0 +1,34 @@
+
+	<div class="clear"></div>
+	<div id="footer">
+		<div id="beta"><%= link_to 'beta', about_index_url %></div>
+			<ul>
+				<li>
+					<%= mail_to("chris@computer-beatz.net" , "Contact" ,
+												:encode => "javascript" ) %>
+				</li>
+				<% li_with_class_if( params[:controller] == 'faq', 'current' ) do %>
+					<%= link_to_unless_current( "FAQ" , faq_index_url ) %>
+				<% end %>
+				<% li_with_class_if( params[:controller] == 'about', 'current' ) do %>
+					<%= link_to_unless_current( "About" , about_index_url ) %>
+				<% end %>
+			</ul>
+	
+		<div>
+			Work published on computer-beatz is licensed under different 
+			<%= link_to 'Creative Commons', 'http://de.creativecommons.org/', :target => :blank %> Licenses.
+			The specific license is mentioned at appropiate place.
+			General rules on attributing the work can be found 
+			in the <%= link_to 'Attribution Rules', :controller => 'attrbution_rules' %>. Additional 
+			each project is free to define their own rules.
+		</div>
+		<div id="jur">
+			<%= link_to 'Terms', terms_url %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<%= link_to 'Privacy Policy', privacy_policy_index_url %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<%= link_to 'Advert/BannerExchange', advert_url %>
+		</div>
+	</div>
+	</div>
+</body>
+</html>

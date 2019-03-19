@@ -1,0 +1,17 @@
+	<tr>
+		
+		<td class="w50px">
+			<%= link_to image_tag( fan.avatar.url(:thumb) ), fan %>
+		
+		</td>
+		
+		<td>
+			<strong><%= link_to( h(fan.login), fan ) %></strong>
+		</td>
+		
+		<td class="align-right">
+			<%= link_to 'Accept', accept_user_friendship_path(:user_id => current_user, :id => fan) %><br />
+			<%= link_to 'Decline', decline_user_friendship_path(:user_id => current_user, :id => fan), :method => :delete, :confirm => "Decline the friendship request?" %>
+		</td>
+		
+	</tr>

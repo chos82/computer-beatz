@@ -1,0 +1,22 @@
+<p>
+	If your desired album <b>"<%=h @intended[:name] %>"</b>
+	is one of the following,
+	please check the radiobutton.<br />
+	If none of those matches, leave the last option checked.
+</p>
+<% form_tag :action => 'create', :track => @intended do %>
+	<p>
+		<% for similar in @similars do -%>
+		<%= radio_button_tag 'choices',(similar.id) -%>
+		<%= label_tag "choices_#{similar.id}", (h similar.name) -%><br />
+		<% end -%>
+		<%= radio_button_tag 'choices', '', true -%>
+		<%= label_tag 'choices_', 'no match' %>
+	</p>
+	<p>
+		<%= submit_tag "Continue" %>
+	</p>	
+<% end %>
+<p>
+	<%= link_to 'back', :action => 'new' %>
+</p>

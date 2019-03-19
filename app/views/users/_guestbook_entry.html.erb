@@ -1,0 +1,16 @@
+<%= link_to image_tag( guestbook_entry.gb_sender.avatar.url(:thumb) ), guestbook_entry.gb_sender %>
+	<div class="head">
+		<% if guestbook_entry.gb_sender == user -%>
+		<strong class="red">
+			<%= h guestbook_entry.gb_sender.login %>
+		<% else -%>
+		<strong>
+			<%= link_to (h guestbook_entry.gb_sender.login), guestbook_entry.gb_sender %>
+		<% end -%>
+		</strong><br />
+		<%= time_ago_in_words guestbook_entry.created_at %> ago
+	</div>
+	
+	<div class="text">
+		<%=sanitize( format_text(guestbook_entry.text) ) %>
+	</div>

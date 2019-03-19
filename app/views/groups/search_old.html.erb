@@ -1,0 +1,92 @@
+
+<div class="order">
+	<div>Order by:</div>
+	<div class="margin-bottom">
+			<% unless params[:order] == 'name' %>
+			<%= link_to 'Name', :action => 'index', :order => 'name', :public => @public, :visible => @visible, :search => {:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Name</span>
+			<% end %>
+		
+			<% unless params[:order] == 'messages' %>
+			<%= link_to 'Messages', :action => 'index', :order => 'messages', :public => @public, :visible => @visible, :search => {:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Messages</span>
+			<% end %>
+			
+			<% unless params[:order] == 'members' %>
+			<%= link_to 'Members', :action => 'index', :order => 'members', :public => @public, :visible => @visible, :search => {:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Members</span>
+			<% end %>
+			
+			<% unless params[:order] == 'activity' || params[:order].blank? %>
+			<%= link_to 'Activity', :action => 'index', :order => 'activity', :public => @public, :visible => @visible, :search => {:query => @query} %>&nbsp;
+			<% else %>
+			<span class="current">Activity</span>
+			<% end %>
+	</div>
+	<div class="selector-wrap">
+		Messages:<br />
+	<div class="selector" title="Messages are visible to...">
+		<% unless params[:visible] == 'ture' %>
+		<%= link_to 'public', :action => 'index', :order => @order, :visible => 'true', :public => @public, :search => {:query => @query} %>
+		<% else %>
+		<span class="current">public</span>
+		<% end %>
+		
+		<% unless params[:visible] == 'both' || params[:visible].blank? %>
+		<%= link_to 'both', :action => 'index', :order => @order, :visible => 'both', :public => @public, :search => {:query => @query} %>
+		<% else %>
+		<span class="current">both</span> 
+		<% end %>
+		
+		<% unless params[:visible] == 'false' %>
+		<%= link_to 'members', :action => 'index', :order => @order, :visible => 'false', :public => @public, :search => {:query => @query} %>
+		<% else %>
+		<span class="current">members</span> 
+		<% end %>
+	</div>
+	</div>
+	<div class="selector-wrap">
+		Membership:<br />
+	<div class="selector" title="Membership is accesible...">
+		<% unless params[:public] == 'ture' %>
+		<%= link_to 'public', :action => 'index', :order => @order, :public => 'true', :visible => @visible, :search => {:query => @query} %>
+		<% else %>
+		<span class="current">public</span> 
+		<% end %>
+		
+		<% unless params[:public] == 'both' || params[:public].blank? %>
+		<%= link_to 'both', :action => 'index', :order => @order, :public => 'both', :visible => @visible, :search => {:query => @query} %>
+		<% else %>
+		<span class="current">both</span> 
+		<% end %>
+		
+		<% unless params[:public] == 'false' %>
+		<%= link_to 'locked', :action => 'index', :order => @order, :public => 'false', :visible => @visible, :search => {:query => @query} %>
+		<% else %>
+		<span class="current">locked</span> 
+		<% end %>
+	</div>
+	</div>
+</div>
+
+<% unless @results.empty? -%>
+<table class="list-entries">
+	<% for item in @results do %>
+	<%= render :partial => 'shared/group', :object => item %>
+	<% end %>
+</table>
+
+<%= will_paginate @results, :inner_window => 1, :outer_window => 1, :order => params[:order], :search => {:query => @query} %>
+
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+
+<% else %>
+<p class="center">
+	No groups found.
+</p>
+<% end %>

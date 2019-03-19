@@ -1,0 +1,61 @@
+<% unless @tags.empty? -%>
+
+<% if params[:view] == 'list' || params[:view].nil? -%>
+
+<h3 class="align-center">All your Tags as List</h3>
+<div class="order">
+	<div class="margin-bottom">
+		<span class="current">List</span>&nbsp;
+		<%= link_to 'Cloud', mytags_path(current_user, :view => 'cloud') %>&nbsp;
+		<%= link_to 'Alphabetical', mytags_path(current_user, :view => 'alphabetical') %>
+	</div>
+</div>
+
+<% for tag in @tags do -%>
+<% link_to mytag_path(:id => current_user, :tag => tag.name), :class => 'tagListItem' do %>
+	<span class="tagListName"><%= tag.name %></span>
+	<span class="tagListCount"><%= tag.count %></span>
+<% end %>
+<% end -%>
+
+<% elsif params[:view] == 'cloud' -%>
+
+<h3 class="center">All your TagCloud</h3>
+<div class="order">
+	<div class="margin-bottom">
+		<%= link_to 'List', mytags_path(current_user) %>&nbsp;
+		<span class="current">Cloud</span>&nbsp;
+		<%= link_to 'Alphabetical', mytags_path(current_user, :view => 'alphabetical') %>
+	</div>
+</div>
+	
+<div class="align-center">
+	<% tag_cloud @tags do |tag, class_name| %>
+	<%= link_to tag.name, mytag_path(:id => current_user, :tag => tag.name), :class => class_name %>
+	<% end %>
+</div>
+
+<% else -%>
+<h3 class="center">All your Tags in alphabetical order</h3>
+<div class="order">
+	<div class="margin-bottom">
+		<%= link_to 'List', mytags_path(current_user) %>&nbsp;
+		<%= link_to 'Cloud', mytags_path(current_user, :view => 'cloud') %>&nbsp;
+		<span class="current">Alphabetical</span>
+	</div>
+</div>
+
+<a name="top"></a>
+<div class="alphabeticalIndex">
+	<%= make_alphabet_index @alpha_map %>
+</div>	
+	
+<div class="clear tagsAlphabetical">
+	<%= echo_mytags_alphabetical @tags, current_user.id %>
+</div>
+
+<% end -%>
+
+<% else -%>
+You don`t have any Tags yet. Start tagging!
+<% end -%>

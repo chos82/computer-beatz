@@ -1,0 +1,11 @@
+<%=  render :partial => 'release', :object => @release %>
+
+<%= render :partial => 'comments', :object => @comments %>
+
+<%= will_paginate @comments, :inner_window => 1, :outer_window => 1 %>
+
+<% if logged_in? -%>
+<%= render :partial => 'add_comment', :object => @release %>
+<% end -%>
+
+<div id="observer"></div>

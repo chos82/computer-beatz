@@ -1,0 +1,93 @@
+<div class="std-album">
+	<div class="entry-date">
+		On computer-beatz sice <%= show_time_short @album.created_at %>
+	</div>
+	<h3 id="h-entry"><span><%=h @album.name %></span></h3>
+	<em><%= echo_release_date @album %></em>
+	<p>
+		Artist: <%= link_to_artist(@album) %>
+	</p>
+	<p>
+		Label: <%= link_to_label(@album) %>
+		<% if @album.label && @album.label.license == 'free' -%>
+		<span class="free-license"></span>
+		<% elsif @album.label && @album.label.license == 'commercial' -%>
+		<span class="commercial-license"></span>
+		<% end -%>
+	</p>
+</div>
+
+<% unless @album.creator.nil? -%>
+<div class="creator">
+	<%= link_to (h @album.creator.login), @album.creator %> made this entry
+</div>
+<% end -%>
+
+<div id="report">
+	<%= report_entry @album %>
+</div>
+
+<div class="container1">
+
+	<div class="advert1">
+		<%= link_to( image_tag("advert1.jpg"), advert_url ) %>
+	</div>
+
+	<div class="credit2">
+		Photo by <%= link_to 'Hryckowain', 'http://flickr.com/people/hryckowian/?search=Hryckowian', :target => 'blank' %>
+	</div>
+
+	<div id="rating">
+		<%= render :partial => 'music/rating', :object => @album %>
+	</div>
+
+	<div id="love">
+		<%= render :partial => 'music/loving', :object => @album %>
+	</div>
+
+</div>
+
+<p class="clear">
+	<h3>Tracks:</h3>
+	<%= link_to 'Add a track', :action => 'add_track', :id => @album %>
+	<% for track in @album.tracks do -%>
+	<ul>
+		<li><%= link_to track.name, track %></li>
+	</ul>
+	<% end -%>
+</p>
+
+<p class="further">
+	<%= link_to 'Similar Items', music_similar_index_path(@album) %>
+</p>
+
+
+<% unless @tags.empty? %>
+<h3 class="align-center">Tags:</h3>
+<p class="tag-list align-center">
+	<% tag_cloud @tags do |tag, class_name| %>
+	<%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => class_name %>
+	<% end %>
+</p>
+<% end %>
+
+<% if logged_in? -%>
+<div id="tags-link">
+	<%= link_to( 'Tag', manage_tags_music_url(@album),
+							 :class => 'tooltip button',
+							 :id => 'tag-button',
+							 :title => "Manage Tags for this Item." ) %>
+	<div class="tool-txt" id="tag-button_tipBox">&nbsp;</div>
+	<div class="spinner-bar" id="tag-button_spinner" style="display: none;">&nbsp;</div>
+</div>
+<div id="manage-tags" class="add-tag" style="display: none;"></div>
+<% end -%>
+
+<%= render :partial => 'shared/comments', :object => @comments %>
+
+<%= will_paginate @comments, :inner_window => 1, :outer_window => 1 %>
+<% if logged_in? -%>
+<%= render :partial => 'music/add_comment', :object => @album %>
+<% end -%>
+
+<div id="observer"></div>

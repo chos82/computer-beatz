@@ -1,0 +1,29 @@
+	<tr class="blank">
+		<td>
+			<strong><%= link_to( (h label.name), label ) %></strong>
+		</td>
+		<% unless label.www.blank? %>
+		<td class="www">
+			<%= link_to 'www', 'http://' + label.www,
+									 :target => 'blank' %>
+		</td>
+		<% else %>
+		<td>&nbsp;</td>
+		<% end %>
+	</tr>
+	<tr class="stats">
+		<td colspan="3">
+			<div class="stats">
+				<ul class="star-rating-small">
+					<% if label.rated_by_user?(current_user) %>
+					<li class="current-rating-rated" style="width:<%= label.rating*12.round %>px">rated</li>
+					<% else %>
+					<li class="current-rating" style="width:<%= label.rating*12.round %>px">rated</li>
+					<% end %>
+				</ul>
+				<span class="stats-c" title="Number of comments"><%= label.comments_count %></span>
+				<span class="stats-l" title="Number of people loving this item"><%= label.favourites_count %></span>
+				<span class="stats-t" title="Number of taggings for this item"><%= label.taggings_count %></span>
+			</div>
+		</td>
+	</tr>

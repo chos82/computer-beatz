@@ -1,0 +1,5 @@
+page.replace_html("preview-link" , :partial => "show_preview_3000")
+
+page[:preview].visual_effect :BlindUp
+
+page.replace_html("observer", :partial => nil)

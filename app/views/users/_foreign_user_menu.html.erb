@@ -1,0 +1,58 @@
+<p class="user-name">
+	<% if logged_in? %>
+	<% if !(@user.is_friends_with?(current_user) || current_user.is_friends_with?(@user)) -%>
+		<%= link_to_unless_current 'Become Friends', new_user_friendship_path(@user), :id => 'bd-01', :class => 'blindDown cUp become-friends' %>
+	<% elsif current_user.is_friends_with?(@user) && !current_user.is_mutual_friends_with?(@user) -%>
+		<span class="pending-friend">
+			Friendship requested
+		</span>
+	<% elsif @user.is_friends_with?(current_user) && !current_user.is_mutual_friends_with?(@user) -%>
+		<span class="pending-friend">
+			Requested your friendship<br />
+			<%= link_to 'Accept', accepting_user_friendship_path(:user_id => @user, :id => current_user), :class => 'become-friends' %>
+		</span>
+	<% else -%>
+		<span class="my-friend">
+			Your Friend
+		</span>
+	<% end -%>
+	<% end -%>
+	<span class="user-login">
+		<%=h @user.login %>
+	</span>
+</p>
+
+<% hidden_div_if( !@makeFriends, { :id => "blindable-01", :class => "submit-cancel mTB borderStd"} ) do %>
+	<% form_for( :friendship, :url => user_friendships_path(@user) ) do |f| %>
+	    	<%= f.submit 'Do it!', :id => 'save' %>
+	<% end -%>
+	<%= link_to 'Cancel', user_path(@user), :id => 'bu-01', :class => 'blindUp' %>
+	Become a friend of <b><%= @user.login %></b>?
+<% end %>
+<div class="clear"></div>
+
+<% if user_has_hidden_info? @user -%>
+<div class="hidden-info">
+	<%= @user.login %>'s privacy settings do not allow you to see everything.
+</div>
+<% end -%>
+
+<div id="foreign-user-profile-menu">
+	
+	<%= link_to_unless_current 'Profile', user_path(@user) %>
+
+	<%= user_menu_link 'Tagged', tagged_user_path(@user), @user, @user.tagged_privacy %>
+
+	<%= user_menu_link 'Tags', tags_user_path(@user), @user, @user.tagged_privacy %>
+
+	<%= user_menu_link 'Favourites', favourites_user_path(@user), @user, @user.favourites_privacy %>
+	
+	<%= user_menu_link 'Friends', user_friendships_path(@user), @user, @user.friendships_privacy %>
+
+	<%= user_menu_link 'Groups', user_memberships_path(@user), @user, @user.groups_privacy %>
+	
+	<%= link_to_unless_current 'Send Message', new_user_messages_path(@user) %>
+
+	<%= link_to_unless_current 'Invite', new_user_invitation_path(@user) %>
+
+</div>

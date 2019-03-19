@@ -1,0 +1,28 @@
+<div class="margin-left">
+<h3>New artist <%= 'for <em>' + h(@track.name) + '</em>' if @tarck %>
+			   <%= 'for <em>' + h(@label.name) + '</em>' if @label%>
+			   <%= 'for <em>' + h(@album.name) + '</em>' if @album %></h3>
+
+<%= error_messages_for 'artist', :header_message => "The form could not be submitted.",
+								 :message => "Please check the following details:",
+								 :header_tag => 'h3' %>
+
+<% form_for( @artist, :url => {:action => 'check_new',
+							   :track_id => params[:track_id],
+							   :label_id => params[:label_id],
+							   :album_id => params[:album_id]} )do |f| %>
+  <p>
+    <%= f.label :name %><br />
+    <%= text_field_with_auto_complete :artist, :name, {:autocomplete => 'off'}, {:method => :get, :skip_style => true} %><br/>
+  </p>
+  <p>
+    <%= f.label :www,  "Homepage" %><br />
+    <%= f.text_field :www %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', artists_path %>
+</div>

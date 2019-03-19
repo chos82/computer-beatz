@@ -1,0 +1,26 @@
+<% if logged_in? -%>
+<% if @love -%>
+<div id="loving">
+<%= link_to_remote 'Un-love', { :before => "Element.show('spinner-love')",
+										    :complete => "Element.hide('spinner-love')" ,
+										    :url => remove_from_favourites_release_url(loving), :method => :delete },
+									      { :href => remove_from_favourites_release_url(loving), :method => :delete,
+										    :title => 'Changed your mind?'} %>
+<span class="spinner" id="spinner-love" style="display: none;">&nbsp;</span>
+</div>
+<% else -%>
+<div id="to-love">
+<%= link_to_remote 'Love', { :before => "Element.show('spinner-to-love')",
+										 :complete => "Element.hide('spinner-to-love')" ,
+										 :url => make_favourite_release_url(loving), :method => :put },
+									   { :href => make_favourite_release_url(loving), :method => :put,
+										 :title => 'Make it your favourite.'} %>
+<span class="spinner" id="spinner-to-love" style="display: none;">&nbsp;</span>
+</div>
+<% end -%>
+<% end -%>
+<% unless loving.users.length == 0 %>
+<div>
+	<%= link_to_loving_release loving %>
+</div>
+<% end %>

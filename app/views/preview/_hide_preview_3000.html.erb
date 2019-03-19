@@ -1,0 +1,4 @@
+<%= link_to_remote 'Hide Preview', {:before => "Element.show('spinner-preview')",
+									   :complete => "Element.hide('spinner-preview')" ,
+									   :url => {:controller => 'preview', :action => 'hide_preview_3000'} },
+									  {:href => url_for(:controller => 'preview', :action => 'hide_preview_3000')} %>

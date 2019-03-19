@@ -1,0 +1,15 @@
+<% form_for :search, :url => { :controller => 'users', :action => 'search_by_email' } do |f| %>
+			<%= f.text_field :email %>
+			<%= submit_tag 'Search by email' %>
+<% end %>
+<% form_for :search, :url => { :controller => 'users', :action => 'search_by_login' } do |f| %>
+			<%= f.text_field :login %>
+			<%= submit_tag 'Search by name' %>
+<% end %>
+<h1>Listing Users:</h1>
+<table>
+	<% for user in @users do %>
+	<%= render :partial => 'user', :object => user %>
+	<% end %>
+	<%= will_paginate @users, :inner_window => 1, :outer_window => 1 %>
+</table>

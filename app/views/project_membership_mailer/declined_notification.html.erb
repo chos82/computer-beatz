@@ -1,0 +1,10 @@
+You are member of the computer-beatz project <%= h @project.name %>.
+A member of this project has invited <%= h @decliner %> to become a member of this project.
+
+User <%= h @decliner %> has declined the invitation.
+(Or cancled her/his computer-beatz account)
+
+
+Visit the project page:
+
+	<%= "http://#{SITE_URL}" + member_project_path(@project) %>

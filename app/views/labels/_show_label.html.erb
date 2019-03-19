@@ -1,0 +1,18 @@
+<div class="std-label">
+	<div class="entry-date">
+		On computer-beatz sice <%= show_time_short @label.created_at %>
+	</div>
+	<div>
+	<%= show_license @label %>
+	</div>
+	<h3><%= link_to_unless_current( (h @label.name), @label) %></h3>
+	<p>
+	<% unless @label.www.blank? %>
+	
+		<%= link_to @label.www, 'http://' + @label.www,
+									 :target => 'blank' %>
+	<% else %>
+		<%= link_to 'Add homepage', edit_label_path %>
+	<% end %>
+	</p>
+</div>

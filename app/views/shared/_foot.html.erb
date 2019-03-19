@@ -1,0 +1,79 @@
+
+	<div class="clear"></div>
+	
+	<div id="socialize" style="display:none;">
+		
+		<div id="bookmarks" style="display:none;">
+			<%= link_to 'close', {:controller => :bookmarks, :action => :close_bookmarks},
+																	:id => "bookmarks_close" %>
+			<%= render_social_bookmarks('http://' + SITE_URL + request.request_uri, title_text) %>
+			<div class="clear"></div>
+		</div>
+		
+		<div id="tweet">
+			<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+			<script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		</div>
+		
+		<%= link_to 'Bookmark!', {:controller => :bookmarks, :action => :show_bookmarks},
+										:id => "bookmark_button" %>
+
+		<!--<div id="fb_like">
+			<script type="text/javascript">
+			//<![CDATA[
+			(function() {
+			    document.write('<fb:like layout="button_count" font="trebuchet ms"></fb:like>');
+			    var s = document.createElement('SCRIPT'), s1 = document.getElementsByTagName('SCRIPT')[0];
+			    s.type = 'text/javascript';
+			    s.async = true;
+			    s.src = 'http://connect.facebook.net/en_US/all.js#xfbml=1';
+			    s1.parentNode.insertBefore(s, s1);
+			})();
+			//]]>
+			</script>
+		</div>-->
+		<div id="fb_share"><a href="#" 
+  			onclick="
+		    window.open(
+		      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+		      'facebook-share-dialog', 
+		      'width=626,height=436'); 
+		    return false;">
+		  Share
+		</a></div>
+						
+	</div>
+	
+	<div id="footer">
+		<div id="beta"><%= link_to 'beta', about_index_url %></div>
+			<ul>
+				<li>
+					<%= mail_to("chris@computer-beatz.net" , "Contact" ,
+												:encode => "javascript" ) %>
+				</li>
+				<% li_with_class_if( params[:controller] == 'faq', 'current' ) do %>
+					<%= link_to_unless_current( "FAQ" , faq_index_url ) %>
+				<% end %>
+				<% li_with_class_if( params[:controller] == 'about', 'current' ) do %>
+					<%= link_to_unless_current( "About" , about_index_url ) %>
+				<% end %>
+			</ul>
+	
+		<div>
+			Work published on computer-beatz is licensed under different 
+			<%= link_to 'Creative Commons', 'http://de.creativecommons.org/', :target => :blank %> Licenses.
+			The specific license is mentioned at appropiate place.
+			General rules on attributing the work can be found 
+			in the <%= link_to 'Attribution Rules', :controller => 'attrbution_rules' %>. Additional 
+			each project is free to define their own rules.
+		</div>
+		<div id="jur">
+			<%= link_to 'Terms', terms_url %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<%= link_to 'Privacy Policy', privacy_policy_index_url %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<%= link_to 'Advert/BannerExchange', advert_url %>
+		</div>
+	</div>
+	</div>
+	
+</body>
+</html>

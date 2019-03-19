@@ -1,0 +1,9 @@
+<%= @sender.login %> wants to become your frined. You can approve or decline the friendship:
+
+<%= "http://#{SITE_URL}/" + myinvitations_path(@recipient) %>
+
+
+
+In case you don`t want to recieve notification e-mails on updates, edit your profile:
+
+	<%= "http://#{SITE_URL}" + myprofile_path(@recipient) %>

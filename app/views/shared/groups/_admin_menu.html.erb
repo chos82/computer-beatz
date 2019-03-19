@@ -1,0 +1,11 @@
+<div id="group-menu">
+	<%= link_to_unless_current 'Show Group', group_path(@group) %>
+	<% if show_group? @group -%>
+	<%= link_to_unless_current 'Topics', group_topics_path(@group) %>
+	<% end -%>
+	<%= link_to_unless_current 'Members', group_members_path(@group)%>
+	<%= link_to_unless_current 'Edit Group', edit_group_path(@group) %>
+	<% if @group.locked == true -%>
+	<%= link_to_unless_current 'Pending Requests', pending_group_members_path(@group) %>
+	<% end -%>
+</div>

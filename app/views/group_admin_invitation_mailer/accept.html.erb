@@ -1,0 +1,7 @@
+You had invited <%=h @reciever.login %> to become the admin of group '<%=h @group.titile %>'.
+<%= @reciever.login %> accepted your invitation.
+
+<%= h @reciever.login %> is now the admin of <% h @group.title %>
+
+	View the group profile:
+	<%= "http://#{SITE_URL}" + group_path(@group) %>

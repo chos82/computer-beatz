@@ -1,0 +1,86 @@
+	<div>Order by:</div>
+	<div  class="margin-bottom">
+			<% unless params[:order] == 'name' || params[:order].blank? %>
+			<%= link_to 'Name', :action => 'advanced_search',
+									:params => {:order => 'name',
+												:query => {:label => @label,
+														   :artist => @artist,
+														   :track => @track,
+											    		   :release_connector => @release_connector},
+														   :tags => @tags,
+														   :license => @license,
+											    :date => {:year => @release_date}} %>&nbsp;
+			<% else %>
+			<span class="current">Name</span>
+			<% end %>
+			
+			<% unless params[:order] == 'comments' %>
+			<%= link_to 'Comments', :action => 'advanced_search',
+									:params => {:order => 'comments',
+												:query => {:label => @label,
+														   :artist => @artist,
+														   :track => @track,
+														   :tags => @tags,
+														   :license => @license,
+											    		   :release_connector => @release_connector},
+											    :date => {:year => @release_date}} %>&nbsp;
+			<% else %>
+			<span class="current">Comments</span>
+			<% end %>
+			
+			<% unless params[:order] == 'last_commented' %>
+			<%= link_to 'Last commented', :action => 'advanced_search',
+									:params => {:order => 'last_commented',
+												:query => {:label => @label,
+														   :artist => @artist,
+														   :track => @track,
+														   :tags => @tags,
+														   :license => @license,
+											    		   :release_connector => @release_connector},
+											    :date => {:year => @release_date}} %>&nbsp;
+			<% else %>
+			<span class="current">Last commented</span>
+			<% end %>
+			
+			<% unless params[:order] == 'loves' %>
+			<%= link_to 'Loves', :action => 'advanced_search',
+									:params => {:order => 'loves',
+												:query => {:label => @label,
+														   :artist => @artist,
+														   :track => @track,
+														   :tags => @tags,
+														   :license => @license,
+											    		   :release_connector => @release_connector},
+											    :date => {:year => @release_date}} %>&nbsp;
+			<% else %>
+			<span class="current">Loves</span>
+			<% end %>
+			
+			<% unless params[:order] == 'rating' %>
+			<%= link_to 'Rating', :action => 'advanced_search',
+									:params => {:order => 'rating',
+												:query => {:label => @label,
+														   :artist => @artist,
+														   :track => @track,
+														   :tags => @tags,
+														   :license => @license,
+											    		   :release_connector => @release_connector},
+											    :date => {:year => @release_date}} %>&nbsp;
+			<% else %>
+			<span class="current">Rating</span>
+			<% end %>
+			
+			<% unless params[:order] == 'newest' %>
+			<%= link_to 'Entry date', :action => 'advanced_search',
+										:params => {:order => 'newest',
+													:query => {:label => @label,
+														   :artist => @artist,
+														   :track => @track,
+														   :tags => @tags,
+														   :license => @license,
+											    		   :release_connector => @release_connector},
+											   	 	:date => {:year => @release_date}} %>&nbsp;
+			<% else %>
+			<span class="current">Entry date</span>
+			<% end %>
+</div>

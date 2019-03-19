@@ -1,0 +1,68 @@
+<div class="center-content">
+<h3>Sign in</h3>
+Please fill in the form below. Fields marked with * must be filled in.
+<%= error_messages_for :user, :header_message => "The form could not be submitted.",
+								 :message => "Please check the following details:",
+								 :header_tag => 'h3'  %>
+<% form_for :user, :url => users_path do |f| -%>
+<p><%= f.label :login, 'Username *' %><br/>
+<%= f.text_field :login %></p>
+
+<p><%= f.label :email, 'Email * <em>(will not be shown)</em>' %><br/>
+<%= f.text_field :email %></p>
+<p><%= f.label :email_confirmation, 'Email confirmation *' %><br/>
+<%= f.text_field :email_confirmation %></p>
+
+<p><%= f.label :gender, 'Gender' %><br />
+<%= f.radio_button :gender, 'female' %><%= label_tag 'user[gender]', 'female' %>
+<%= f.radio_button :gender, 'male' %><%= label_tag 'user[gender]', 'male' %>
+</p>
+
+<p><%= f.label :birthday, 'Birthday' %><br />
+<%= f.date_select( :birthday, 
+				   :order => [:day, :month, :year],
+				   :start_year => 1930,
+				   :end_year => (Time.now.year - 10),
+				   :include_blank => true ) %></p>
+
+<p><%= f.label :time_zone, 'Time Zone' %><br />
+<%= f.time_zone_select( "time_zone", nil, :default => "UTC" ) %></p>
+
+<p><%= f.label :country, 'Country' %><br />
+<%= f.country_select 'country', ['Germany'] %></p>
+
+<table>
+	<tr>
+		<td>
+			<%= f.label :zip, 'ZIP' %><br />
+			<%= f.text_field :zip, :size => 5 %>
+		</td>
+		<td>
+			<%= f.label :city, 'City' %><br />
+			<%= f.text_field :city %>
+		</td>
+	</tr>
+</table>
+
+<p><%= f.label :www, 'Homepage' %><br />
+<%= f.text_field :www, :size => 45 %></p>
+
+
+<p><%= f.label :password, 'Password *' %><br/>
+<%= f.password_field :password %></p>
+
+<p><%= f.label :password_confirmation, 'Confirm Password *' %><br/>
+<%= f.password_field :password_confirmation %></p>
+
+<p><%= f.check_box :terms %> I read, understood and accept the 
+<%= link_to 'terms', {:controller => :static, :action => :terms}, 
+					 {:popup => ['computer-beatz_terms', 
+						'height=600,width=500, dependent=yes, location=no, scrollbars=yes, status=no, toolbar=no']} %>. *</p>
+
+<p>
+	<%= recaptcha_tags %>
+</p>
+
+<p><%= submit_tag 'Sign up' %></p>
+<% end -%>
+</div>

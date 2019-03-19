@@ -1,0 +1,26 @@
+<% unless @topic.user.nil? %>
+<div>
+	Created by <%= link_to h(@topic.user.login), user_path(@topic.user) %>, on <%= show_time @topic.created_at %>
+</div>
+<% end -%>
+
+<p class="group-name">
+	<%= link_to h(@group.title), group_path(@group) %>:  <%=h @topic.title %>
+</p>
+
+<% if current_user == @group.admin -%>
+<%= render :partial => 'news_messages/news_with_delete', :collection => @news %>
+<% else -%>
+<%= render :partial => 'news_messages/news', :collection => @news %>
+<% end -%>
+
+<%= will_paginate @news, :inner_window => 1, :outer_window => 1 %>
+<div class="page-count">
+	(Showing <%= @from %> - <%=  @to %> / <%= @total %>)
+</div>
+
+<p class="center">
+	<%= link_to 'New Post', new_group_topic_news_message_path(@group, @topic), :class => 'std-button' %>
+</p>
+
+<%= link_to '&lt;&lt; Back to group', group_path(@group) %>

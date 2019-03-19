@@ -1,0 +1,13 @@
+The release <%= h @release.name %> of project <%= h @project.name %>
+has a new comment.
+
+See the comment on the page of the release:
+	<%= "http://#{SITE_URL}" + release_path(@release) %>
+	
+	
+	
+-------------------------------------------------------
+You are receiving the e-mail because you enabled e-mail
+notifications on comments for the project and it`s releases.
+To change this, please visit:
+<%= "http://#{SITE_URL}" + project_path(@project) + "/member" %>

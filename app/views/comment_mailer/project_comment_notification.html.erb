@@ -1,0 +1,12 @@
+The project <%= h @project.name %> has a new comment.
+
+See the comment on the project`s profile page:
+	<%= "http://#{SITE_URL}" + project_path(@project) %>
+	
+	
+	
+-------------------------------------------------------
+You are receiving the e-mail because you enabled e-mail
+notifications on comments for the project. To change this,
+please visit:
+<%= "http://#{SITE_URL}" + project_path(@project) + "/member" %>

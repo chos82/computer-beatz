@@ -1,0 +1,35 @@
+<div id="user-profile-menu">
+	
+	<%= link_to_unless_current 'Profile', myprofile_path(current_user) %>
+	
+	<%= link_to_unless_current 'Tagged', mytaggings_path(current_user) %>
+	
+	<%= link_to_unless_current 'Tags', mytags_path(current_user) %>
+	
+	<%= link_to_unless_current 'Favourites', myfavourites_path(current_user) %>
+	
+	<% if !( mailbox_status_ok?(current_user) ) %>
+	<%= link_to_unless params[:ontroller] == 'inbox' || params[:controller] == 'outbox', 'Mail', inbox_index_path(current_user), :class => 'warning' %>
+	<% elsif (new_mail?(current_user)) -%>
+	<%= link_to_unless params[:ontroller] == 'inbox' || params[:controller] == 'outbox', 'Mail', inbox_index_path(current_user), :class => 'highlight' %>
+	<% else -%>
+	<%= link_to_unless params[:ontroller] == 'inbox' || params[:controller] == 'outbox', 'Mail', inbox_index_path(current_user) %>
+	<% end -%>
+	
+	<%= link_to_unless_current 'Friends', myfriends_path(current_user) %>
+	
+	<%= link_to_unless_current 'Groups', mygroups_path(current_user) %>
+	
+	<% unless current_user.projects.empty? -%>
+		<%= link_to_unless_current 'Projects', myprojects_path(current_user) %>
+	<% end -%>
+
+	<% unless no_invitations == 0 -%>
+	<%= link_to_unless_current 'Invitations', myinvitations_path(current_user), :class => 'highlight' %>
+	<% else -%>
+	<%= link_to_unless_current 'Invitations', myinvitations_path(current_user) %>
+	<% end -%>
+	
+	<%= link_to_unless_current 'Account', myaccount_path(current_user) %>
+	
+</div>

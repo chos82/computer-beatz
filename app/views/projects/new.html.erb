@@ -1,0 +1,155 @@
+<h3>New project</h3>
+
+<% form_for(@project, :html => { :multipart => true}) do |f| %>
+  <%= f.error_messages :header_message => "The form could not be submitted.",
+					   :message => "Please check the following details:",
+					   :header_tag => 'h3' %>
+
+  <p>
+		<em>Fields marked with * are required.</em>
+  </p>
+  <p>
+    <%= f.label :name %>*<br />
+    <%= f.text_field :name, :size => 73 %>
+  </p>
+  
+  <p>
+  	<span class="right-px">
+  		<span class="spinner" id="spinner-preview" style="display: none;">&nbsp;</span>
+		<span id="preview-link">
+  		<%= render :partial => 'preview/show_preview_no_limit' %>
+		</span>
+	</span>
+	<%= f.label :description %>*<br />
+	<%= f.text_area :description, :rows => 15, :cols => 55, :id => 'text-no-limit' %><br />
+	<span class="right-px">You may use <%= link_to 'Textile', {:controller => 'static', :action => 'textile'}, :popup => ['Textile Short Reference', 'height=800,width=600, scrollbars=yes'] %> syntax, but no HTML</span>
+  </p>
+  
+  <div id="preview" class="description" style="display: none">
+  	<strong>Preview:</strong>
+  	<div id="result" class="text"></div>
+  </div>
+  
+  <p>
+  	<%= f.label :logo, 'Upload a logo' %><br />
+	<%= f.file_field :logo %>
+  </p>
+  <p>
+  	<%= f.label :license %>*:<br />
+	All releases on computer-beatz are licensed under <%= link_to 'Creative Commons', 'http://creativecommons.org' %> licenses.<br />
+	<strong>To avoid copyright issues, a the choosen license can not be changed!</strong><br />
+	You can choose between the following licenses for the project (all releases for this project will get this license):
+	<table>
+		<tr>
+			<td colspan="3"><b>Attribution</b></td>
+		<tr class="p5-10px">
+			<td>
+				<%= f.radio_button :license, 'by' %>
+			</td>
+			<td>
+				<a rel="license" href="http://creativecommons.org/licenses/by/3.0/" target="_blank">
+					<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png"/>
+				</a>
+			</td>
+			<td class="mB1"> 
+					This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">
+					Creative Commons Attribution 3.0 Unported License</a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3"><b>Attribution Share Alike</b></td>
+		<tr class="p5-10px">
+			<td>
+				<%= f.radio_button :license, 'by-sa' %>
+			</td>
+			<td>
+				<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">
+					<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png"/>
+				</a>
+			</td>
+			<td> 
+					This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">
+					Creative Commons Attribution-ShareAlike 3.0 Unported License</a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3"><b>Attribution No Derivatives</b></td>
+		</tr>
+		<tr class="p5-10px">
+			<td>
+				<%= f.radio_button :license, 'by-nd' %>
+			</td>
+			<td>
+				<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/" target="_blank">
+					<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/88x31.png"/>
+				</a>
+			</td>
+			<td> 
+					This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/">
+					Creative Commons Attribution-NoDerivs 3.0 Unported License</a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3"><b>Attribution Non-Commercial</b></td>
+		<tr>
+		<tr class="p5-10px">
+			<td>
+				<%= f.radio_button :license, 'by-nc' %>
+			</td>
+			<td>
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/" target="_blank">
+					<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/88x31.png"/>
+				</a>
+			</td>
+			<td> 
+					This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">
+					Creative Commons Attribution-NonCommercial 3.0 Unported License</a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3"><b>Attribution Non-Commercial Share Alike</b></td>
+		<tr>
+		<tr class="p5-10px">
+			<td>
+				<%= f.radio_button :license, 'by-nc-sa' %>
+			</td>
+			<td>
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank">
+					<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png"/>
+				</a>
+			</td>
+			<td> 
+					This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+					Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3"><b>Attribution Non-Commercial No Derivatives</b></td>
+		<tr>
+		<tr class="p5-10px">
+			<td>
+				<%= f.radio_button :license, 'by-nc-nd' %>
+			</td>
+			<td>
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+					<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png"/>
+				</a>
+			</td>
+			<td> 
+					This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/">
+					Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License</a>
+			</td>
+		</tr>
+	</table>
+	
+	<p>
+		<em>See <%= link_to 'About Licenses', 'http://creativecommons.org/about/licenses', :target => :blank %> for further explanation.</em>
+	</p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to '&lt;&lt; Back', projects_path %>
+
+<div id="observer"></div>

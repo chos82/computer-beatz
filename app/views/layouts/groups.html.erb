@@ -1,0 +1,20 @@
+<%= render :partial => 'shared/application_head' %>
+		
+				<%= render :partial => 'shared/adverts_right' %>
+		
+				<div id="main">
+					<% if flash[:notice] -%>
+					<div id="notice">
+						<%= flash[:notice] %>
+					</div>
+					<% end -%>
+					<% if flash[:error] -%>
+					<div id="error">
+						<%= flash[:error] %>
+					</div>
+					<% end -%>
+				
+					<%= yield :layout %>
+				</div>
+		
+	<%= render :partial => 'shared/foot' %>

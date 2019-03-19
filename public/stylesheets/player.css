@@ -1,0 +1,205 @@
+body {
+	mmargin:0;
+	padding:0;
+	background-color:black;
+	color:white;
+	font-family: "Trebuchet MS", "Lucida Grande", Helvetica, sans-serif;
+	font-size: 16pt;
+}
+
+a{
+	text-decoration:none;
+}
+.clear{
+	clear:both;
+}
+
+#playlist{
+	background-color:#bbb;
+	margin:0 30px;
+	padding: 8px 15px;
+}
+
+.audio{
+	display:block;
+	color: black;
+	padding-left:10px;
+}
+	.audio:hover{
+		background-color:#8080ff;
+	}
+.playing{
+	background-color:#bfbfff;
+}
+
+#player{
+	height:39px;
+	background-color:black;
+	padding:0 30px 10px 25px;
+}
+
+#p_stop, #p_left, #p_play-pause, #p_skp-bwd, #p_skp-fwd, #p_level, #p_levelSlider{
+	float:left;
+}
+#p_stop{
+	background:url(/images/player/01-stop.png);
+	width:33px;
+	height:39px;
+}
+#p_play-pause{
+	background:url(/images/player/02-pause-play.png) left no-repeat;
+	width:45px;
+	height:39px;
+}
+#p_skp-bwd{
+	background:url(/images/player/03-skipBwd.png);
+	width:30px;
+	height:39px;
+}
+#p_skp-fwd{
+	background:url(/images/player/04-skipFwd.png);
+	width:30px;
+	height:39px;
+}
+#p_level{
+	background:url(/images/player/05-level.png);
+	width:25px;
+	height:39px;
+}
+
+#p_levelTrack{
+	background-color:#888;
+	width:105px;
+	height:3px;
+	position:relative;
+	top:17px;
+	margin-left:5px;
+}
+#p_levelHandle{
+	background-color:#bbb;
+	width:5px;
+	height:21px;
+	cursor:w-resize;
+	position:relative;
+	top:-9px;
+}
+#volumeBar{
+	background:url(/images/player/volumeBar.png);
+	height: 15px;
+	margin-left:5px;
+	position:relative;
+}
+#status{
+	padding:5px 8px;
+	border: 1px solid #888;
+	margin: 0 30px;
+	cursor:pointer;
+}
+#loadBar{
+	height: 10px;
+	width: 1px;
+	background-color: #bbb;
+}
+#posBar{
+	height: 10px;
+	width: 0;
+	background-color:#8080ff;
+}
+#time{
+	font-size: 25px;
+	margin:10px 0 10px 15px;
+}
+#scrollUp, #scrollDown{
+	background-color:#888;
+	height:20px;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+#scrollUp{
+	background-image:url(/images/player/scrollUp.png);
+}
+#scrollDown{
+	background-image:url(/images/player/scrollDown.png);
+}
+#visualizations, #animation, #links{
+	font-size: .7em;
+	text-align:center;
+	margin: 10px 30px;
+}
+#visualizations{
+	font-weight:bold;
+	padding: 5px 15px;
+	border: 1px solid black;
+	cursor:pointer;
+}
+
+	#animation .bt{
+		width:25%;
+		background-color:#888;
+		float:left;
+		cursor:pointer;
+	}
+	#animation .current{
+		background-color:#bfbfff;
+	}
+	
+#data{
+	height:60px;
+	margin:10px 0;
+}
+	#left, #right{
+		height:22px;
+	}
+	#left{
+		margin-bottom:6px;
+		background-image:url(/images/player/peakBar.png);
+	}
+	#right{
+		background-image:url(/images/player/peakBar.png);
+	}
+#d_spectrum{
+	background-image:url(/images/player/spectrumBack.png);
+	width:512px;
+	height:50px;
+	margin-left:auto;
+	margin-right:auto;
+}
+	#d_spectrum div{
+		width:2px;
+		height:50px;
+		background-color:black;
+		float:left;
+	}
+	
+#d_wave{
+	width:512px;
+	margin-left:auto;
+	margin-right:auto;
+}
+	#d_wave div{
+		background-color:#888;
+		width:2px;
+		height:1px;
+		position:relative;
+		float:left;
+	}
+#cp{
+	background-color:#bfbfff;
+	font-size:smaller;
+}
+
+#show, #download{
+	diplay:block;
+	float:left;
+	width:50%;
+	color:white;
+	font-weight:bold;
+	background-color:#888;
+}
+	#show:hover, #download:hover{
+		background-color:#8080ff;
+	}
+
+#sm2-container{
+	height:8px;
+}

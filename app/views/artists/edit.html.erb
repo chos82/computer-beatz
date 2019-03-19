@@ -1,0 +1,17 @@
+<div class="margin-left">
+<h3>Add a homepage for <%=@artist.name%></h3>
+
+<% form_for(@artist) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label 'Homepage', :www %><br />
+    <%= f.text_field :www %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', @artist %>
+</div>

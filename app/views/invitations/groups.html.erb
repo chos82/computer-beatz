@@ -1,0 +1,8 @@
+<%= link_to '&lt;&lt; Invitations overview', user_invitations_path(current_user) %><br />
+
+<div class="list-head-seperator">
+	Invitations to groups
+</div>
+<table class="list-entries">
+	<%= render :partial => 'list_invitations', :collection => @invitations, :as => :invitation %>
+</table>

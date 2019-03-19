@@ -1,0 +1,13 @@
+<p class="center">
+	<%= pluralize @results.length, 'record' %> in <em>Music</em> found.
+</p>
+
+<div class="order">
+	<%= render :partial => 'order' %>
+</div>
+
+<table class="list-entries">
+	<% for music in @results do %>
+	<%= render :partial => 'item', :object => item %>
+	<% end %>
+</table>

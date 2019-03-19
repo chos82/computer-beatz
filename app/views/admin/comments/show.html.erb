@@ -1,0 +1,16 @@
+<p>
+	<h3>Comment for: <%= blank_link_to_show_depending_on_type @item %></h3>
+</p>
+<p>
+	By:
+	<%= link_to( h(@comment.user.login), {:controller => '/users',
+								  :action => 'show',
+							      :id => @comment.user.id},
+							    {:target => 'blank'}) %>
+</p>
+<p>
+	<pre><%=h @comment.text %></pre>
+</p>
+<%= link_to 'Set Valid', {:action => 'set_valid', :id => @comment}, :confirm => "Set valid?" %><br/>
+<%= link_to 'Back', admin_comments_path %> | 
+<%= link_to 'Destroy', admin_comment_path(@comment), :confirm => 'Are you sure?', :method => :delete %>

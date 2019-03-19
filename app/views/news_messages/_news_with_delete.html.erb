@@ -1,0 +1,31 @@
+<% if news_with_delete.admin_message -%>
+<div class="gn-admin">
+<% else -%>
+<div class="gn-std">
+<% end -%>
+	<a name="id<%=news_with_delete.id%>"></a>
+	<%= link_to image_tag( news_with_delete.sender.avatar.url(:thumb) ), news_with_delete.sender %>
+	<div class="head">
+		<strong><%= link_to (h news_with_delete.sender.login), news_with_delete.sender %></strong><br />
+		<%= time_ago_in_words news_with_delete.created_at %> ago 
+		<% unless news_with_delete.created_at == news_with_delete.updated_at -%>
+		(edited on <%= show_time news_with_delete.updated_at %>)
+		<% end -%>
+	</div>
+	<div class="subject">
+		<% if news_with_delete.id.to_s == params[:h_id] -%>
+				<span class="message-highlight">-&gt;</span>
+		<% end -%>
+		<%= news_with_delete.subject %>
+	</div>
+	<div class="text"><%= format_text news_with_delete.text %></div>
+	<div class="delete-news_with_delete">
+			<%= link_to 'Delete', group_topic_news_message_path( :group_id => @group, :topic_id => @topic, :id => news_with_delete ),
+                 		:method => :delete,
+                 		:confirm => 'Delete this message?' %>
+	</div>
+	<% if current_user == news_with_delete.sender -%>
+	<%= link_to 'Edit',  edit_group_topic_news_message_path( :group_id => @group, :topic_id => @topic, :id => news_with_delete ), :class=>'edit_link' %>
+	<% end -%>
+</div>
+

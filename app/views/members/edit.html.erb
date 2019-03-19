@@ -1,0 +1,9 @@
+<% form_for :member, :url => group_member_path(@group, @member), :html => {:method => :put} do |f| %>
+  <p>
+  	<%= f.check_box :news_notification %>
+	<%= f.label :news_notification, 'Recvieve email notifications on new group messages?' %>
+	<%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= render :partial => 'shared/groups/group_profile', :object => @group %>

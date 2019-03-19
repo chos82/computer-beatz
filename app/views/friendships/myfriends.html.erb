@@ -1,0 +1,18 @@
+	<%= render :partial => 'users/user_menu' %>
+	<% unless current_user.is_a_fan_of.empty? -%>
+		<p class="center"><%= link_to 'Your pending requests', requested_user_friendships_path(current_user) %></p>
+	<% end -%>
+	<% unless @friends.empty? -%>
+		<h3>Your Friends:</h3>
+	<% else -%>
+		<p class="center">You currently have no friends. Go and get some!</p>
+	<% end -%>
+
+<table class="list-entries">
+	<%= render :partial => 'friend', :collection => @friends %>
+</table>
+
+<%= will_paginate @friends, :inner_window => 1, :outer_window => 1 %>
+
+
+

@@ -1,0 +1,23 @@
+<%= render :partial => 'users/user_menu' %>
+
+<h3>Sent Message:</h3>
+<div class="message-head">
+	<%= link_to image_tag( @message.reciever.avatar.url(:thumb) ), @message.reciever %>
+	<div>
+		<%= link_to (h @message.reciever.login), @message.reciever %><br />
+		<%= show_time @message.created_at %>
+	</div>
+</div>
+
+<div class="message-subject">
+	<%= @message.subject %>
+</div>
+
+<div class="message-text">
+	<%= sanitize( format_text @message.text ) %>
+</div>
+
+<%= link_to '&laquo; Back to Outbox', outbox_index_path( current_user ) %> | 
+<%= link_to 'delete', outbox_path( current_user, @message ),
+								 :method => :delete,
+								 :confirm => 'Delete this message?' %>

@@ -1,0 +1,107 @@
+<div id="newsletter">
+	<h3>
+		<span><%= link_to 'Archive', newsletter_index_url %></span>
+		Recent News
+	</h3>
+	<% for nl in @newsletter do -%>
+	<div>
+		<strong><%= link_to( h(nl.subject), nl ) %></strong><br />
+		<%= truncate( h(nl.text), 80) %>
+	</div>
+	<% end -%>
+</div>
+
+<div id="releasesContainer">
+	<h3>
+		<span><%= link_to 'All', releases_url %></span>	
+		Latest Publications
+	</h3>
+	<% for release in @releases do -%>
+	<div>
+		<%= link_to image_tag( release.cover.url(:thumb), {:class => 'floatingLeft noBoarder'} ), release, :class => 'playable' %>
+		<div style="display:none;"><%=release.id%></div>
+		<strong>
+			<%= link_to h(release.project.name), release.project %> - 
+			<%= link_to( h(release.name), release ) %>
+		</strong>
+	</div>
+	<div class="clear"></div>
+	<% end -%>
+</div>
+
+<div id="musicContainer">
+	<h3>
+		<span><%= link_to 'All', music_index_url %></span>
+		Recent created DB entries
+	</h3>
+	<table class="list-entries">
+		<% for item in @music do %>
+		<%= render :partial => 'music/item', :object => item %>
+		<% end %>
+	</table>
+</div>
+
+<div id="peopleContainer">
+	<h3>
+		<span><%= link_to 'All', users_url %></span>
+		People recently signed in
+	</h3>
+	<table class="list-entries">
+		<tr>
+		<th>&nbsp;</th>
+		<th>Name</th>
+		<th>Age</th>
+		<th>Country</th>
+		<th>Online Status</th>
+	</tr>
+	<% for user in @people do -%>
+	<tr>
+	<td>
+		<%= link_to image_tag( user.avatar.url(:thumb) ), user %>
+	</td>
+	<td>
+		<strong><%= link_to( h(user.login), user ) %></strong>
+	</td>
+	<td>
+		<%= show_age user %>
+	</td>
+	<td>
+		<%= show_country user %>
+	</td>
+	<% if user.online? %>
+	<td class="user-on">
+		&nbsp;
+	</td>
+	<% else %>
+	<td class="user-off">
+		&nbsp;
+	</td>
+	<% end %>
+</tr>
+	<% end %>
+</table>
+</div>
+
+<div id="groupNewsContainer">
+	<h3>Latest posts in groups</h3>
+	<% for post in @gn do -%>
+	<div class="latestPosts">
+		<div class="latestGroups">
+			<% link_to post.topic.group do %>
+				<%= image_tag post.topic.group.logo.url(:thumb) %>
+				<%= post.topic.group.title %>
+			<% end %>
+		</div>
+		<i>
+			<small>
+				Topic: 
+				<strong><%= link_to h(post.topic.title), group_topic_path(post.topic.group.id, post.topic.id) %></strong><br />
+			</small>
+		</i>
+		<div class="l_post">
+			<strong>-&gt; </strong><%= link_to '<b>'+ h(post.subject) + '</b>:<br /> ' + truncate( strip_tags(RedCloth.new(post.text).to_html), 80),
+					group_topic_path(post.topic.group.id, post.topic.id, :anchor => post.id, :h_id => post.id) %>
+		</div>
+	</div>
+	<% end -%>
+</div>

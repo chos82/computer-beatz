@@ -1,0 +1,16 @@
+<div class="margin-left">
+<h3>Editing <%=@label.name%></h3>
+
+<% form_for(@label, :url => {:action => 'update_license', :id => @label}) do |f| %>
+  <%= f.error_messages %>
+  <p>
+  	Publications are...<br />
+  	<%= f.radio_button :license, "free" %><%= f.label :license, "free" %>
+	<%= f.radio_button :license, "commercial" %><%= f.label :license, "commercial" %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+<%= link_to 'Back', @label %>
+</div>

@@ -1,0 +1,43 @@
+	<div class="order">
+		<p id="artist-index-back">
+				<%= link_to 'New artist', :action => 'new' %>
+			</p>
+		<div>Order by:</div>
+		<div class="margin-bottom">
+			<% unless params[:order] == 'name' %>
+			<%= link_to 'Name', :action => params[:action], :order => 'name' %>&nbsp;
+			<% else %>
+			<span class="current">Name</span>
+			<% end %>
+			
+			<% unless params[:order] == 'comments' %>
+			<%= link_to 'Comments', :action => params[:action], :order => 'comments' %>&nbsp;
+			<% else %>
+			<span class="current">Comments</span>
+			<% end %>
+			
+			<% unless params[:order] == 'last_commented' %>
+			<%= link_to 'Last commented', :action => params[:action], :order => 'last_commented' %>&nbsp;
+			<% else %>
+			<span class="current">Last commented</span>
+			<% end %>
+			
+			<% unless params[:order] == 'loves' %>
+			<%= link_to 'Loves', :action => params[:action], :order => 'loves' %>&nbsp;
+			<% else %>
+			<span class="current">Loves</span>
+			<% end %>
+			
+			<% unless params[:order] == 'rating' %>
+			<%= link_to 'Rating', :action => params[:action], :order => 'rating' %>&nbsp;
+			<% else %>
+			<span class="current">Rating</span>
+			<% end %>
+			
+			<% unless params[:order] == 'newest' || params[:order].blank?  %>
+			<%= link_to 'Entry date', :action => params[:action], :order => 'newest' %>&nbsp;
+			<% else %>
+			<span class="current">Entry date</span>
+			<% end %>
+		</div>
+	</div>

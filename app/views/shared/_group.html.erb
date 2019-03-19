@@ -1,0 +1,25 @@
+<tr>
+	<td class="mini-group-info">
+		<div class="group-logo">
+			<%= link_to image_tag( group.logo.url(:thumb) ), group %>
+		</div>
+		<div class="group-stats">
+			<% if group.locked -%>
+			<div class="locked" title="Users have to be approved by the group`s admin">&nbsp;</div>
+			<% else -%>
+			<div class="unlocked" title="Public accessible">&nbsp;</div>
+			<% end -%>
+			<% if group.public -%>
+			<div class="public" title="Everybody can read messages">&nbsp;</div>
+			<% else -%>
+			<div class="not-public" title="Only group members can read messages">&nbsp;</div>
+			<% end -%>
+		</div>
+	</td>
+	<td class="group-title">
+		<strong><%= link_to( h(group.title), group ) %></strong>
+		<% if group.admin == current_user -%>
+		<span class="red"> (Admin)</span>
+		<% end %>
+	</td>
+</tr>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  state: MyString
+  favourites_counter: 1
+  release_comments_counter: 1
+
+two:
+  name: MyString
+  description: MyText
+  state: MyString
+  favourites_counter: 1
+  release_comments_counter: 1
